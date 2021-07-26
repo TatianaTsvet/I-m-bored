@@ -7,17 +7,9 @@ import {
   IconButton,
   ListSubheader,
 } from "@material-ui/core";
-import InfoIcon from "@material-ui/icons/Info";
+import itemData from "../../core/itemData";
+import ModalWithActivity from "../../core/serviceComponents/modal-with-activity/modal-with-activity";
 import "./cards-list.css";
-
-const itemData = [
-  {
-    img: "image",
-    title: "Education",
-    href: "education.jpg",
-  },
-  {},
-];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,39 +20,41 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   imageList: {
-    width: 500,
-    height: 450,
+    width: "100%",
+    height: "100%",
   },
   icon: {
-    color: "rgba(255, 255, 255, 0.54)",
+    color: "#ff9800",
+    background: "#ffe0b2",
   },
 }));
 
-export default function TitlebarImageList() {
+export default function CardList() {
   const classes = useStyles();
-
+  const modalOpen = () => {
+    this.props.setOpen(true);
+  };
   return (
     <div className={classes.root}>
+   
       <ImageList rowHeight={180} className={classes.imageList}>
         <ImageListItem key="Subheader" cols={2} style={{ height: "auto" }}>
-          <ListSubheader component="div">December</ListSubheader>
+          <ListSubheader component="div">Recreation Types</ListSubheader>
         </ImageListItem>
         {itemData.map((item) => (
           <ImageListItem key={item.img}>
-            <img
-              // src={item.img}
-              alt={item.href}
-              src="images/education.jpg"
-            />
+            <img alt={item.href} src={`images/${item.src}`} />
             <ImageListItemBar
               title={item.title}
-              subtitle={<span>by: {item.author}</span>}
+              subtitle={<span>by: {item.subtitle}</span>}
               actionIcon={
                 <IconButton
                   aria-label={`info about ${item.title}`}
+                  color="inherit"
                   className={classes.icon}
+                  onClick={modalOpen}
                 >
-                  <InfoIcon />
+                  {item.icon}
                 </IconButton>
               }
             />
