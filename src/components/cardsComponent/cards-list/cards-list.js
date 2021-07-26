@@ -9,7 +9,9 @@ import {
 } from "@material-ui/core";
 import itemData from "../../core/itemData";
 import ModalWithActivity from "../../core/serviceComponents/modal-with-activity/modal-with-activity";
+import { useDispatch } from "react-redux";
 import "./cards-list.css";
+import AsyncRequest from "../../../service/asyncRequests";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,13 +32,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CardList() {
+  const acyncRequest = new AsyncRequest();
+
+  const dispatch = useDispatch();
   const classes = useStyles();
-  const modalOpen = () => {
-    this.props.setOpen(true);
+
+  const modalOpen = async (type) => {
+    const newType = type.toLowerCase();
+    const getNewActivity = await acyncRequest.getActivity(newType);
+
+    dispatch({ type: "openModal", payload: true });
+    dispatch({ type: "getActivity", payload: getNewActivity });
   };
   return (
     <div className={classes.root}>
-   
+      <ModalWithActivity />
       <ImageList rowHeight={180} className={classes.imageList}>
         <ImageListItem key="Subheader" cols={2} style={{ height: "auto" }}>
           <ListSubheader component="div">Recreation Types</ListSubheader>
@@ -46,13 +56,13 @@ export default function CardList() {
             <img alt={item.href} src={`images/${item.src}`} />
             <ImageListItemBar
               title={item.title}
-              subtitle={<span>by: {item.subtitle}</span>}
+              subtitle={item.subtitle}
               actionIcon={
                 <IconButton
                   aria-label={`info about ${item.title}`}
                   color="inherit"
                   className={classes.icon}
-                  onClick={modalOpen}
+                  onClick={() => modalOpen(item.title)}
                 >
                   {item.icon}
                 </IconButton>
