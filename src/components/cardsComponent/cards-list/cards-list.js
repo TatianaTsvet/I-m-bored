@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import {
   ImageList,
   ImageListItem,
@@ -9,41 +8,22 @@ import {
 } from "@material-ui/core";
 import itemData from "../../core/itemData";
 import ModalWithActivity from "../../core/serviceComponents/modal-with-activity/modal-with-activity";
+import fetchNewActivity from "../../../service/asyncRequests";
 import { useDispatch } from "react-redux";
+import useStyles from "./styles";
 import "./cards-list.css";
-import AsyncRequest from "../../../service/asyncRequests";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-    overflow: "hidden",
-    backgroundColor: theme.palette.background.paper,
-  },
-  imageList: {
-    width: "100%",
-    height: "100%",
-  },
-  icon: {
-    color: "#ff9800",
-    background: "#ffe0b2",
-  },
-}));
-
-export default function CardList() {
-  const acyncRequest = new AsyncRequest();
-
+export default function CardsList() {
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  const modalOpen = async (type) => {
-    const newType = type.toLowerCase();
-    const getNewActivity = await acyncRequest.getActivity(newType);
-
+  const modalOpen = (type) => {
+    const newType = type.replace(" ", "").toLowerCase();
+    dispatch(fetchNewActivity(newType));
+    dispatch({ type: "switchLoading", payload: true });
     dispatch({ type: "openModal", payload: true });
-    dispatch({ type: "getActivity", payload: getNewActivity });
   };
+
   return (
     <div className={classes.root}>
       <ModalWithActivity />

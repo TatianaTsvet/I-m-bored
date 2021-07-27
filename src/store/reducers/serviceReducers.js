@@ -1,7 +1,7 @@
-import { OPEN_MODAL } from "../actions/actionType";
-
+import { OPEN_MODAL, SWITCH_LOADING } from "../actions/actionType";
 const defaultState = {
   modal: false,
+  loading: false,
 };
 const serviceReducers = (state = defaultState, action) => {
   switch (action.type) {
@@ -9,6 +9,11 @@ const serviceReducers = (state = defaultState, action) => {
       return {
         ...state,
         modal: action.payload,
+      };
+    case SWITCH_LOADING:
+      return {
+        ...state,
+        loading: action.payload,
       };
     default:
       return state;
