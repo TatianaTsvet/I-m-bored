@@ -1,36 +1,35 @@
 import React from "react";
-import { CircularProgress, Fade } from "@material-ui/core";
+import { CircularProgress, Grid, Modal } from "@material-ui/core";
+import { useSelector } from "react-redux";
 import useStyles from "./styles";
 import "./spinner.css";
 
-// function rand() {
-//   return Math.round(Math.random() * 20) - 10;
-// }
-
-// function getModalStyle() {
-//   const top = 50 + rand();
-//   const left = 50 + rand();
-
-//   return {
-//     top: `${top}%`,
-//     left: `${left}%`,
-//     transform: `translate(-${top}%, -${left}%)`,
-//   };
-// }
-
-export default function CircularIndeterminate() {
+export default function Spinner(props) {
   const classes = useStyles();
-  // const [modalStyle] = React.useState(getModalStyle);
-
+  const loading = useSelector((state) => state.serviceReducers.loading);
   return (
-    <div className={classes.spinner}>
-      <CircularProgress className={classes.progress} />
-
-      <Fade in={repeatedActivity}>
-        <div className={classes.modalPaper}>
-          <h2 id="transition-modal-title"></h2>
-        </div>
-      </Fade>
-    </div>
+    <Modal
+      open={loading}
+      aria-labelledby="simple-modal-title"
+      aria-describedby="simple-modal-description"
+    >
+      <Grid
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        className={classes.spinner}
+      >
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          className={classes.spinnerBackground}
+        >
+          <CircularProgress className={classes.progress} />
+        </Grid>
+      </Grid>
+    </Modal>
   );
 }

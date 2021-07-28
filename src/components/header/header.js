@@ -1,29 +1,18 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import HistoryIcon from "@material-ui/icons/History";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
-
+import { useDispatch } from "react-redux";
+import useStyles from "./styles";
 import "./header.css";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  appbar: {
-    background: "#ff9800",
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
 
 export default function ButtonAppBar() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const openDrawer = () => {
+    dispatch({ type: "openFavoriteDrawer", payload: true });
+  };
 
   return (
     <div className={classes.root}>
@@ -37,6 +26,7 @@ export default function ButtonAppBar() {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            onClick={openDrawer}
           >
             <FavoriteBorderIcon />
           </IconButton>

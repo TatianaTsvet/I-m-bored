@@ -7,7 +7,6 @@ import {
   ListSubheader,
 } from "@material-ui/core";
 import itemData from "../../core/itemData";
-import ModalWithActivity from "../../core/serviceComponents/modal-with-activity/modal-with-activity";
 import fetchNewActivity from "../../../service/asyncRequests";
 import { useDispatch } from "react-redux";
 import useStyles from "./styles";
@@ -26,7 +25,6 @@ export default function CardsList() {
 
   return (
     <div className={classes.root}>
-      <ModalWithActivity />
       <ImageList rowHeight={180} className={classes.imageList}>
         <ImageListItem key="Subheader" cols={2} style={{ height: "auto" }}>
           <ListSubheader component="div">Recreation Types</ListSubheader>

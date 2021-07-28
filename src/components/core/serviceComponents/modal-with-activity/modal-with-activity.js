@@ -1,47 +1,13 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { Modal, Grid, IconButton, Tooltip } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import PersonIcon from "@material-ui/icons/Person";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import CloseIcon from "@material-ui/icons/Close";
+import useStyles from "./styles";
 import "./modal-with-activity.css";
-import Spinner from "../spinner";
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    position: "absolute",
-
-    width: 400,
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-    flexWrap: "nowrap",
-    // boxSizing: "content-box",
-  },
-  icon: {
-    color: "#ff9800",
-  },
-}));
-
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
 
 export default function ModalWithActivity() {
-  const [modalStyle] = React.useState(getModalStyle);
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -50,13 +16,13 @@ export default function ModalWithActivity() {
   };
   const addToFavourite = (activity) => {
     dispatch({ type: "addToActivityList", payload: activity });
+    dispatch({ type: "openModal", payload: false });
   };
 
   const modalOpen = useSelector((state) => state.serviceReducers.modal);
   const randomActivity = useSelector(
     (state) => state.mainReducers.randomActivity
   );
-  const loading = useSelector((state) => state.serviceReducers.loading);
 
   let participants = [<PersonIcon key="personIcon" />];
   for (let i = 1; i < randomActivity.participants; i++) {
@@ -65,12 +31,15 @@ export default function ModalWithActivity() {
 
   const body = (
     <Grid
+      item
+      xs={8}
+      sm={9}
+      md={6}
       container
       direction="row"
       justifyContent="space-around"
       alignItems="flex-start"
       className={classes.paper}
-      style={modalStyle}
     >
       <Grid
         container
@@ -84,30 +53,44 @@ export default function ModalWithActivity() {
           <span className={classes.icon}>{participants}</span>
         </p>
         <Tooltip title="Add to favourite" aria-label="add">
-          <IconButton color="inherit" className={classes.icon}>
-            <FavoriteIcon onClick={() => addToFavourite(randomActivity)} />
+          <IconButton
+            color="inherit"
+            className={classes.icon}
+            onClick={() => addToFavourite(randomActivity)}
+          >
+            <FavoriteIcon />
           </IconButton>
         </Tooltip>
       </Grid>
       <Grid>
-        <IconButton color="inherit" className={classes.icon}>
-          <CloseIcon onClick={modalClose} />
+        <IconButton
+          color="inherit"
+          className={classes.icon}
+          onClick={modalClose}
+        >
+          <CloseIcon />
         </IconButton>
       </Grid>
     </Grid>
   );
-  const modalBody = loading ? <Spinner /> : body;
 
   return (
-    <div>
-      <Modal
-        open={modalOpen}
-        onClose={modalClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
+    <Modal
+      open={modalOpen}
+      onClose={modalClose}
+      aria-labelledby="simple-modal-title"
+      aria-describedby="simple-modal-description"
+    >
+      <Grid
+        container
+        item
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        className={classes.modal}
       >
-        {modalBody}
-      </Modal>
-    </div>
+        {body}
+      </Grid>
+    </Modal>
   );
 }

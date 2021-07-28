@@ -1,18 +1,21 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  spinner: {
-    background: "#fff",
-    width: 200,
-    height: 200,
-    position: "absolute",
-    display: "flex",
-    justifyContent: "center",
-    flexDirection: "column",
-    alignItems: "center",
-  },
+  spinner: {},
   progress: {
     color: "#ff9800",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  spinnerBackground: {
+    background: "#fff",
+    width: 300,
+    height: 150,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    position: "absolute",
+    top: "30%",
   },
 }));
 

@@ -1,5 +1,20 @@
-const styles = (theme) => ({
-  root: {},
-});
+import { makeStyles } from "@material-ui/core/styles";
 
-export default styles;
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    flexWrap: "nowrap",
+    boxSizing: "content-box",
+    position: "absolute",
+    top: "25%",
+  },
+  icon: {
+    color: "#ff9800",
+  },
+  modal: {},
+}));
+export default useStyles;

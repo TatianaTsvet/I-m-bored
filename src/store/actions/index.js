@@ -19,6 +19,12 @@ export const openModal = (modal) => {
     payload: { modal },
   };
 };
+export const openFavoriteDrawer = (favoriteDrawer) => {
+  return {
+    type: types.OPEN_FAVORITE_DRAWER,
+    payload: { favoriteDrawer },
+  };
+};
 export const switchLoading = (loading) => {
   return {
     type: types.SWITCH_LOADING,
