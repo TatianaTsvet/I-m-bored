@@ -10,10 +10,17 @@ import "./header.css";
 export default function ButtonAppBar() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const openDrawer = () => {
-    dispatch({ type: "openFavoriteDrawer", payload: true });
+  const openFavoriteDrawer = () => {
+    dispatch({ type: "openDrawer", payload: true });
+    dispatch({ type: "drawerType", payload: "favorites" });
   };
-
+  const openHistoryDrawer = () => {
+    dispatch({ type: "drawerType", payload: "history" });
+    dispatch({ type: "openDrawer", payload: true });
+  };
+const sendSuggestion = () => {
+  dispatch({ type: "openSuggestion", payload: true });
+}
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.appbar}>
@@ -26,7 +33,7 @@ export default function ButtonAppBar() {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
-            onClick={openDrawer}
+            onClick={openFavoriteDrawer}
           >
             <FavoriteBorderIcon />
           </IconButton>
@@ -35,6 +42,7 @@ export default function ButtonAppBar() {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            onClick={openHistoryDrawer}
           >
             <HistoryIcon />
           </IconButton>
@@ -43,6 +51,7 @@ export default function ButtonAppBar() {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            onClick={sendSuggestion}
           >
             <MailOutlineIcon />
           </IconButton>

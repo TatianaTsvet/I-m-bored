@@ -1,3 +1,3 @@
-import ModalWithActivity from "./header";
+import ModalWithActivity from "./modal-with-activity";
 
 export default ModalWithActivity;

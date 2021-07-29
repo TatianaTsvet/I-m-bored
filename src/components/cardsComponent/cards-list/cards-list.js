@@ -17,7 +17,7 @@ export default function CardsList() {
   const classes = useStyles();
 
   const modalOpen = (type) => {
-    const newType = type.replace(" ", "").toLowerCase();
+    const newType = type.replace(" ", "");
     dispatch(fetchNewActivity(newType));
     dispatch({ type: "switchLoading", payload: true });
     dispatch({ type: "openModal", payload: true });
@@ -33,7 +33,7 @@ export default function CardsList() {
           <ImageListItem key={item.img}>
             <img alt={item.href} src={`images/${item.src}`} />
             <ImageListItemBar
-              title={item.title}
+              title={item.title.toUpperCase()}
               subtitle={item.subtitle}
               actionIcon={
                 <IconButton

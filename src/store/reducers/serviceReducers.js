@@ -1,12 +1,15 @@
 import {
-  OPEN_FAVORITE_DRAWER,
+  OPEN_DRAWER,
   OPEN_MODAL,
   SWITCH_LOADING,
+  DRAWER_TYPE,
 } from "../actions/actionType";
 const defaultState = {
   modal: false,
   loading: false,
-  favoriteDrawer: false,
+  drawer: false,
+  drawerType: "favorites",
+  suggestionModal: false,
 };
 const serviceReducers = (state = defaultState, action) => {
   switch (action.type) {
@@ -15,15 +18,20 @@ const serviceReducers = (state = defaultState, action) => {
         ...state,
         modal: action.payload,
       };
-    case OPEN_FAVORITE_DRAWER:
+    case OPEN_DRAWER:
       return {
         ...state,
-        favoriteDrawer: action.payload,
+        drawer: action.payload,
       };
     case SWITCH_LOADING:
       return {
         ...state,
         loading: action.payload,
+      };
+    case DRAWER_TYPE:
+      return {
+        ...state,
+        drawerType: action.payload,
       };
     default:
       return state;

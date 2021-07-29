@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
 import ModalWithActivity from "../../core/serviceComponents/modal-with-activity/modal-with-activity";
+import ModalSuggestActivity from "../../core/serviceComponents/modal-suggest-activity";
 import CardsList from "../cards-list/cards-list";
 import Spinner from "../../core/serviceComponents/spinner";
 import { useSelector } from "react-redux";
@@ -14,7 +15,7 @@ export default function Cards() {
       <Grid>
         <CardsList />
       </Grid>
-
+      <ModalSuggestActivity />
       {loading ? <Spinner loading={loading} /> : <ModalWithActivity />}
       <Spinner />
     </Grid>

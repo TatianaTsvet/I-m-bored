@@ -12,6 +12,12 @@ export const getActivity = (randomActivity) => {
     payload: { randomActivity },
   };
 };
+export const deleteFavoriteActivity = (key) => {
+  return {
+    type: types.DELETE_FAVORITE_ACTIVITY,
+    payload: { key },
+  };
+};
 
 export const openModal = (modal) => {
   return {
@@ -19,15 +25,27 @@ export const openModal = (modal) => {
     payload: { modal },
   };
 };
-export const openFavoriteDrawer = (favoriteDrawer) => {
+export const openDrawer = (drawer) => {
   return {
-    type: types.OPEN_FAVORITE_DRAWER,
-    payload: { favoriteDrawer },
+    type: types.OPEN_DRAWER,
+    payload: { drawer },
   };
 };
 export const switchLoading = (loading) => {
   return {
     type: types.SWITCH_LOADING,
     payload: { loading },
+  };
+};
+export const drawerType = (type) => {
+  return {
+    type: types.DRAWER_TYPE,
+    payload: { type },
+  };
+};
+export const openSuggestion = (modal) => {
+  return {
+    type: types.OPEN_SUGGESTION,
+    payload: { modal },
   };
 };
