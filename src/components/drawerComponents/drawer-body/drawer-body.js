@@ -19,21 +19,39 @@ export default function DrawerBody() {
 
   const [activities, setActivities] = useState(allActivities);
   const [value, setValue] = useState(1);
-  console.log(activities);
+  const [checked, setChecked] = useState([]);
+  const [filteredActivities, setfilteredActivities] = useState({});
 
   const switchType = (event) => {
-    if (event.target.checked) {
-      const newActivitiesList = allActivities.filter(
-        (item) => item.type !== event.target.value
-      );
-      setActivities(newActivitiesList);
+    // if (event.target.checked) {
+    //   const newActivitiesList = allActivities.filter(
+    //     (item) => item.type !== event.target.value
+    //   );
+    //   setActivities(newActivitiesList);
+    // } else {
+    //   const returnActivities = allActivities.filter(
+    //     (item) => item.type === event.target.value
+    //   );
+    //   const newList = [...activities, ...returnActivities];
+    //   setActivities(newList);
+    // }
+    const currentIndex = checked.indexOf(event.target.value);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(event.target.value);
     } else {
-      const returnActivities = allActivities.filter(
-        (item) => item.type === event.target.value
-      );
-      const newList = [...activities, ...returnActivities];
-      setActivities(newList);
+      newChecked.splice(currentIndex, 1);
     }
+    console.log(newChecked);
+    setChecked(newChecked);
+
+    const newActivitiesList = allActivities.filter((item) =>
+      newChecked.map((i) => {
+        return item.type !== i;
+      })
+    );
+    console.log(newActivitiesList);
   };
 
   const inputSearch = (event) => {
@@ -45,7 +63,7 @@ export default function DrawerBody() {
 
   const countSearch = (event) => {
     setValue(event.target.value);
-    const participantsSearch = activities.filter(
+    const participantsSearch = allActivities.filter(
       (item) => item.participants >= event.target.value
     );
     setActivities(participantsSearch);

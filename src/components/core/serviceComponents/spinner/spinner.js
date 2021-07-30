@@ -21,6 +21,10 @@ export default function Spinner(props) {
         className={classes.spinner}
       >
         <Grid
+          item
+          xs={10}
+          sm={9}
+          md={6}
           container
           direction="row"
           justifyContent="center"

@@ -1,6 +1,6 @@
 import { getActivity } from "../store/actions";
 
-const fetchNewActivity = (type) => {
+export const fetchNewActivity = (type) => {
   let data = new URLSearchParams();
   if (type === "random") {
     data = "";
@@ -8,7 +8,6 @@ const fetchNewActivity = (type) => {
     data = `type=${type}`;
   }
   return (dispatch) => {
-    // dispatch(fetchActivity());
     fetch(`https://www.boredapi.com/api/activity?${data}`, {
       cache: "no-cache",
     })
@@ -21,4 +20,20 @@ const fetchNewActivity = (type) => {
       );
   };
 };
-export default fetchNewActivity;
+
+export const sendActivityWithSuggestion = (suggestion) => {
+  return (dispatch) => {
+    fetch(`https://www.boredapi.com/api/suggestion`, {
+      cache: "no-cache",
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(suggestion),
+    })
+      .then((res) => res.json())
+      .then((res) => dispatch({ type: "suggestResponse", payload: res }))
+      .then(dispatch({ type: "openSnackbar", payload: true }));
+  };
+};

@@ -7,7 +7,7 @@ import {
   ListSubheader,
 } from "@material-ui/core";
 import itemData from "../../core/itemData";
-import fetchNewActivity from "../../../service/asyncRequests";
+import { fetchNewActivity } from "../../../service/asyncRequests";
 import { useDispatch } from "react-redux";
 import useStyles from "./styles";
 import "./cards-list.css";

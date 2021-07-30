@@ -31,6 +31,12 @@ export const openDrawer = (drawer) => {
     payload: { drawer },
   };
 };
+export const openSnackbar = (openSnackbar) => {
+  return {
+    type: types.OPEN_SNACKBAR,
+    payload: { openSnackbar },
+  };
+};
 export const switchLoading = (loading) => {
   return {
     type: types.SWITCH_LOADING,
@@ -47,5 +53,11 @@ export const openSuggestion = (modal) => {
   return {
     type: types.OPEN_SUGGESTION,
     payload: { modal },
+  };
+};
+export const suggestResponse = (response) => {
+  return {
+    type: types.SUGGEST_RESPONSE,
+    payload: { response },
   };
 };

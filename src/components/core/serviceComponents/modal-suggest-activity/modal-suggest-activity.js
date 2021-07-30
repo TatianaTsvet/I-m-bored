@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   TextField,
   MenuItem,
@@ -7,8 +7,11 @@ import {
   Grid,
   Typography,
   Modal,
+  Button,
+  FormControl,
 } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
+import { sendActivityWithSuggestion } from "../../../../service/asyncRequests";
 import useStyles from "./styles";
 import "./modal-suggest-activity.css";
 
@@ -26,61 +29,73 @@ const availableTypes = [
 export default function BasicTextFields() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const [activity, setActivity] = useState("");
+  const [type, setType] = useState("");
+  const [participants, setParticipants] = useState(1);
+
   const openModal = useSelector(
     (state) => state.serviceReducers.suggestionModal
   );
   const modalClose = () => {
-    dispatch({ type: "openModal", payload: false });
+    dispatch({ type: "openSuggestion", payload: false });
   };
   const changeInput = (event) => {
-    console.log(event.target.value);
+    setActivity(event.target.value);
   };
   const changeSelect = (event) => {
-    console.log(event.target.value);
+    setType(event.target.value);
   };
-  const changeParticipants = () => {};
+  const changeParticipants = (event) => {
+    setParticipants(event.target.value);
+  };
+
+  const sendSuggestion = () => {
+    const data = { activity, type, participants };
+    dispatch(sendActivityWithSuggestion(data));
+    dispatch({ type: "openSuggestion", payload: false });
+  };
+
   const types = availableTypes.map((item) => {
     return (
       <MenuItem value={item.replace(" ", "")} key={item}>
-        {item}
+        {item.toUpperCase()}
       </MenuItem>
     );
   });
-  return (
-    <Modal
-      open={openModal}
-      onClose={modalClose}
-      aria-labelledby="simple-modal-title"
-      aria-describedby="simple-modal-description"
-    >
-      <form className={classes.root}>
+  const body = (
+    <Grid item xs={10} sm={9} md={6} className={classes.paper}>
+      <FormControl className={classes.formControl}>
         <Grid
           container
           direction="column"
           justifyContent="center"
-          alignItems="center"
+          alignItems="stretch"
         >
           <Typography>
             Suggest a new activity to the Bored API team and see your activity
             in future displays!
           </Typography>
-          <TextField id="standard-basic" onChange={changeInput} />
+          <InputLabel htmlFor="standard-basic"></InputLabel>
+          <TextField
+            className={classes.textActivity}
+            required
+            id="standard-basic"
+            onChange={changeInput}
+          />
 
           <TextField
             className={classes.textField}
             id="outlined-basic"
             type="number"
             min={1}
-            defaultValue={1}
             variant="outlined"
             onChange={changeParticipants}
             label="participants"
           />
-          <InputLabel id="demo-simple-select-outlined-label">
-            Category
-          </InputLabel>
+
           <Select
-            className={classes.select}
+            required
+            className={classes.selectForm}
             onChange={changeSelect}
             labelId="demo-simple-select-outlined-label"
             id="demo-simple-select-outlined"
@@ -88,8 +103,51 @@ export default function BasicTextFields() {
           >
             {types}
           </Select>
+          <Grid
+            container
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="center"
+          >
+            <Button variant="contained" color="primary" onClick={modalClose}>
+              Close
+            </Button>
+            <Button
+              className={classes.suggestionButton}
+              variant="contained"
+              color="secondary"
+              onClick={sendSuggestion}
+              disabled={
+                activity === "" || type === "" || participants <= 0
+                  ? true
+                  : false
+              }
+            >
+              Send suggestion
+            </Button>
+          </Grid>
         </Grid>
-      </form>
+      </FormControl>
+    </Grid>
+  );
+
+  return (
+    <Modal
+      open={openModal}
+      onClose={modalClose}
+      aria-labelledby="simple-modal-title"
+      aria-describedby="simple-modal-description"
+    >
+      <Grid
+        container
+        item
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        className={classes.modal}
+      >
+        {body}
+      </Grid>
     </Modal>
   );
 }

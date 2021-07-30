@@ -18,7 +18,7 @@ export default function SearchField(props) {
   const icons = (
     <Grid container direction="row">
       <p>Filters:</p>
-      {itemData.map((item) => (
+      {itemData.map((item, index) => (
         <FormControlLabel
           key={item.img}
           className={classes.formControl}
@@ -31,6 +31,7 @@ export default function SearchField(props) {
               name="checkedH"
               label={item.title}
               value={item.title}
+              color="primary"
             />
           }
         />

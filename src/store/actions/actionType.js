@@ -6,3 +6,5 @@ export const OPEN_DRAWER = "openDrawer";
 export const DELETE_FAVORITE_ACTIVITY = "deleteFavoriteActivity";
 export const DRAWER_TYPE = "drawerType";
 export const OPEN_SUGGESTION = "openSuggestion";
+export const SUGGEST_RESPONSE = "suggestResponse";
+export const OPEN_SNACKBAR = "openSnackbar";
