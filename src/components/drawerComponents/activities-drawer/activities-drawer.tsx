@@ -3,14 +3,15 @@ import DrawerBody from "../drawer-body";
 
 import CancelPresentationIcon from "@material-ui/icons/CancelPresentation";
 import { IconButton, Drawer } from "@material-ui/core";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import useStyles from "./styles";
 import "./activities-drawer.css";
+import { useTypedSelector } from "../../../hooks/useTypeSelector";
 
 export default function ActivitiesDrawer() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const drawerOpen = useSelector((state) => state.serviceReducers.drawer);
+  const drawerOpen = useTypedSelector((state) => state.serviceReducers.drawer);
   const drawerClose = () => {
     dispatch({ type: "openDrawer", payload: false });
   };

@@ -5,16 +5,14 @@ import ModalSuggestActivity from "../../core/serviceComponents/modal-suggest-act
 import CardsList from "../cards-list/cards-list";
 import Spinner from "../../core/serviceComponents/spinner";
 import SnackbarResult from "../../core/serviceComponents/snackbar-result";
-import { useDispatch, useSelector } from "react-redux";
+import { useTypedSelector } from "../../../hooks/useTypeSelector";
+import { useDispatch } from "react-redux";
 import "./cards.css";
 
-export default function Cards() {
+export default function Cards() { 
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.serviceReducers.loading);
-  const snackbar = useSelector((state) => state.serviceReducers.openSnackbar);
-  const suggestResponse = useSelector(
-    (state) => state.serviceReducers.suggestResponse
-  );
+  const {loading, openSnackbar, suggestResponse} = useTypedSelector((state) => state.serviceReducers);
+  
   const snackbarClose = () => {
     dispatch({ type: "openSnackbar", payload: false });
   };
@@ -23,14 +21,14 @@ export default function Cards() {
       <Grid>
         <CardsList />
       </Grid>
-      <ModalSuggestActivity />
-      {loading ? <Spinner loading={loading} /> : <ModalWithActivity />}
-      <Spinner />
-      <SnackbarResult
-        snackbar={snackbar}
+      {/* <ModalSuggestActivity /> */}
+      {/* {loading ? <Spinner loading={loading} /> : <ModalWithActivity />} */}
+      {/* <Spinner /> */}
+      {/* <SnackbarResult */}
+        {/* snackbar={openSnackbar}
         suggestResponse={suggestResponse}
         snackbarClose={snackbarClose}
-      />
+      /> */}
     </Grid>
   );
 }

@@ -35,7 +35,7 @@ const itemData = [
     img: "image4",
     title: "diy",
     src: "diy.jpg",
-    subtitle: "Do It Yourself!",
+    subtitle: "Do It Yourself!", 
     icon: <BuildIcon />,
   },
   {

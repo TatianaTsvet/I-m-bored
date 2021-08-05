@@ -1,12 +1,14 @@
 import {
-  OPEN_DRAWER,
-  OPEN_MODAL,
-  SWITCH_LOADING,
-  DRAWER_TYPE,
-  OPEN_SUGGESTION,
-  SUGGEST_RESPONSE,
-  OPEN_SNACKBAR,
+  // OPEN_DRAWER,
+  // OPEN_MODAL,
+  // SWITCH_LOADING,
+  // DRAWER_TYPE,
+  // OPEN_SUGGESTION,
+  // SUGGEST_RESPONSE,
+  // OPEN_SNACKBAR,
+  ActionTypes
 } from "../actions/actionType";
+import { ServiceState, Actions } from "../../types/serviceTypes";
 
 const defaultState = {
   modal: false,
@@ -17,39 +19,39 @@ const defaultState = {
   suggestResponse: "",
   openSnackbar: false,
 };
-const serviceReducers = (state = defaultState, action) => {
+const serviceReducers = (state = defaultState, action: Actions): ServiceState => {
   switch (action.type) {
-    case OPEN_MODAL:
+    case ActionTypes.OPEN_MODAL:
       return {
         ...state,
         modal: action.payload,
       };
-    case OPEN_SUGGESTION:
+    case ActionTypes.OPEN_SUGGESTION:
       return {
         ...state,
         suggestionModal: action.payload,
       };
-    case OPEN_DRAWER:
+    case ActionTypes.OPEN_DRAWER:
       return {
         ...state,
         drawer: action.payload,
       };
-    case OPEN_SNACKBAR:
+    case ActionTypes.OPEN_SNACKBAR:
       return {
         ...state,
         openSnackbar: action.payload,
       };
-    case SWITCH_LOADING:
+    case ActionTypes.SWITCH_LOADING:
       return {
         ...state,
         loading: action.payload,
       };
-    case DRAWER_TYPE:
+    case ActionTypes.DRAWER_TYPE:
       return {
         ...state,
         drawerType: action.payload,
       };
-    case SUGGEST_RESPONSE:
+    case ActionTypes.SUGGEST_RESPONSE:
       return {
         ...state,
         suggestResponse: action.payload,

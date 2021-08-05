@@ -9,9 +9,9 @@ import "./app.css";
 export default function App() {
   return (
     <Grid container direction="column">
-      <Header />
+      {/* <Header /> */}
       <Cards />
-      <ActivitiesDrawer />
+      {/* <ActivitiesDrawer /> */}
     </Grid>
   );
 }

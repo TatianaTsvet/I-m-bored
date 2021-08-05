@@ -1,8 +1,6 @@
 import React from "react";
 import { Grid, IconButton, Typography } from "@material-ui/core";
 import itemData from "../../core/itemData";
-
-// import { useSelector } from "react-redux";
 import useStyles from "./styles";
 import "./icons-field.css";
 

@@ -9,9 +9,9 @@ const rootReducer = combineReducers({
   serviceReducers,
 });
 
-const store = createStore(
+export const  store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
+export type RootState = ReturnType<typeof rootReducer> 
 
-export default store;

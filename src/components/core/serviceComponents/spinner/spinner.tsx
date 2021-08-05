@@ -1,12 +1,12 @@
 import React from "react";
 import { CircularProgress, Grid, Modal } from "@material-ui/core";
-import { useSelector } from "react-redux";
 import useStyles from "./styles";
 import "./spinner.css";
+import { useTypedSelector } from "../../../../hooks/useTypeSelector";
 
 export default function Spinner(props) {
   const classes = useStyles();
-  const loading = useSelector((state) => state.serviceReducers.loading);
+  const loading = useTypedSelector((state) => state.serviceReducers.loading);
   return (
     <Modal
       open={loading}

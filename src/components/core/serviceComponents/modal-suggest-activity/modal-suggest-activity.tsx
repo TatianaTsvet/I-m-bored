@@ -10,10 +10,12 @@ import {
   Button,
   FormControl,
 } from "@material-ui/core";
-import { useSelector, useDispatch } from "react-redux";
+import {useDispatch } from "react-redux";
+import { useTypedSelector } from "../../../../hooks/useTypeSelector";
 import { sendActivityWithSuggestion } from "../../../../service/asyncRequests";
 import useStyles from "./styles";
 import "./modal-suggest-activity.css";
+
 
 const availableTypes = [
   "education",
@@ -24,7 +26,7 @@ const availableTypes = [
   "cooking",
   "relaxation",
   "music",
-  "busy work",
+  "busy work", 
 ];
 export default function BasicTextFields() {
   const classes = useStyles();
@@ -33,20 +35,20 @@ export default function BasicTextFields() {
   const [type, setType] = useState("");
   const [participants, setParticipants] = useState(1);
 
-  const openModal = useSelector(
+  const openModal = useTypedSelector(
     (state) => state.serviceReducers.suggestionModal
   );
   const modalClose = () => {
     dispatch({ type: "openSuggestion", payload: false });
   };
-  const changeInput = (event) => {
+  const changeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setActivity(event.target.value);
   };
-  const changeSelect = (event) => {
+  const changeSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     setType(event.target.value);
   };
-  const changeParticipants = (event) => {
-    setParticipants(event.target.value);
+  const changeParticipants = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // setParticipants(event.target.value);
   };
 
   const sendSuggestion = () => {
@@ -64,7 +66,7 @@ export default function BasicTextFields() {
   });
   const body = (
     <Grid item xs={10} sm={9} md={6} className={classes.paper}>
-      <FormControl className={classes.formControl}>
+      <FormControl>
         <Grid
           container
           direction="column"
@@ -77,7 +79,6 @@ export default function BasicTextFields() {
           </Typography>
           <InputLabel htmlFor="standard-basic"></InputLabel>
           <TextField
-            className={classes.textActivity}
             required
             id="standard-basic"
             onChange={changeInput}
@@ -85,18 +86,21 @@ export default function BasicTextFields() {
 
           <TextField
             className={classes.textField}
-            id="outlined-basic"
+            id="standard-number"
             type="number"
-            min={1}
+            // min={1}
             variant="outlined"
             onChange={changeParticipants}
             label="participants"
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
 
           <Select
             required
             className={classes.selectForm}
-            onChange={changeSelect}
+            onChange={() => changeSelect}
             labelId="demo-simple-select-outlined-label"
             id="demo-simple-select-outlined"
             defaultValue=""
@@ -144,7 +148,7 @@ export default function BasicTextFields() {
         direction="row"
         justifyContent="center"
         alignItems="center"
-        className={classes.modal}
+       
       >
         {body}
       </Grid>

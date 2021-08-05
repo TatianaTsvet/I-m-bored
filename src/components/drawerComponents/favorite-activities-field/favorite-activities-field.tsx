@@ -2,13 +2,14 @@ import React from "react";
 import { Grid, Typography, IconButton } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import "./favorite-activities-field.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import useStyles from "./styles";
+import { useTypedSelector } from "../../../hooks/useTypeSelector";
 
 export default function FavoriteActivitiesField(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const allActivities = useSelector((state) => state.mainReducers.activity);
+  const allActivities = useTypedSelector((state) => state.mainReducers.activity);
 
   const deleteActivity = (key) => {
     dispatch({ type: "deleteFavoriteActivity", payload: key });

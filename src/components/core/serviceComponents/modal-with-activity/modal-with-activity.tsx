@@ -1,11 +1,12 @@
 import React from "react";
 import { Modal, Grid, IconButton, Tooltip } from "@material-ui/core";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import PersonIcon from "@material-ui/icons/Person";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import CloseIcon from "@material-ui/icons/Close";
 import useStyles from "./styles";
 import "./modal-with-activity.css";
+import { useTypedSelector } from "../../../../hooks/useTypeSelector";
 
 export default function ModalWithActivity() {
   const dispatch = useDispatch();
@@ -14,13 +15,13 @@ export default function ModalWithActivity() {
   const modalClose = () => {
     dispatch({ type: "openModal", payload: false });
   };
-  const addToFavourite = (activity) => {
+  const addToFavourite = (activity: object) => {
     dispatch({ type: "addToActivityList", payload: activity });
     dispatch({ type: "openModal", payload: false });
   };
 
-  const modalOpen = useSelector((state) => state.serviceReducers.modal);
-  const randomActivity = useSelector(
+  const modalOpen = useTypedSelector((state) => state.serviceReducers.modal);
+  const randomActivity = useTypedSelector(
     (state) => state.mainReducers.randomActivity
   );
 

@@ -6,7 +6,11 @@ import MuiAlert from "@material-ui/lab/Alert";
 import useStyles from "./styles";
 import "./snackbar-result.css";
 
-export default function SnackbarResult(props) {
+export default function SnackbarResult(props: boolean | function snackbarClose(params:boolean) {
+  
+} ) {
+  
+}) {
   const classes = useStyles();
 
   return (
