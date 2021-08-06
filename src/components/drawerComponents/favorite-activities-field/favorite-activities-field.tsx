@@ -6,12 +6,16 @@ import { useDispatch } from "react-redux";
 import useStyles from "./styles";
 import { useTypedSelector } from "../../../hooks/useTypeSelector";
 
-export default function FavoriteActivitiesField(props) {
+interface FavoriteActivitiesProps {
+activities: any[],
+}
+
+const FavoriteActivitiesField : React.FC<FavoriteActivitiesProps> = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const allActivities = useTypedSelector((state) => state.mainReducers.activity);
 
-  const deleteActivity = (key) => {
+  const deleteActivity = (key: number) => {
     dispatch({ type: "deleteFavoriteActivity", payload: key });
   };
   if (allActivities.length === 0) {
@@ -43,3 +47,4 @@ export default function FavoriteActivitiesField(props) {
   ));
   return <div className="favorite-activities">{favoriteActivities}</div>;
 }
+export default FavoriteActivitiesField

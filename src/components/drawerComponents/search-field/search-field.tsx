@@ -12,7 +12,16 @@ import itemData from "../../core/itemData";
 import useStyles from "./styles";
 import "./search-field.css";
 
-export default function SearchField(props) {
+
+interface SearchFieldProps {
+  switchType:  any,
+  countSearch: any,
+  inputSearch: any,
+  value: number,
+
+}
+
+const SearchField: React.FC<SearchFieldProps> = (props) => {
   const classes = useStyles();
 
   const icons = (
@@ -20,6 +29,7 @@ export default function SearchField(props) {
       <p>Filters:</p>
       {itemData.map((item, index) => (
         <FormControlLabel
+        label="label"
           key={item.img}
           className={classes.formControl}
           control={
@@ -29,7 +39,6 @@ export default function SearchField(props) {
               onClick={props.switchType}
               checkedIcon={item.icon}
               name="checkedH"
-              label={item.title}
               value={item.title}
               color="primary"
             />
@@ -83,3 +92,5 @@ export default function SearchField(props) {
     </div>
   );
 }
+
+export default SearchField

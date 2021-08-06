@@ -1,8 +1,7 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 
-import "./icons-field.css";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => createStyles({
   drawer: {
     background: "#37474f",
     height: "100%",
@@ -14,6 +13,6 @@ const useStyles = makeStyles({
   icon: {
     color: "#ff9800",
   },
-});
+}));
 
 export default useStyles;

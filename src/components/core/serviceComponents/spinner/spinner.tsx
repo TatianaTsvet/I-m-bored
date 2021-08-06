@@ -2,14 +2,18 @@ import React from "react";
 import { CircularProgress, Grid, Modal } from "@material-ui/core";
 import useStyles from "./styles";
 import "./spinner.css";
-import { useTypedSelector } from "../../../../hooks/useTypeSelector";
 
-export default function Spinner(props) {
+
+interface SpinerProps {
+  loading: boolean
+}
+
+const Spinner: React.FC<SpinerProps> = (props) => {
   const classes = useStyles();
-  const loading = useTypedSelector((state) => state.serviceReducers.loading);
+  
   return (
     <Modal
-      open={loading}
+      open={props.loading}
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
     >
@@ -18,7 +22,7 @@ export default function Spinner(props) {
         direction="row"
         justifyContent="center"
         alignItems="center"
-        className={classes.spinner}
+      
       >
         <Grid
           item
@@ -37,3 +41,4 @@ export default function Spinner(props) {
     </Modal>
   );
 }
+export default Spinner

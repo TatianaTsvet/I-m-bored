@@ -4,7 +4,7 @@ import {
   // GET_ACTIVITY, 
   ActionTypes
 } from "../actions/actionType";
-import { MainState,  Actions } from "../../types/mainTypes";
+import { MainState,  MainActions } from "../../types/mainTypes";
 
 
 const defaultState: MainState = {
@@ -12,7 +12,7 @@ const defaultState: MainState = {
   history: JSON.parse(localStorage.getItem("history") ?? "[]"),
   randomActivity: "",
 };
-const mainReducers = (state = defaultState, action: Actions): MainState => {
+const mainReducers = (state = defaultState, action: MainActions): MainState => {
   switch (action.type) {
     case ActionTypes.ADD_TO_ACTIVITY_LIST:
       const sameActivity = !!state.activity.find(

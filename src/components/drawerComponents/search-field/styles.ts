@@ -1,17 +1,10 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
-const useStyles = makeStyles({
-  drawer: {
-    background: "#37474f",
-    height: "100%",
-    color: "#ff9800",
-  },
-  drawerText: {
-    textTransform: "uppercase",
-  },
+const useStyles = makeStyles((theme: Theme) => createStyles({
   icon: {
     color: "#ff9800",
   },
+
   input: {
     color: "#ff9800",
 
@@ -41,6 +34,5 @@ const useStyles = makeStyles({
   formControl: {
     marginLeft: "0.5em",
   },
-});
-
+}));
 export default useStyles;

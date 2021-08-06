@@ -28,7 +28,7 @@ const availableTypes = [
   "music",
   "busy work", 
 ];
-export default function BasicTextFields() {
+const  ModalSuggestActivity: React.FC = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [activity, setActivity] = useState("");
@@ -40,21 +40,28 @@ export default function BasicTextFields() {
   );
   const modalClose = () => {
     dispatch({ type: "openSuggestion", payload: false });
+    setParticipants(1)
   };
-  const changeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const changeInput = (event: React.ChangeEvent<HTMLInputElement>) => {  
     setActivity(event.target.value);
   };
-  const changeSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setType(event.target.value);
+  const changeSelect = (event: React.ChangeEvent<{ value: unknown }>) => {
+   
+    setType(event.target.value as string);
+   
   };
   const changeParticipants = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // setParticipants(event.target.value);
+   
+
+    const participantsNumber = Number(event.target.value);
+    setParticipants(participantsNumber);
   };
 
   const sendSuggestion = () => {
     const data = { activity, type, participants };
     dispatch(sendActivityWithSuggestion(data));
     dispatch({ type: "openSuggestion", payload: false });
+    setParticipants(1)
   };
 
   const types = availableTypes.map((item) => {
@@ -88,7 +95,8 @@ export default function BasicTextFields() {
             className={classes.textField}
             id="standard-number"
             type="number"
-            // min={1}
+            value={participants}
+           
             variant="outlined"
             onChange={changeParticipants}
             label="participants"
@@ -100,7 +108,7 @@ export default function BasicTextFields() {
           <Select
             required
             className={classes.selectForm}
-            onChange={() => changeSelect}
+            onChange={changeSelect}
             labelId="demo-simple-select-outlined-label"
             id="demo-simple-select-outlined"
             defaultValue=""
@@ -155,3 +163,5 @@ export default function BasicTextFields() {
     </Modal>
   );
 }
+
+export default ModalSuggestActivity

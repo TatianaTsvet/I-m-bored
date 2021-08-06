@@ -1,11 +1,11 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
     flexGrow: 1,
     position: "sticky",
     width: "100%",
-    zIndex: "1000",
+    // zIndex: "1000",
     top: "0",
   },
   appbar: {

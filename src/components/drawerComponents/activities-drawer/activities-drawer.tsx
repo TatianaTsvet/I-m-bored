@@ -1,6 +1,5 @@
 import React from "react";
 import DrawerBody from "../drawer-body";
-
 import CancelPresentationIcon from "@material-ui/icons/CancelPresentation";
 import { IconButton, Drawer } from "@material-ui/core";
 import { useDispatch } from "react-redux";
@@ -8,7 +7,7 @@ import useStyles from "./styles";
 import "./activities-drawer.css";
 import { useTypedSelector } from "../../../hooks/useTypeSelector";
 
-export default function ActivitiesDrawer() {
+const ActivitiesDrawer : React.FC = () =>  {
   const classes = useStyles();
   const dispatch = useDispatch();
   const drawerOpen = useTypedSelector((state) => state.serviceReducers.drawer);
@@ -19,9 +18,8 @@ export default function ActivitiesDrawer() {
   const drawer = (
     <div className={classes.drawer}>
       <IconButton
-        variant="contained"
-        onClick={drawerClose}
-        className={classes.iconDrawer}
+         onClick={drawerClose}
+         className={classes.iconDrawer}
       >
         <CancelPresentationIcon />
       </IconButton>
@@ -43,3 +41,4 @@ export default function ActivitiesDrawer() {
     </nav>
   );
 }
+export default ActivitiesDrawer

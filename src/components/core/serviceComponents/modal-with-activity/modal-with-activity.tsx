@@ -8,7 +8,7 @@ import useStyles from "./styles";
 import "./modal-with-activity.css";
 import { useTypedSelector } from "../../../../hooks/useTypeSelector";
 
-export default function ModalWithActivity() {
+const ModalWithActivity: React.FC = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -95,3 +95,5 @@ export default function ModalWithActivity() {
     </Modal>
   );
 }
+
+export default ModalWithActivity

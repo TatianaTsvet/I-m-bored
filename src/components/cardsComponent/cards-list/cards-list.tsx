@@ -11,16 +11,16 @@ import { fetchNewActivity } from "../../../service/asyncRequests";
 import { useDispatch } from "react-redux";
  import useStyles from "./styles";
 import "./cards-list.css";
-// import { useActions } from "../../../hooks/useActions";
 
-export default function CardsList() {
-  // const {} = useActions
+
+const CardsList: React.FC = () =>  {
+ 
   const dispatch = useDispatch();
   const classes = useStyles();
 
   const modalOpen = (type: string) => {
     const newType = type.replace(" ", "");
-    dispatch: (fetchNewActivity(newType));
+    dispatch(fetchNewActivity(newType));
     dispatch({ type: "switchLoading", payload: true });
     dispatch({ type: "openModal", payload: true });
   };
@@ -54,3 +54,5 @@ export default function CardsList() {
     </div>
   );
 }
+
+export default CardsList;

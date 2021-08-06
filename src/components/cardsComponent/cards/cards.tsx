@@ -9,7 +9,7 @@ import { useTypedSelector } from "../../../hooks/useTypeSelector";
 import { useDispatch } from "react-redux";
 import "./cards.css";
 
-export default function Cards() { 
+ const Cards: React.FC = () => { 
   const dispatch = useDispatch();
   const {loading, openSnackbar, suggestResponse} = useTypedSelector((state) => state.serviceReducers);
   
@@ -21,14 +21,15 @@ export default function Cards() {
       <Grid>
         <CardsList />
       </Grid>
-      {/* <ModalSuggestActivity /> */}
-      {/* {loading ? <Spinner loading={loading} /> : <ModalWithActivity />} */}
-      {/* <Spinner /> */}
-      {/* <SnackbarResult */}
-        {/* snackbar={openSnackbar}
+      <ModalSuggestActivity /> 
+      {loading ? <Spinner loading={loading} /> : <ModalWithActivity />}
+     
+      <SnackbarResult
+       snackbar={openSnackbar}
         suggestResponse={suggestResponse}
-        snackbarClose={snackbarClose}
-      /> */}
+        snackbarClose={ snackbarClose}
+      />
     </Grid>
   );
 }
+export default Cards

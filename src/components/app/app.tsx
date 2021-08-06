@@ -6,12 +6,13 @@ import { Grid } from "@material-ui/core";
 
 import "./app.css";
 
-export default function App() {
+const App: React.FC = () => {
   return (
     <Grid container direction="column">
-      {/* <Header /> */}
+      <Header />
       <Cards />
-      {/* <ActivitiesDrawer /> */}
+      <ActivitiesDrawer />
     </Grid>
   );
 }
+export default App

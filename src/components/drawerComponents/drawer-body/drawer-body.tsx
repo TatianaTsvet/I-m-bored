@@ -17,11 +17,9 @@ export default function DrawerBody() {
 
   const [activities, setActivities] = useState(allActivities);
   const [value, setValue] = useState(1);
-  const [checked, setChecked] = useState([]);
-  const [inputActivities, setfilteredInputActivities] = useState(activities);
+  const [checked, setChecked] = useState<string[]>([]);
 
-  const switchType = (event) => {
-    
+  const switchType = (event: React.ChangeEvent<HTMLInputElement>)=> {
     const currentIndex = checked.indexOf(event.target.value);
     const newChecked = [...checked];
 
@@ -37,7 +35,7 @@ export default function DrawerBody() {
     setActivities(res);
   };
 
-  const inputSearch = (event) => {
+  const inputSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     
     const foundItems = allActivities.filter(
       (item) => item.activity.indexOf(event.target.value) > -1
@@ -46,8 +44,8 @@ export default function DrawerBody() {
     setActivities(foundItems);
   };
 
-  const countSearch = (event) => {
-    setValue(event.target.value);
+  const countSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(Number(event.target.value));
     const participantsSearch = allActivities.filter(
       (item) => item.participants >= event.target.value
     );
@@ -59,7 +57,7 @@ export default function DrawerBody() {
       <Typography variant="h6" gutterBottom className={classes.drawerText}>
         {drawerType}
       </Typography>
-
+     
       <SearchField
         value={value}
         switchType={switchType}

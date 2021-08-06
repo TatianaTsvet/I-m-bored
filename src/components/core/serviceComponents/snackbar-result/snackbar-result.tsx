@@ -1,16 +1,19 @@
 import React from "react";
 import { Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
-
-
 import useStyles from "./styles";
 import "./snackbar-result.css";
 
-export default function SnackbarResult(props: boolean | function snackbarClose(params:boolean) {
-  
-} ) {
-  
-}) {
+
+
+interface SnackbarProps {
+  snackbar: boolean,
+  snackbarClose: any,
+  suggestResponse: any,
+}
+
+const SnackbarResult: React.FC<SnackbarProps> = (props) =>  {  
+
   const classes = useStyles();
 
   return (
@@ -31,3 +34,5 @@ export default function SnackbarResult(props: boolean | function snackbarClose(p
     />
   );
 }
+
+export default SnackbarResult;
