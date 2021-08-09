@@ -18,15 +18,16 @@ export default function ButtonAppBar() {
     dispatch({ type: "drawerType", payload: "history" });
     dispatch({ type: "openDrawer", payload: true });
   };
-const sendSuggestion = () => {
-  dispatch({ type: "openSuggestion", payload: true });
-}
+  const sendSuggestion = () => {
+    dispatch({ type: "openSuggestion", payload: true });
+  };
+
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.appbar}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            I'm bored...
+            I am bored...
           </Typography>
           <IconButton
             edge="start"

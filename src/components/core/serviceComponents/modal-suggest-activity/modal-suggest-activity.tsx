@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, FC } from "react";
 import {
   TextField,
   MenuItem,
@@ -10,12 +10,11 @@ import {
   Button,
   FormControl,
 } from "@material-ui/core";
-import {useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../../../hooks/useTypeSelector";
 import { sendActivityWithSuggestion } from "../../../../service/asyncRequests";
 import useStyles from "./styles";
 import "./modal-suggest-activity.css";
-
 
 const availableTypes = [
   "education",
@@ -26,9 +25,9 @@ const availableTypes = [
   "cooking",
   "relaxation",
   "music",
-  "busy work", 
+  "busy work",
 ];
-const  ModalSuggestActivity: React.FC = () => {
+const ModalSuggestActivity: FC = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [activity, setActivity] = useState("");
@@ -40,19 +39,15 @@ const  ModalSuggestActivity: React.FC = () => {
   );
   const modalClose = () => {
     dispatch({ type: "openSuggestion", payload: false });
-    setParticipants(1)
+    setParticipants(1);
   };
-  const changeInput = (event: React.ChangeEvent<HTMLInputElement>) => {  
+  const changeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setActivity(event.target.value);
   };
   const changeSelect = (event: React.ChangeEvent<{ value: unknown }>) => {
-   
     setType(event.target.value as string);
-   
   };
   const changeParticipants = (event: React.ChangeEvent<HTMLInputElement>) => {
-   
-
     const participantsNumber = Number(event.target.value);
     setParticipants(participantsNumber);
   };
@@ -61,7 +56,7 @@ const  ModalSuggestActivity: React.FC = () => {
     const data = { activity, type, participants };
     dispatch(sendActivityWithSuggestion(data));
     dispatch({ type: "openSuggestion", payload: false });
-    setParticipants(1)
+    setParticipants(1);
   };
 
   const types = availableTypes.map((item) => {
@@ -85,18 +80,13 @@ const  ModalSuggestActivity: React.FC = () => {
             in future displays!
           </Typography>
           <InputLabel htmlFor="standard-basic"></InputLabel>
-          <TextField
-            required
-            id="standard-basic"
-            onChange={changeInput}
-          />
+          <TextField required id="standard-basic" onChange={changeInput} />
 
           <TextField
             className={classes.textField}
             id="standard-number"
             type="number"
             value={participants}
-           
             variant="outlined"
             onChange={changeParticipants}
             label="participants"
@@ -156,12 +146,11 @@ const  ModalSuggestActivity: React.FC = () => {
         direction="row"
         justifyContent="center"
         alignItems="center"
-       
       >
         {body}
       </Grid>
     </Modal>
   );
-}
+};
 
-export default ModalSuggestActivity
+export default ModalSuggestActivity;

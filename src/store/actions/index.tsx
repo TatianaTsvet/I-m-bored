@@ -1,4 +1,3 @@
-
 import { ActionTypes } from "./actionType";
 
 export const addToActivityList = (activity: any[]) => {

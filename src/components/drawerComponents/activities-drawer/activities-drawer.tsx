@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import DrawerBody from "../drawer-body";
 import CancelPresentationIcon from "@material-ui/icons/CancelPresentation";
 import { IconButton, Drawer } from "@material-ui/core";
@@ -7,7 +7,7 @@ import useStyles from "./styles";
 import "./activities-drawer.css";
 import { useTypedSelector } from "../../../hooks/useTypeSelector";
 
-const ActivitiesDrawer : React.FC = () =>  {
+const ActivitiesDrawer: FC = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const drawerOpen = useTypedSelector((state) => state.serviceReducers.drawer);
@@ -17,10 +17,7 @@ const ActivitiesDrawer : React.FC = () =>  {
 
   const drawer = (
     <div className={classes.drawer}>
-      <IconButton
-         onClick={drawerClose}
-         className={classes.iconDrawer}
-      >
+      <IconButton onClick={drawerClose} className={classes.iconDrawer}>
         <CancelPresentationIcon />
       </IconButton>
       <DrawerBody />
@@ -40,5 +37,5 @@ const ActivitiesDrawer : React.FC = () =>  {
       </Drawer>
     </nav>
   );
-}
-export default ActivitiesDrawer
+};
+export default ActivitiesDrawer;

@@ -4,16 +4,17 @@ import MuiAlert from "@material-ui/lab/Alert";
 import useStyles from "./styles";
 import "./snackbar-result.css";
 
-
-
 interface SnackbarProps {
-  snackbar: boolean,
-  snackbarClose: any,
-  suggestResponse: any,
+  suggestResponse: any;
+  snackbar: boolean;
+  snackbarClose: () => void;
 }
 
-const SnackbarResult: React.FC<SnackbarProps> = (props) =>  {  
-
+const SnackbarResult = ({
+  snackbar,
+  snackbarClose,
+  suggestResponse,
+}: SnackbarProps): React.ReactElement => {
   const classes = useStyles();
 
   return (
@@ -23,16 +24,16 @@ const SnackbarResult: React.FC<SnackbarProps> = (props) =>  {
         vertical: "bottom",
         horizontal: "right",
       }}
-      open={props.snackbar}
+      open={snackbar}
       autoHideDuration={2000}
-      onClose={props.snackbarClose}
+      onClose={snackbarClose}
       action={
         <MuiAlert variant="filled" severity="success">
-          {props.suggestResponse.message}
+          {suggestResponse.message}
         </MuiAlert>
       }
     />
   );
-}
+};
 
 export default SnackbarResult;

@@ -6,7 +6,7 @@ import {
   // OPEN_SUGGESTION,
   // SUGGEST_RESPONSE,
   // OPEN_SNACKBAR,
-  ActionTypes
+  ActionTypes,
 } from "../actions/actionType";
 import { ServiceState, ServiceActions } from "../../types/serviceTypes";
 
@@ -19,7 +19,10 @@ const defaultState = {
   suggestResponse: "",
   openSnackbar: false,
 };
-const serviceReducers = (state = defaultState, action: ServiceActions): ServiceState => {
+const serviceReducers = (
+  state = defaultState,
+  action: ServiceActions
+): ServiceState => {
   switch (action.type) {
     case ActionTypes.OPEN_MODAL:
       return {

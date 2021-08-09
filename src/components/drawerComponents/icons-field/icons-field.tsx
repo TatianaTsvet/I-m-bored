@@ -12,6 +12,7 @@ export default function IconsField() {
       <p>Filters:</p>
       {itemData.map((item) => (
         <IconButton
+          key={item.title}
           aria-label={`info about ${item.title}`}
           className={classes.icon}
         >

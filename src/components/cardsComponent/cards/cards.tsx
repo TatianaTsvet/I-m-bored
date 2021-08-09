@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { Grid } from "@material-ui/core";
 import ModalWithActivity from "../../core/serviceComponents/modal-with-activity/modal-with-activity";
 import ModalSuggestActivity from "../../core/serviceComponents/modal-suggest-activity";
@@ -9,10 +9,12 @@ import { useTypedSelector } from "../../../hooks/useTypeSelector";
 import { useDispatch } from "react-redux";
 import "./cards.css";
 
- const Cards: React.FC = () => { 
+const Cards: FC = () => {
   const dispatch = useDispatch();
-  const {loading, openSnackbar, suggestResponse} = useTypedSelector((state) => state.serviceReducers);
-  
+  const { loading, openSnackbar, suggestResponse } = useTypedSelector(
+    (state) => state.serviceReducers
+  );
+
   const snackbarClose = () => {
     dispatch({ type: "openSnackbar", payload: false });
   };
@@ -21,15 +23,15 @@ import "./cards.css";
       <Grid>
         <CardsList />
       </Grid>
-      <ModalSuggestActivity /> 
+      <ModalSuggestActivity />
       {loading ? <Spinner loading={loading} /> : <ModalWithActivity />}
-     
+
       <SnackbarResult
-       snackbar={openSnackbar}
+        snackbar={openSnackbar}
         suggestResponse={suggestResponse}
-        snackbarClose={ snackbarClose}
+        snackbarClose={snackbarClose}
       />
     </Grid>
   );
-}
-export default Cards
+};
+export default Cards;

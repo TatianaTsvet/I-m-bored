@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { Modal, Grid, IconButton, Tooltip } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import PersonIcon from "@material-ui/icons/Person";
@@ -8,14 +8,14 @@ import useStyles from "./styles";
 import "./modal-with-activity.css";
 import { useTypedSelector } from "../../../../hooks/useTypeSelector";
 
-const ModalWithActivity: React.FC = () => {
+const ModalWithActivity: FC = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
 
   const modalClose = () => {
     dispatch({ type: "openModal", payload: false });
   };
-  const addToFavourite = (activity: object) => {
+  const addToFavorite = (activity: any) => {
     dispatch({ type: "addToActivityList", payload: activity });
     dispatch({ type: "openModal", payload: false });
   };
@@ -25,7 +25,7 @@ const ModalWithActivity: React.FC = () => {
     (state) => state.mainReducers.randomActivity
   );
 
-  let participants = [<PersonIcon key="personIcon" />];
+  const participants = [<PersonIcon key="personIcon" />];
   for (let i = 1; i < randomActivity.participants; i++) {
     participants.push(<PersonIcon key={`personIcon${i}`} />);
   }
@@ -53,11 +53,11 @@ const ModalWithActivity: React.FC = () => {
           Participants
           <span className={classes.icon}>{participants}</span>
         </p>
-        <Tooltip title="Add to favourite" aria-label="add">
+        <Tooltip title="Add to favorite" aria-label="add">
           <IconButton
             color="inherit"
             className={classes.icon}
-            onClick={() => addToFavourite(randomActivity)}
+            onClick={() => addToFavorite(randomActivity)}
           >
             <FavoriteIcon />
           </IconButton>
@@ -94,6 +94,6 @@ const ModalWithActivity: React.FC = () => {
       </Grid>
     </Modal>
   );
-}
+};
 
-export default ModalWithActivity
+export default ModalWithActivity;

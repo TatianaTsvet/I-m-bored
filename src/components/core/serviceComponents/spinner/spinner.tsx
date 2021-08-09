@@ -1,16 +1,15 @@
-import React from "react";
+import React, { FC } from "react";
 import { CircularProgress, Grid, Modal } from "@material-ui/core";
 import useStyles from "./styles";
 import "./spinner.css";
 
-
-interface SpinerProps {
-  loading: boolean
+interface SpinnerProps {
+  loading: boolean;
 }
 
-const Spinner: React.FC<SpinerProps> = (props) => {
+const Spinner: FC<SpinnerProps> = (props) => {
   const classes = useStyles();
-  
+
   return (
     <Modal
       open={props.loading}
@@ -22,7 +21,6 @@ const Spinner: React.FC<SpinerProps> = (props) => {
         direction="row"
         justifyContent="center"
         alignItems="center"
-      
       >
         <Grid
           item
@@ -40,5 +38,5 @@ const Spinner: React.FC<SpinerProps> = (props) => {
       </Grid>
     </Modal>
   );
-}
-export default Spinner
+};
+export default Spinner;

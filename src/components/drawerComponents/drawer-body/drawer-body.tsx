@@ -9,39 +9,48 @@ import "./drawer-body.css";
 
 export default function DrawerBody() {
   const classes = useStyles();
-  const {drawerType} = useTypedSelector((state) => state.serviceReducers);
-  const favoriteActivity = useTypedSelector((state) => state.mainReducers.activity);
-  const historyActivity = useTypedSelector((state) => state.mainReducers.history);
+  const { drawerType } = useTypedSelector((state) => state.serviceReducers);
+  const favoriteActivity = useTypedSelector(
+    (state) => state.mainReducers.activity
+  );
+  const historyActivity = useTypedSelector(
+    (state) => state.mainReducers.history
+  );
   const allActivities =
     drawerType === "favorites" ? favoriteActivity : historyActivity;
 
   const [activities, setActivities] = useState(allActivities);
-  const [value, setValue] = useState(1);
-  const [checked, setChecked] = useState<string[]>([]);
+  const [input, setInput] = useState<string>("");
+  const [value, setValue] = useState<number>(1);
+  const [checked, setChecked] = useState<any[]>([]);
 
-  const switchType = (event: React.ChangeEvent<HTMLInputElement>)=> {
+  const switchType = (event: React.MouseEvent<HTMLButtonElement>) => {
     const currentIndex = checked.indexOf(event.target.value);
-    const newChecked = [...checked];
+    //const newChecked = [...checked];
 
+    // if (currentIndex === -1) {
+    //   newChecked.push(event.target.value);
+    // } else {
+    //   newChecked.splice(currentIndex, 1);
+    // }
+
+    // setChecked(newChecked);
+
+    // const res = allActivities.filter(({ type }) => !newChecked.includes(type));
+    // setActivities(res);
     if (currentIndex === -1) {
-      newChecked.push(event.target.value);
+      setChecked((checked) => [...checked, event.target.value]);
     } else {
-      newChecked.splice(currentIndex, 1);
+      setChecked((checked) => checked.splice(currentIndex, 1));
     }
-
-    setChecked(newChecked);
-
-    const res = allActivities.filter(({ type }) => !newChecked.includes(type));
-    setActivities(res);
   };
 
   const inputSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    
-    const foundItems = allActivities.filter(
-      (item) => item.activity.indexOf(event.target.value) > -1
-    );
-
-    setActivities(foundItems);
+    // const foundItems = allActivities.filter(
+    //   (item) => item.activity.indexOf(event.target.value) > -1
+    // );
+    // setActivities(foundItems);
+    setInput(event.target.value.toLowerCase());
   };
 
   const countSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,14 +66,18 @@ export default function DrawerBody() {
       <Typography variant="h6" gutterBottom className={classes.drawerText}>
         {drawerType}
       </Typography>
-     
+
       <SearchField
         value={value}
         switchType={switchType}
         countSearch={countSearch}
         inputSearch={inputSearch}
       />
-      <FavoriteActivitiesField activities={activities} />
+      <FavoriteActivitiesField
+        activities={activities}
+        input={input}
+        checked={checked}
+      />
     </div>
   );
 }

@@ -1,11 +1,10 @@
 import {
   // ADD_TO_ACTIVITY_LIST,
   // DELETE_FAVORITE_ACTIVITY,
-  // GET_ACTIVITY, 
-  ActionTypes
+  // GET_ACTIVITY,
+  ActionTypes,
 } from "../actions/actionType";
-import { MainState,  MainActions } from "../../types/mainTypes";
-
+import { MainState, MainActions } from "../../types/mainTypes";
 
 const defaultState: MainState = {
   activity: JSON.parse(localStorage.getItem("activityList") ?? "[]"),
@@ -20,7 +19,7 @@ const mainReducers = (state = defaultState, action: MainActions): MainState => {
         // .key
       );
       const newActivity = sameActivity
-        ? state.activity 
+        ? state.activity
         : [...state.activity, action.payload];
 
       localStorage.setItem("activityList", JSON.stringify(newActivity));
@@ -33,8 +32,8 @@ const mainReducers = (state = defaultState, action: MainActions): MainState => {
       return {
         ...state,
         randomActivity: action.payload,
-         // .randomActivity,
-        history: action.payload
+        // .randomActivity,
+        history: action.payload,
         // .randomActivity,
       };
     case ActionTypes.DELETE_FAVORITE_ACTIVITY:

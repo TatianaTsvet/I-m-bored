@@ -1,20 +1,18 @@
-import React from "react";
+import React, { FC } from "react";
 import {
   ImageList,
   ImageListItem,
   ImageListItemBar,
-  IconButton, 
+  IconButton,
   ListSubheader,
 } from "@material-ui/core";
 import itemData from "../../core/itemData";
 import { fetchNewActivity } from "../../../service/asyncRequests";
 import { useDispatch } from "react-redux";
- import useStyles from "./styles";
+import useStyles from "./styles";
 import "./cards-list.css";
 
-
-const CardsList: React.FC = () =>  {
- 
+const CardsList: FC = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -25,7 +23,7 @@ const CardsList: React.FC = () =>  {
     dispatch({ type: "openModal", payload: true });
   };
 
-  return ( 
+  return (
     <div className={classes.root}>
       <ImageList rowHeight={180} className={classes.imageList}>
         <ImageListItem key="Subheader" cols={2} style={{ height: "auto" }}>
@@ -53,6 +51,6 @@ const CardsList: React.FC = () =>  {
       </ImageList>
     </div>
   );
-}
+};
 
 export default CardsList;

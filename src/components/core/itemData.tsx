@@ -1,3 +1,4 @@
+import React from "react";
 import SchoolIcon from "@material-ui/icons/School";
 import DirectionsBikeIcon from "@material-ui/icons/DirectionsBike";
 import PeopleIcon from "@material-ui/icons/People";
@@ -35,7 +36,7 @@ const itemData = [
     img: "image4",
     title: "diy",
     src: "diy.jpg",
-    subtitle: "Do It Yourself!", 
+    subtitle: "Do It Yourself!",
     icon: <BuildIcon />,
   },
   {
