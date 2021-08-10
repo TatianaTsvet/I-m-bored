@@ -1,6 +1,7 @@
 import React, { FC } from "react";
-import { Grid, Typography, IconButton } from "@material-ui/core";
+import { Grid, Typography, IconButton, Checkbox } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import "./favorite-activities-field.css";
 import { useDispatch } from "react-redux";
 import useStyles from "./styles";
@@ -10,28 +11,35 @@ interface IFavoriteActivity {
   activity: string;
   type: string;
   key: number;
+  participants: number;
+  liked?: boolean;
 }
 interface IFavoriteActivitiesProps {
   activities: IFavoriteActivity[];
-  input: any;
-  checked: any;
+  input: string;
+  checked: string[];
+  count: number;
+  drawerType: string;
 }
 
 const FavoriteActivitiesField: FC<IFavoriteActivitiesProps> = ({
   activities,
-  input,
   checked,
+  drawerType,
 }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const allActivities = useTypedSelector(
+  const favoriteActivities = useTypedSelector(
     (state) => state.mainReducers.activity
+  );
+  const historyActivities = useTypedSelector(
+    (state) => state.mainReducers.history
   );
 
   const deleteActivity = (key: number) => {
     dispatch({ type: "deleteFavoriteActivity", payload: key });
   };
-  if (allActivities.length === 0) {
+  if (drawerType === "favorites" && favoriteActivities.length === 0) {
     return (
       <Typography variant="overline">
         You currently have no boring antidotes in favorites
@@ -39,40 +47,19 @@ const FavoriteActivitiesField: FC<IFavoriteActivitiesProps> = ({
     );
   }
 
-  // const favoriteActivities =
-  // props.activities.map((item) => (
-  //   <Grid
-  //     key={item.key}
-  //     className={classes.favoriteActivities}
-  //     container
-  //     direction="row"
-  //     justifyContent="space-between"
-  //     alignItems="center"
-  //   >
-  //     <Grid item xs={9}>
-  //       <Typography variant="body1">{item.activity}</Typography>
-  //     </Grid>
-  //     <IconButton
-  //       className={classes.icon}
-  //       onClick={() => deleteActivity(item.key)}
-  //     >
-  //       <DeleteIcon />
-  //     </IconButton>
-  //   </Grid>
-  // ));
+  // const addToLiked = (key: number) => {
+  //   dispatch({ type: "clickedLikeButton", payload: key });
+  // };
+  const addToLiked = (event: any) => {
+    console.log(event.target);
+  };
 
   return (
     <div className="favorite-activities">
-      {/* {favoriteActivities} */}
       {activities
-        .filter(({ activity, type }) => {
-          if (activity || type) {
-            if (type) {
-              return checked.includes(type);
-            }
-            if (activity) {
-              return activity.toLowerCase().includes(input);
-            }
+        .filter(({ type }) => {
+          if (type) {
+            return !checked.includes(type);
           }
           return true;
         })
@@ -88,12 +75,23 @@ const FavoriteActivitiesField: FC<IFavoriteActivitiesProps> = ({
             <Grid item xs={9}>
               <Typography variant="body1">{item.activity}</Typography>
             </Grid>
-            <IconButton
-              className={classes.icon}
-              onClick={() => deleteActivity(item.key)}
-            >
-              <DeleteIcon />
-            </IconButton>
+            {drawerType === "favorites" ? (
+              <IconButton
+                className={classes.icon}
+                onClick={() => deleteActivity(item.key)}
+              >
+                <DeleteIcon />
+              </IconButton>
+            ) : (
+              <Checkbox
+                checked={item.liked ? true : false}
+                icon={<FavoriteIcon />}
+                onChange={addToLiked}
+                checkedIcon={<FavoriteIcon />}
+                name="checkedH"
+                value={item.key}
+              />
+            )}
           </Grid>
         ))}
     </div>

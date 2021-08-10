@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme: Theme) =>
     favoriteActivities: {
       marginTop: "0.6em",
     },
+    
   })
 );
 export default useStyles;

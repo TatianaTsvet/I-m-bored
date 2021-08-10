@@ -61,3 +61,9 @@ export const suggestResponse = (response: any[]) => {
     payload: { response },
   };
 };
+export const clickedLikeButton = (key: number) => {
+  return {
+    type: ActionTypes.CLICKED_LIKE_BUTTON,
+    payload: { key },
+  };
+};

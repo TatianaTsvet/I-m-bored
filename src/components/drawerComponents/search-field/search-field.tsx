@@ -1,37 +1,53 @@
-import React, { FC } from "react";
-import { Grid, InputAdornment, Input, Checkbox } from "@material-ui/core";
+import React, { FC, useCallback } from "react";
+import { Grid, InputAdornment, Input } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import PersonIcon from "@material-ui/icons/Person";
+import Filter from "../filter";
 import itemData from "../../core/itemData";
 import useStyles from "./styles";
 import "./search-field.css";
 
 interface SearchFieldProps {
-  switchType: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  countSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  inputSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  value: number;
+  onCheckFilter: (title: string, checked: boolean) => void;
+  onSearch: (value: string) => void;
+  onCountChange: (count: number) => void;
+  count: number;
 }
 
 const SearchField: FC<SearchFieldProps> = (props) => {
   const classes = useStyles();
+  const { onCheckFilter, onSearch, onCountChange, count } = props;
 
   const icons = (
     <Grid container direction="row">
       <p>Filters:</p>
-      {itemData.map((item, index) => (
-        <Checkbox
-          key={item.img}
-          className={classes.checkbox}
-          icon={item.icon}
-          onClick={props.switchType}
-          checkedIcon={item.icon}
-          name="checkedH"
-          value={item.title}
-          color="primary"
+      {itemData.map(({ title, icon }) => (
+        <Filter
+          key={title}
+          title={title}
+          icon={icon}
+          switchType={onCheckFilter}
         />
       ))}
     </Grid>
+  );
+
+  const handleSearchInput = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      onSearch(event.target.value);
+    },
+    [onSearch]
+  );
+
+  const handleCountInput = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (event.target.value >= "1") {
+        onCountChange(Number(event.target.value));
+      } else {
+        onCountChange(1);
+      }
+    },
+    [onCountChange]
   );
 
   return (
@@ -47,7 +63,7 @@ const SearchField: FC<SearchFieldProps> = (props) => {
       >
         <Grid item xs={8}>
           <Input
-            onChange={props.inputSearch}
+            onChange={handleSearchInput}
             className={classes.input}
             id="input-with-icon-adornment"
             startAdornment={
@@ -59,9 +75,9 @@ const SearchField: FC<SearchFieldProps> = (props) => {
         </Grid>
         <Grid item xs={3}>
           <Input
-            onChange={props.countSearch}
+            onChange={handleCountInput}
             type="number"
-            value={props.value}
+            value={count}
             className={classes.input}
             id="input-with-icon-adornment"
             startAdornment={

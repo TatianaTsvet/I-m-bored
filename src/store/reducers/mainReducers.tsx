@@ -1,22 +1,16 @@
-import {
-  // ADD_TO_ACTIVITY_LIST,
-  // DELETE_FAVORITE_ACTIVITY,
-  // GET_ACTIVITY,
-  ActionTypes,
-} from "../actions/actionType";
+import { ActionTypes } from "../actions/actionType";
 import { MainState, MainActions } from "../../types/mainTypes";
 
 const defaultState: MainState = {
   activity: JSON.parse(localStorage.getItem("activityList") ?? "[]"),
   history: JSON.parse(localStorage.getItem("history") ?? "[]"),
-  randomActivity: "",
+  randomActivity: [],
 };
 const mainReducers = (state = defaultState, action: MainActions): MainState => {
   switch (action.type) {
     case ActionTypes.ADD_TO_ACTIVITY_LIST:
       const sameActivity = !!state.activity.find(
-        (item) => item.key === action.payload
-        // .key
+        (item) => item.key === action.payload.key
       );
       const newActivity = sameActivity
         ? state.activity
@@ -29,12 +23,18 @@ const mainReducers = (state = defaultState, action: MainActions): MainState => {
         activity: newActivity,
       };
     case ActionTypes.GET_ACTIVITY:
+      const likedActivity = { ...action.payload, liked: true };
+      const sameHistoryActivity = !!state.history.find(
+        (item) => item.key === action.payload.key
+      );
+      const historyList = sameHistoryActivity
+        ? state.history
+        : [...state.history, likedActivity];
+      localStorage.setItem("history", JSON.stringify(historyList));
       return {
         ...state,
-        randomActivity: action.payload,
-        // .randomActivity,
-        history: action.payload,
-        // .randomActivity,
+        randomActivity: historyList,
+        history: historyList,
       };
     case ActionTypes.DELETE_FAVORITE_ACTIVITY:
       const nonDeletedActivities = state.activity.filter(
@@ -48,6 +48,10 @@ const mainReducers = (state = defaultState, action: MainActions): MainState => {
       return {
         ...state,
         activity: nonDeletedActivities,
+      };
+    case ActionTypes.CLICKED_LIKE_BUTTON:
+      return {
+        ...state,
       };
     default:
       return state;
