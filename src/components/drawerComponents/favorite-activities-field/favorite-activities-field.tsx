@@ -89,7 +89,7 @@ const FavoriteActivitiesField: FC<IFavoriteActivitiesProps> = ({
                 onChange={addToLiked}
                 checkedIcon={<FavoriteIcon />}
                 name="checkedH"
-                value={item.key}
+                value={item.key} 
               />
             )}
           </Grid>
