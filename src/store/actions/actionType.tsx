@@ -21,4 +21,5 @@ export enum ActionTypes {
   SUGGEST_RESPONSE = "suggestResponse",
   OPEN_SNACKBAR = "openSnackbar",
   CLICKED_LIKE_BUTTON = "clickedLikeButton",
+  CHANGE_LIKED = "changeLiked",
 }

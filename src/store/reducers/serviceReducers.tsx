@@ -1,13 +1,4 @@
-import {
-  // OPEN_DRAWER,
-  // OPEN_MODAL,
-  // SWITCH_LOADING,
-  // DRAWER_TYPE,
-  // OPEN_SUGGESTION,
-  // SUGGEST_RESPONSE,
-  // OPEN_SNACKBAR,
-  ActionTypes,
-} from "../actions/actionType";
+import { ActionTypes } from "../actions/actionType";
 import { ServiceState, ServiceActions } from "../../types/serviceTypes";
 
 const defaultState = {
@@ -33,6 +24,7 @@ const serviceReducers = (
       return {
         ...state,
         suggestionModal: action.payload,
+        suggestResponse: "",
       };
     case ActionTypes.OPEN_DRAWER:
       return {

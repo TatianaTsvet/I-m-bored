@@ -6,21 +6,7 @@ import "./favorite-activities-field.css";
 import { useDispatch } from "react-redux";
 import useStyles from "./styles";
 import { useTypedSelector } from "../../../hooks/useTypeSelector";
-
-interface IFavoriteActivity {
-  activity: string;
-  type: string;
-  key: number;
-  participants: number;
-  liked?: boolean;
-}
-interface IFavoriteActivitiesProps {
-  activities: IFavoriteActivity[];
-  input: string;
-  checked: string[];
-  count: number;
-  drawerType: string;
-}
+import { IFavoriteActivitiesProps } from "../../../interfaces/interfaces";
 
 const FavoriteActivitiesField: FC<IFavoriteActivitiesProps> = ({
   activities,
@@ -31,9 +17,6 @@ const FavoriteActivitiesField: FC<IFavoriteActivitiesProps> = ({
   const dispatch = useDispatch();
   const favoriteActivities = useTypedSelector(
     (state) => state.mainReducers.activity
-  );
-  const historyActivities = useTypedSelector(
-    (state) => state.mainReducers.history
   );
 
   const deleteActivity = (key: number) => {
@@ -47,11 +30,21 @@ const FavoriteActivitiesField: FC<IFavoriteActivitiesProps> = ({
     );
   }
 
-  // const addToLiked = (key: number) => {
-  //   dispatch({ type: "clickedLikeButton", payload: key });
-  // };
-  const addToLiked = (event: any) => {
-    console.log(event.target);
+  const addToLiked = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    checked: boolean
+  ) => {
+    if (!checked) {
+      dispatch({
+        type: "deleteFavoriteActivity",
+        payload: event.target.value,
+      });
+    } else {
+      dispatch({
+        type: "changeLiked",
+        payload: event.target.value,
+      });
+    }
   };
 
   return (
@@ -89,7 +82,7 @@ const FavoriteActivitiesField: FC<IFavoriteActivitiesProps> = ({
                 onChange={addToLiked}
                 checkedIcon={<FavoriteIcon />}
                 name="checkedH"
-                value={item.key} 
+                value={item.key}
               />
             )}
           </Grid>

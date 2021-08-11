@@ -67,3 +67,9 @@ export const clickedLikeButton = (key: number) => {
     payload: { key },
   };
 };
+export const changeLiked = (liked: string[]) => {
+  return {
+    type: ActionTypes.CHANGE_LIKED,
+    payload: { liked },
+  };
+};

@@ -6,15 +6,9 @@ import Filter from "../filter";
 import itemData from "../../core/itemData";
 import useStyles from "./styles";
 import "./search-field.css";
+import { ISearchFieldProps } from "../../../interfaces/interfaces";
 
-interface SearchFieldProps {
-  onCheckFilter: (title: string, checked: boolean) => void;
-  onSearch: (value: string) => void;
-  onCountChange: (count: number) => void;
-  count: number;
-}
-
-const SearchField: FC<SearchFieldProps> = (props) => {
+const SearchField: FC<ISearchFieldProps> = (props) => {
   const classes = useStyles();
   const { onCheckFilter, onSearch, onCountChange, count } = props;
 

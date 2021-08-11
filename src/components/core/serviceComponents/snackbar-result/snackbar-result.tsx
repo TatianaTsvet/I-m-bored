@@ -3,18 +3,13 @@ import { Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 import useStyles from "./styles";
 import "./snackbar-result.css";
-
-interface SnackbarProps {
-  suggestResponse: any;
-  snackbar: boolean;
-  snackbarClose: () => void;
-}
+import { ISnackbarProps } from "../../../../interfaces/interfaces";
 
 const SnackbarResult = ({
   snackbar,
   snackbarClose,
   suggestResponse,
-}: SnackbarProps): React.ReactElement => {
+}: ISnackbarProps): React.ReactElement => {
   const classes = useStyles();
 
   return (

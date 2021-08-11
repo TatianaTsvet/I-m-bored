@@ -15,6 +15,7 @@ import { useTypedSelector } from "../../../../hooks/useTypeSelector";
 import { sendActivityWithSuggestion } from "../../../../service/asyncRequests";
 import useStyles from "./styles";
 import "./modal-suggest-activity.css";
+import { useEffect } from "react";
 
 const availableTypes = [
   "education",
@@ -37,9 +38,16 @@ const ModalSuggestActivity: FC = () => {
   const openModal = useTypedSelector(
     (state) => state.serviceReducers.suggestionModal
   );
+  useEffect(() => {
+    if (!openModal) {
+      setParticipants(1);
+      setType("");
+      setActivity("");
+    }
+  }, [openModal]);
+
   const modalClose = () => {
     dispatch({ type: "openSuggestion", payload: false });
-    setParticipants(1);
   };
   const changeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setActivity(event.target.value);

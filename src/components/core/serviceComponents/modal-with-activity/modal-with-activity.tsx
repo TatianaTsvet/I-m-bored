@@ -7,13 +7,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import useStyles from "./styles";
 import "./modal-with-activity.css";
 import { useTypedSelector } from "../../../../hooks/useTypeSelector";
-
-interface IActivity {
-  activity: string;
-  type: string;
-  participants: number;
-  key: number;
-}
+import { IActivity } from "../../../../interfaces/interfaces";
 
 const ModalWithActivity: FC = () => {
   const dispatch = useDispatch();

@@ -2,12 +2,9 @@ import React, { FC } from "react";
 import { CircularProgress, Grid, Modal } from "@material-ui/core";
 import useStyles from "./styles";
 import "./spinner.css";
+import { ISpinnerProps } from "../../../../interfaces/interfaces";
 
-interface SpinnerProps {
-  loading: boolean;
-}
-
-const Spinner: FC<SpinnerProps> = (props) => {
+const Spinner: FC<ISpinnerProps> = (props) => {
   const classes = useStyles();
 
   return (

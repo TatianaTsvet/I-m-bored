@@ -1,14 +1,8 @@
 import React, { FC, useCallback } from "react";
 import { Checkbox } from "@material-ui/core";
-
+import { IFilterProps } from "../../../interfaces/interfaces";
 import useStyles from "./styles";
 import "./filter.css";
-
-interface IFilterProps {
-  switchType: (title: IFilterProps["title"], checked: boolean) => void;
-  title: string;
-  icon: React.ReactNode;
-}
 
 const Filter: FC<IFilterProps> = (props) => {
   const classes = useStyles();
@@ -30,7 +24,7 @@ const Filter: FC<IFilterProps> = (props) => {
       checkedIcon={icon}
       name="checkedH"
       value={title}
-      color="primary" 
+      color="primary"
     />
   );
 };

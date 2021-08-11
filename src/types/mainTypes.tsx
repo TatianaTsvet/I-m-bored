@@ -30,9 +30,14 @@ interface ClickedLikeButton {
   type: ActionTypes.CLICKED_LIKE_BUTTON;
   payload: string;
 }
+interface ChangedLiked {
+  type: ActionTypes.CHANGE_LIKED;
+  payload: number;
+}
 
 export type MainActions =
   | AddToActivityList
   | DeleteFavoriteActivity
   | GetActivity
-  | ClickedLikeButton;
+  | ClickedLikeButton
+  | ChangedLiked;
