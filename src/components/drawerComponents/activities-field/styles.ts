@@ -6,9 +6,11 @@ const useStyles = makeStyles((theme: Theme) =>
       color: "#ff9800",
     },
     favoriteActivities: {
-      marginTop: "0.6em",
+      marginTop: "0.2em",     
     },
-    
+    activityName: {
+      marginTop: '0.6em'
+    }
   })
 );
 export default useStyles;

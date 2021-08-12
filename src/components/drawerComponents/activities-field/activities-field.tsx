@@ -2,13 +2,13 @@ import React, { FC } from "react";
 import { Grid, Typography, IconButton, Checkbox } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import "./favorite-activities-field.css";
+import "./activities-field.css";
 import { useDispatch } from "react-redux";
 import useStyles from "./styles";
 import { useTypedSelector } from "../../../hooks/useTypeSelector";
 import { IFavoriteActivitiesProps } from "../../../interfaces/interfaces";
 
-const FavoriteActivitiesField: FC<IFavoriteActivitiesProps> = ({
+const ActivitiesField: FC<IFavoriteActivitiesProps> = ({
   activities,
   checked,
   drawerType,
@@ -58,36 +58,41 @@ const FavoriteActivitiesField: FC<IFavoriteActivitiesProps> = ({
         })
         .map((item) => (
           <Grid
+            container
+            item
             key={item.key}
             className={classes.favoriteActivities}
-            container
             direction="row"
             justifyContent="space-between"
-            alignItems="center"
+            alignItems="flex-start"
           >
-            <Grid item xs={9}>
-              <Typography variant="body1">{item.activity}</Typography>
+            <Grid item xs={10}>
+              <Typography variant="body1" className={classes.activityName}>
+                {item.activity}
+              </Typography>
             </Grid>
-            {drawerType === "favorites" ? (
-              <IconButton
-                className={classes.icon}
-                onClick={() => deleteActivity(item.key)}
-              >
-                <DeleteIcon />
-              </IconButton>
-            ) : (
-              <Checkbox
-                checked={item.liked ? true : false}
-                icon={<FavoriteIcon />}
-                onChange={addToLiked}
-                checkedIcon={<FavoriteIcon />}
-                name="checkedH"
-                value={item.key}
-              />
-            )}
+            <Grid item xs={2}>
+              {drawerType === "favorites" ? (
+                <IconButton
+                  className={classes.icon}
+                  onClick={() => deleteActivity(item.key)}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              ) : (
+                <Checkbox
+                  checked={item.liked ? true : false}
+                  icon={<FavoriteIcon />}
+                  onChange={addToLiked}
+                  checkedIcon={<FavoriteIcon />}
+                  name="checkedH"
+                  value={item.key}
+                />
+              )}
+            </Grid>
           </Grid>
         ))}
     </div>
   );
 };
-export default FavoriteActivitiesField;
+export default ActivitiesField;

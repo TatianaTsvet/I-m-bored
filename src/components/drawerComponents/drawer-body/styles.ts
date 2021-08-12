@@ -6,6 +6,7 @@ const useStyles = makeStyles((theme: Theme) =>
       background: "#37474f",
       height: "100%",
       color: "#ff9800",
+      
     },
     drawerText: {
       textTransform: "uppercase",

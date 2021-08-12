@@ -1,5 +1,12 @@
 import React from "react";
-import { AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Grid,
+  Tooltip,
+} from "@material-ui/core";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import HistoryIcon from "@material-ui/icons/History";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
@@ -23,41 +30,62 @@ export default function ButtonAppBar() {
   };
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static" className={classes.appbar}>
+    <Grid className={classes.root} container>
+      <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             I am bored...
           </Typography>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-            onClick={openFavoriteDrawer}
+          <Tooltip
+            title="Favorite"
+            arrow
+            leaveTouchDelay={2000}
+            enterTouchDelay={50}
           >
-            <FavoriteBorderIcon />
-          </IconButton>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-            onClick={openHistoryDrawer}
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="menu"
+              onClick={openFavoriteDrawer}
+            >
+              <FavoriteBorderIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip
+            title="History"
+            arrow
+            leaveTouchDelay={2000}
+            enterTouchDelay={50}
           >
-            <HistoryIcon />
-          </IconButton>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-            onClick={sendSuggestion}
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="menu"
+              onClick={openHistoryDrawer}
+            >
+              <HistoryIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip
+            title="Suggest new activity"
+            arrow
+            leaveTouchDelay={2000}
+            enterTouchDelay={50}
           >
-            <MailOutlineIcon />
-          </IconButton>
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="menu"
+              onClick={sendSuggestion}
+            >
+              <MailOutlineIcon />
+            </IconButton>
+          </Tooltip>
         </Toolbar>
       </AppBar>
-    </div>
+    </Grid>
   );
 }

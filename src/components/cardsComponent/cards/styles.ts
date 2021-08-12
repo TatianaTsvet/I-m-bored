@@ -2,16 +2,12 @@ import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    
-    imageList: {
-      width: "100%",
-      height: "100%",
+    container: {
+        // [theme.breakpoints.down('xs')]: {
+         
+        //   },
     },
-    
-    icon: {
-      color: "#ff9800",
-      background: "#ffe0b2",
-    },
+  
   })
 );
 

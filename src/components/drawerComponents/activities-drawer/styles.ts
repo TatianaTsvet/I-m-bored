@@ -3,7 +3,7 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     drawer: {
-      background: "#37474f",
+     background: "#37474f",
       color: "#ff9800",
       padding: "1em",
     },
@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
       color: "#ff9800",
       position: "absolute",
       right: "1em",
+      
     },
   })
 );

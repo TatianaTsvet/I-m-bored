@@ -6,11 +6,18 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
       position: "sticky",
       width: "100%",
-      // zIndex: "1000",
+      zIndex: 1300,
       top: "0",
+      // [theme.breakpoints.down('xs')]: {
+      //   width: '106%'
+      // },
+     
     },
-    appbar: {
+    appBar: {
       background: "#ff9800",
+      // [theme.breakpoints.down('xs')]: {
+      //   width: '101%'
+      // },
     },
     menuButton: {
       marginRight: theme.spacing(2),

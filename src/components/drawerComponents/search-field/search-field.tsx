@@ -1,5 +1,12 @@
-import React, { FC, useCallback } from "react";
-import { Grid, InputAdornment, Input } from "@material-ui/core";
+import React, { FC, useCallback, useState } from "react";
+import {
+  Grid,
+  InputAdornment,
+  Input,
+  Switch,
+  Hidden,
+  FormControlLabel,
+} from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import PersonIcon from "@material-ui/icons/Person";
 import Filter from "../filter";
@@ -9,28 +16,17 @@ import "./search-field.css";
 import { ISearchFieldProps } from "../../../interfaces/interfaces";
 
 const SearchField: FC<ISearchFieldProps> = (props) => {
-  const classes = useStyles();
   const { onCheckFilter, onSearch, onCountChange, count } = props;
-
-  const icons = (
-    <Grid container direction="row">
-      <p>Filters:</p>
-      {itemData.map(({ title, icon }) => (
-        <Filter
-          key={title}
-          title={title}
-          icon={icon}
-          switchType={onCheckFilter}
-        />
-      ))}
-    </Grid>
-  );
-
+  const [checked, setChecked] = useState(false);
+  const classes = useStyles({ checked });
+  const handleChange = () => {
+    setChecked((prev) => !prev);
+  };
   const handleSearchInput = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       onSearch(event.target.value);
     },
-    [onSearch]
+    [onSearch] 
   );
 
   const handleCountInput = useCallback(
@@ -44,9 +40,38 @@ const SearchField: FC<ISearchFieldProps> = (props) => {
     [onCountChange]
   );
 
+  const icons = (
+    <Grid container className={classes.iconField}>
+      <p>Filters:</p>
+      {/* <Grid container justifyContent="center" xs={10} sm={11}> */}
+      {itemData.map(({ title, icon }) => (
+        <Filter
+          key={title}
+          title={title}
+          icon={icon}
+          switchType={onCheckFilter}
+        />
+      ))}
+      {/* </Grid> */}
+    </Grid>
+  );
+
   return (
     <div className="search-field">
+      <Hidden smUp>
+        <FormControlLabel
+          control={
+            <Switch
+              inputProps={{ "aria-label": "primary checkbox" }}
+              checked={checked}
+              onChange={handleChange}
+            />
+          }
+          label={checked ? "Hide filters" : "Show filters"}
+        />
+      </Hidden>
       {icons}
+
       <Grid
         item
         xs={11}
@@ -54,6 +79,7 @@ const SearchField: FC<ISearchFieldProps> = (props) => {
         direction="row"
         justifyContent="center"
         alignItems="flex-start"
+        className={classes.inputFields}
       >
         <Grid item xs={8}>
           <Input

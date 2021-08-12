@@ -1,4 +1,4 @@
-import React, { useState, FC } from "react";
+import React, { useState, FC, useEffect } from "react";
 import {
   TextField,
   MenuItem,
@@ -15,7 +15,6 @@ import { useTypedSelector } from "../../../../hooks/useTypeSelector";
 import { sendActivityWithSuggestion } from "../../../../service/asyncRequests";
 import useStyles from "./styles";
 import "./modal-suggest-activity.css";
-import { useEffect } from "react";
 
 const availableTypes = [
   "education",

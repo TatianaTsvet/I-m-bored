@@ -1,11 +1,17 @@
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { makeStyles, Theme, createStyles} from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme: Theme) =>
+interface Props {
+  checked: boolean;
+}
+
+const useStyles = makeStyles<Theme, Props>((theme) =>
   createStyles({
     icon: {
       color: "#ff9800",
     },
-
+    inputFields: {
+      marginTop: '1em',
+    },
     input: {
       color: "#ff9800",
 
@@ -35,6 +41,14 @@ const useStyles = makeStyles((theme: Theme) =>
     formControl: {
       marginLeft: "0.5em",
     },
+    iconField: {  
+     
+      [theme.breakpoints.down('xs')]: {
+        display: (props) =>
+        props.checked ? "block" : "none",      },
+       
+    },
+    
   })
 );
 export default useStyles;
