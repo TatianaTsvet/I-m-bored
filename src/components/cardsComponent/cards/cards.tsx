@@ -1,23 +1,25 @@
-import React, { FC } from "react";
+import React, { FC, useReducer } from "react";
 import { Grid } from "@material-ui/core";
 import ModalWithActivity from "../../core/serviceComponents/modal-with-activity/modal-with-activity";
 import ModalSuggestActivity from "../../core/serviceComponents/modal-suggest-activity";
 import CardsList from "../cards-list/cards-list";
 import Spinner from "../../core/serviceComponents/spinner";
 import SnackbarResult from "../../core/serviceComponents/snackbar-result";
-import { useTypedSelector } from "../../../hooks/useTypeSelector";
-import { useDispatch } from "react-redux";
+import { ActionTypes } from "../../../store/actions/actionType";
+import {
+  serviceReducers,
+  defaultState,
+} from "../../../store/reducers/serviceReducers";
 import useStyles from "./styles";
 import "./cards.css";
 
 const Cards: FC = () => {
+  const [state, dispatch] = useReducer(serviceReducers, defaultState);
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const { loading, openSnackbar, suggestResponse } = useTypedSelector(
-    (state) => state.serviceReducers
-  );
+
+  const { loading, openSnackbar, suggestResponse } = state;
   const snackbarClose = () => {
-    dispatch({ type: "openSnackbar", payload: false });
+    dispatch({ type: ActionTypes.OPEN_SNACKBAR, payload: false });
   };
   return (
     <Grid container className={classes.container}>

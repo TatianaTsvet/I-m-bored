@@ -1,13 +1,16 @@
 import { ActionTypes } from "../actions/actionType";
 import { MainState, MainActions } from "../../types/mainTypes";
 
-const defaultState: MainState = {
+export const defaultState: MainState = {
   activity: JSON.parse(localStorage.getItem("activityList") ?? "[]"),
   history: JSON.parse(localStorage.getItem("history") ?? "[]"),
   randomActivity: [],
 };
 
-const mainReducers = (state = defaultState, action: MainActions): MainState => {
+export function mainReducers(
+  state: MainState = defaultState,
+  action: MainActions
+) {
   switch (action.type) {
     case ActionTypes.ADD_TO_ACTIVITY_LIST:
       action.payload.liked = true;
@@ -93,6 +96,4 @@ const mainReducers = (state = defaultState, action: MainActions): MainState => {
     default:
       return state;
   }
-};
-
-export default mainReducers;
+}
