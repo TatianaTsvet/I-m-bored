@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
     icon: {
       color: "#ff9800",
       background: "#ffe0b2",
+      marginRight: '0.1em'
     },
   })
 );

@@ -8,16 +8,12 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "100%",
       zIndex: 1300,
       top: "0",
-      // [theme.breakpoints.down('xs')]: {
-      //   width: '106%'
-      // },
+     
      
     },
     appBar: {
       background: "#ff9800",
-      // [theme.breakpoints.down('xs')]: {
-      //   width: '101%'
-      // },
+      
     },
     menuButton: {
       marginRight: theme.spacing(2),

@@ -9,19 +9,21 @@ import "./app.css";
 const App: FC = () => {
   const classes = useStyles();
   return (
-    <Grid
-      className={classes.container}
-      container
-      item
-      direction="column"
-      justifyContent="flex-start"
-      alignItems="center"
-      md={8}
-      lg={7}
-    >
-      <Header />
-      <Cards />
-      <ActivitiesDrawer />
+    <Grid>
+      <Grid
+        className={classes.container}
+        container
+        item
+        direction="column"
+        justifyContent="flex-start"
+        alignItems="center"
+        md={12}
+        
+      >
+        <Header />
+        <Cards />
+        <ActivitiesDrawer />
+      </Grid>
     </Grid>
   );
 };

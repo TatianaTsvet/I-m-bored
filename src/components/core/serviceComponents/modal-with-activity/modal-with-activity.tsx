@@ -33,9 +33,6 @@ const ModalWithActivity: FC = () => {
     }
     return participants;
   });
-  // for (let i = 1; i < randomActivity.participants; i++) {
-  //   participants.push(<PersonIcon key={`personIcon${i}`} />);
-  // }
 
   const body = randomActivity.map((item) => {
     return (
