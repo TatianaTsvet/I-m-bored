@@ -1,30 +1,37 @@
-import React, { FC } from "react";
+import React, { FC, useReducer } from "react";
 import { Modal, Grid, IconButton, Tooltip } from "@material-ui/core";
-import { useDispatch } from "react-redux";
+
 import PersonIcon from "@material-ui/icons/Person";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import CloseIcon from "@material-ui/icons/Close";
+import { IActivity } from "../../../../interfaces/interfaces";
+import {
+  serviceReducers,
+  serviceState,
+} from "../../../../store/reducers/serviceReducers";
+import {
+  mainReducers,
+  mainState,
+} from "../../../../store/reducers/mainReducers";
+import { ActionTypes } from "../../../../store/actions/actionType";
 import useStyles from "./styles";
 import "./modal-with-activity.css";
-import { useTypedSelector } from "../../../../hooks/useTypeSelector";
-import { IActivity } from "../../../../interfaces/interfaces";
 
 const ModalWithActivity: FC = () => {
-  const dispatch = useDispatch();
   const classes = useStyles();
+  const [serveState, serveDispatch] = useReducer(serviceReducers, serviceState);
+  const [headState, headDispatch] = useReducer(mainReducers, mainState);
 
   const modalClose = () => {
-    dispatch({ type: "openModal", payload: false });
+    serveDispatch({ type: ActionTypes.OPEN_MODAL, payload: false });
   };
   const addToFavorite = (activity: IActivity) => {
-    dispatch({ type: "addToActivityList", payload: activity });
-    dispatch({ type: "openModal", payload: false });
+    headDispatch({ type: ActionTypes.ADD_TO_ACTIVITY_LIST, payload: activity });
+    serveDispatch({ type: ActionTypes.OPEN_MODAL, payload: false });
   };
 
-  const modalOpen = useTypedSelector((state) => state.serviceReducers.modal);
-  const randomActivity = useTypedSelector(
-    (state) => state.mainReducers.randomActivity
-  );
+  const modalOpen = serveState.modal;
+  const randomActivity = headState.randomActivity;
 
   const participants = [<PersonIcon key="personIcon" />];
   randomActivity.map((item) => {
@@ -81,48 +88,6 @@ const ModalWithActivity: FC = () => {
       </Grid>
     );
   });
-  // <Grid
-  //   item
-  //   xs={8}
-  //   sm={9}
-  //   md={6}
-  //   container
-  //   direction="row"
-  //   justifyContent="space-around"
-  //   alignItems="flex-start"
-  //   className={classes.paper}
-  // >
-  //   <Grid
-  //     container
-  //     direction="column"
-  //     justifyContent="space-around"
-  //     alignItems="flex-start"
-  //   >
-  //     <h2 id="simple-modal-title">{randomActivity.activity}</h2>
-  //     <p id="simple-modal-description">
-  //       Participants
-  //       <span className={classes.icon}>{participants}</span>
-  //     </p>
-  //     <Tooltip title="Add to favorite" aria-label="add">
-  //       <IconButton
-  //         color="inherit"
-  //         className={classes.icon}
-  //         onClick={() => addToFavorite(randomActivity)}
-  //       >
-  //         <FavoriteIcon />
-  //       </IconButton>
-  //     </Tooltip>
-  //   </Grid>
-  //   <Grid>
-  //     <IconButton
-  //       color="inherit"
-  //       className={classes.icon}
-  //       onClick={modalClose}
-  //     >
-  //       <CloseIcon />
-  //     </IconButton>
-  //   </Grid>
-  // </Grid>
 
   return (
     <Modal

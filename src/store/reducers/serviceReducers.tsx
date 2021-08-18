@@ -1,7 +1,7 @@
 import { ActionTypes } from "../actions/actionType";
 import { ServiceState, ServiceActions } from "../../types/serviceTypes";
 
-export const defaultState = {
+export const serviceState = {
   modal: false,
   loading: false,
   drawer: false,
@@ -12,7 +12,7 @@ export const defaultState = {
 };
 
 export function serviceReducers(
-  state: ServiceState = defaultState,
+  state: ServiceState,
   action: ServiceActions
 ): ServiceState {
   switch (action.type) {

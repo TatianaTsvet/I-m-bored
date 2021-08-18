@@ -1,47 +1,45 @@
-import { Dispatch } from "redux";
-import { ActionTypes } from "../store/actions/actionType";
-import { MainActions } from "../types/mainTypes";
-import { ServiceActions } from "../types/serviceTypes";
+import {
+  IActivity,
+  IResponse,
+  IResponseMessage,
+} from "../interfaces/interfaces";
+const waitingTime = 2000;
 
-export const fetchNewActivity = (type: string) => {
-  // let data = new URLSearchParams();
+export const fetchNewActivity = async (type: string): Promise<any> => {
+  const startTime = new Date().getTime();
+
   let data = "";
   if (type === "random") {
     data = "";
   } else {
     data = `type=${type}`;
   }
-  return (dispatch: Dispatch<MainActions | ServiceActions>) => {
-    fetch(`https://www.boredapi.com/api/activity?${data}`, {
-      cache: "no-cache",
-    })
-      .then((res) => res.json())
-      .then((data) =>
-        dispatch({ type: ActionTypes.GET_ACTIVITY, payload: data })
-      )
-      .then(() =>
-        setTimeout(() => {
-          dispatch({ type: ActionTypes.SWITCH_LOADING, payload: false });
-        }, 1500)
-      );
-  };
+
+  const res = await fetch(`https://www.boredapi.com/api/activity?${data}`, {
+    cache: "no-cache",
+  });
+  const endTime = new Date().getTime();
+  const leftTime = waitingTime - (endTime - startTime);
+  await new Promise((resolve) => setTimeout(resolve, leftTime));
+  return res;
 };
 
-export const sendActivityWithSuggestion = (suggestion: any) => {
-  return (dispatch: Dispatch<ServiceActions>) => {
-    fetch(`https://www.boredapi.com/api/suggestion`, {
-      cache: "no-cache",
-      method: "POST",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(suggestion),
-    })
-      .then((res) => res.json())
-      .then((res) =>
-        dispatch({ type: ActionTypes.SUGGEST_RESPONSE, payload: res })
-      )
-      .then(() => dispatch({ type: ActionTypes.OPEN_SNACKBAR, payload: true }));
-  };
+export const sendActivityWithSuggestion = async (
+  suggestion: IResponse
+): Promise<any> => {
+  const startTime = new Date().getTime();
+
+  const res = await fetch(`https://www.boredapi.com/api/suggestion`, {
+    cache: "no-cache",
+    method: "POST",
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(suggestion),
+  });
+  const endTime = new Date().getTime();
+  const leftTime = waitingTime - (endTime - startTime);
+  await new Promise((resolve) => setTimeout(resolve, leftTime));
+  return res;
 };

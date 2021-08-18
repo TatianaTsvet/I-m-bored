@@ -8,19 +8,21 @@ import SnackbarResult from "../../core/serviceComponents/snackbar-result";
 import { ActionTypes } from "../../../store/actions/actionType";
 import {
   serviceReducers,
-  defaultState,
+  serviceState,
 } from "../../../store/reducers/serviceReducers";
 import useStyles from "./styles";
 import "./cards.css";
 
 const Cards: FC = () => {
-  const [state, dispatch] = useReducer(serviceReducers, defaultState);
+  const [state, dispatch] = useReducer(serviceReducers, serviceState);
   const classes = useStyles();
 
   const { loading, openSnackbar, suggestResponse } = state;
+
   const snackbarClose = () => {
     dispatch({ type: ActionTypes.OPEN_SNACKBAR, payload: false });
   };
+
   return (
     <Grid container className={classes.container}>
       <Grid>

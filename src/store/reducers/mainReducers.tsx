@@ -1,14 +1,14 @@
 import { ActionTypes } from "../actions/actionType";
 import { MainState, MainActions } from "../../types/mainTypes";
 
-export const defaultState: MainState = {
+export const mainState: MainState = {
   activity: JSON.parse(localStorage.getItem("activityList") ?? "[]"),
   history: JSON.parse(localStorage.getItem("history") ?? "[]"),
   randomActivity: [],
 };
 
 export function mainReducers(
-  state: MainState = defaultState,
+  state: MainState = mainState,
   action: MainActions
 ) {
   switch (action.type) {

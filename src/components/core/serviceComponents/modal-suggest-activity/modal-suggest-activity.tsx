@@ -1,4 +1,4 @@
-import React, { useState, FC, useEffect } from "react";
+import React, { useState, FC, useEffect, useReducer } from "react";
 import {
   TextField,
   MenuItem,
@@ -10,8 +10,11 @@ import {
   Button,
   FormControl,
 } from "@material-ui/core";
-import { useDispatch } from "react-redux";
-import { useTypedSelector } from "../../../../hooks/useTypeSelector";
+import {
+  serviceReducers,
+  serviceState,
+} from "../../../../store/reducers/serviceReducers";
+import { ActionTypes } from "../../../../store/actions/actionType";
 import { sendActivityWithSuggestion } from "../../../../service/asyncRequests";
 import useStyles from "./styles";
 import "./modal-suggest-activity.css";
@@ -29,14 +32,13 @@ const availableTypes = [
 ];
 const ModalSuggestActivity: FC = () => {
   const classes = useStyles();
-  const dispatch = useDispatch();
+  const [serveState, serveDispatch] = useReducer(serviceReducers, serviceState);
   const [activity, setActivity] = useState("");
   const [type, setType] = useState("");
   const [participants, setParticipants] = useState(1);
 
-  const openModal = useTypedSelector(
-    (state) => state.serviceReducers.suggestionModal
-  );
+  const openModal = serveState.suggestionModal;
+
   useEffect(() => {
     if (!openModal) {
       setParticipants(1);
@@ -46,7 +48,7 @@ const ModalSuggestActivity: FC = () => {
   }, [openModal]);
 
   const modalClose = () => {
-    dispatch({ type: "openSuggestion", payload: false });
+    serveDispatch({ type: ActionTypes.OPEN_SUGGESTION, payload: false });
   };
   const changeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setActivity(event.target.value);
@@ -59,10 +61,11 @@ const ModalSuggestActivity: FC = () => {
     setParticipants(participantsNumber);
   };
 
-  const sendSuggestion = () => {
+  const sendSuggestion = async (): Promise<void> => {
     const data = { activity, type, participants };
-    dispatch(sendActivityWithSuggestion(data));
-    dispatch({ type: "openSuggestion", payload: false });
+    const res = await sendActivityWithSuggestion(data);
+    serveDispatch({ type: ActionTypes.SUGGEST_RESPONSE, payload: res });
+    serveDispatch({ type: ActionTypes.OPEN_SUGGESTION, payload: false });
     setParticipants(1);
   };
 

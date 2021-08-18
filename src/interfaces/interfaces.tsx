@@ -4,6 +4,14 @@ export interface IActivity {
   participants: number;
   key: number;
 }
+export interface IResponse {
+  type: string;
+  participants: number;
+  activity: string;
+}
+export interface IResponseMessage {
+  message: string;
+}
 export interface ISnackbarProps {
   suggestResponse: any;
   snackbar: boolean;

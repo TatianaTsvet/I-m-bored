@@ -1,18 +1,21 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useReducer } from "react";
 import DrawerBody from "../drawer-body";
 import CancelPresentationIcon from "@material-ui/icons/CancelPresentation";
 import { IconButton, Drawer } from "@material-ui/core";
-import { useDispatch } from "react-redux";
+import {
+  serviceReducers,
+  serviceState,
+} from "../../../store/reducers/serviceReducers";
+import { ActionTypes } from "../../../store/actions/actionType";
 import useStyles from "./styles";
 import "./activities-drawer.css";
-import { useTypedSelector } from "../../../hooks/useTypeSelector";
 
 const ActivitiesDrawer: FC = () => {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const drawerOpen = useTypedSelector((state) => state.serviceReducers.drawer);
+  const [state, dispatch] = useReducer(serviceReducers, serviceState);
+
   const drawerClose = () => {
-    dispatch({ type: "openDrawer", payload: false });
+    dispatch({ type: ActionTypes.OPEN_DRAWER, payload: false });
   };
 
   const drawer = (
@@ -27,7 +30,7 @@ const ActivitiesDrawer: FC = () => {
     <nav>
       <Drawer
         anchor={"left"}
-        open={drawerOpen}
+        open={state.drawer}
         onClose={drawerClose}
         ModalProps={{
           keepMounted: true,

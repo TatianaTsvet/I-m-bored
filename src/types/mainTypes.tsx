@@ -5,7 +5,7 @@ export interface Activity {
   type: string;
   key: number;
   participants: number;
-  liked: boolean;
+  liked?: boolean;
 }
 
 export interface MainState {

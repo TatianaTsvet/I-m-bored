@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useReducer } from "react";
 import {
   ImageList,
   ImageListItem,
@@ -10,18 +10,27 @@ import {
 import itemData from "../../core/itemData";
 import { Grid } from "@material-ui/core";
 import { fetchNewActivity } from "../../../service/asyncRequests";
-import { useDispatch } from "react-redux";
+import { ActionTypes } from "../../../store/actions/actionType";
 import useStyles from "./styles";
+import {
+  serviceReducers,
+  serviceState,
+} from "../../../store/reducers/serviceReducers";
+import { mainReducers, mainState } from "../../../store/reducers/mainReducers";
 import "./cards-list.css";
 
 const CardsList: FC = () => {
-  const dispatch = useDispatch();
+  const [, serveDispatch] = useReducer(serviceReducers, serviceState);
+  const [, headDispatch] = useReducer(mainReducers, mainState);
   const classes = useStyles();
-  const modalOpen = (type: string) => {
+
+  const modalOpen = async (type: string): Promise<void> => {
     const newType = type.replace(" ", "");
-    dispatch(fetchNewActivity(newType));
-    dispatch({ type: "switchLoading", payload: true });
-    dispatch({ type: "openModal", payload: true });
+
+    const newData = await fetchNewActivity(newType);
+    headDispatch({ type: ActionTypes.GET_ACTIVITY, payload: newData });
+    serveDispatch({ type: ActionTypes.SWITCH_LOADING, payload: true });
+    serveDispatch({ type: ActionTypes.OPEN_MODAL, payload: true });
   };
   const matches = useMediaQuery("(max-width:600px)");
 

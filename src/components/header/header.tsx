@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC, useReducer } from "react";
 import {
   AppBar,
   Toolbar,
@@ -10,23 +10,28 @@ import {
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import HistoryIcon from "@material-ui/icons/History";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
-import { useDispatch } from "react-redux";
+import {
+  serviceReducers,
+  serviceState,
+} from "../../store/reducers/serviceReducers";
+import { ActionTypes } from "../../store/actions/actionType";
 import useStyles from "./styles";
 import "./header.css";
 
-export default function ButtonAppBar() {
+const Header: FC = () => {
   const classes = useStyles();
-  const dispatch = useDispatch();
+  const [state, dispatch] = useReducer(serviceReducers, serviceState);
+
   const openFavoriteDrawer = () => {
-    dispatch({ type: "openDrawer", payload: true });
-    dispatch({ type: "drawerType", payload: "favorites" });
+    dispatch({ type: ActionTypes.OPEN_DRAWER, payload: true });
+    dispatch({ type: ActionTypes.DRAWER_TYPE, payload: "favorites" });
   };
   const openHistoryDrawer = () => {
-    dispatch({ type: "drawerType", payload: "history" });
-    dispatch({ type: "openDrawer", payload: true });
+    dispatch({ type: ActionTypes.DRAWER_TYPE, payload: "history" });
+    dispatch({ type: ActionTypes.OPEN_DRAWER, payload: true });
   };
   const sendSuggestion = () => {
-    dispatch({ type: "openSuggestion", payload: true });
+    dispatch({ type: ActionTypes.OPEN_SUGGESTION, payload: true });
   };
 
   return (
@@ -88,4 +93,6 @@ export default function ButtonAppBar() {
       </AppBar>
     </Grid>
   );
-}
+};
+
+export default Header;

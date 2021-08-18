@@ -1,24 +1,27 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useCallback, useReducer } from "react";
 import { Typography } from "@material-ui/core";
 import ActivitiesField from "../activities-field";
 import SearchField from "../search-field";
-import { useTypedSelector } from "../../../hooks/useTypeSelector";
+import { mainReducers, mainState } from "../../../store/reducers/mainReducers";
+import {
+  serviceReducers,
+  serviceState,
+} from "../../../store/reducers/serviceReducers";
 import useStyles from "./styles";
 import "./drawer-body.css";
-import { useCallback } from "react";
 
 export default function DrawerBody() {
+  const [serveState, serveDispatch] = useReducer(serviceReducers, serviceState);
+   const [headState, headDispatch] = useReducer(mainReducers, mainState);
   const classes = useStyles();
-  const { drawerType } = useTypedSelector((state) => state.serviceReducers);
-  const favoriteActivity = useTypedSelector(
-    (state) => state.mainReducers.activity
-  );
-  const historyActivity = useTypedSelector(
-    (state) => state.mainReducers.history
-  );
+  const drawerType = serveState.drawerType;
+
+  const favoriteActivity = headState.activity;
+  const historyActivity = headState.history;
+
   const allActivities =
     drawerType === "favorites" ? favoriteActivity : historyActivity;
-  // const drawerOpen = useTypedSelector((state) => state.serviceReducers.drawer);
+  // const drawerOpen = serveState.drawer);
 
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [count, setCount] = useState<number>(1);
