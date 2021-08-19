@@ -1,4 +1,4 @@
-import React, { FC, useReducer } from "react";
+import React, { FC, useReducer, useContext } from "react";
 import { Grid } from "@material-ui/core";
 import ModalWithActivity from "../../core/serviceComponents/modal-with-activity/modal-with-activity";
 import ModalSuggestActivity from "../../core/serviceComponents/modal-suggest-activity";
@@ -7,6 +7,7 @@ import Spinner from "../../core/serviceComponents/spinner";
 import SnackbarResult from "../../core/serviceComponents/snackbar-result";
 import { ActionTypes } from "../../../store/actions/actionType";
 import {
+  ContextApp,
   serviceReducers,
   serviceState,
 } from "../../../store/reducers/serviceReducers";
@@ -16,7 +17,7 @@ import "./cards.css";
 const Cards: FC = () => {
   const [state, dispatch] = useReducer(serviceReducers, serviceState);
   const classes = useStyles();
-
+  // const { state, dispatch } = useContext(ContextApp);
   const { loading, openSnackbar, suggestResponse } = state;
 
   const snackbarClose = () => {

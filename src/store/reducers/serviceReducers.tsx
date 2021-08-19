@@ -1,3 +1,4 @@
+import React, { createContext } from "react";
 import { ActionTypes } from "../actions/actionType";
 import { ServiceState, ServiceActions } from "../../types/serviceTypes";
 
@@ -10,6 +11,14 @@ export const serviceState = {
   suggestResponse: "",
   openSnackbar: false,
 };
+
+export const ContextApp = createContext<{
+  state: ServiceState;
+  dispatch: React.Dispatch<ServiceActions>;
+}>({
+  state: serviceState,
+  dispatch: () => undefined,
+});
 
 export function serviceReducers(
   state: ServiceState,
