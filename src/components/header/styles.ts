@@ -17,6 +17,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     menuButton: {
       marginRight: theme.spacing(2),
+     
+    },
+    iconHover: {
+      background: 'red',
     },
     title: {
       flexGrow: 1,

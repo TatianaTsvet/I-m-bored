@@ -22,4 +22,5 @@ export enum ActionTypes {
   OPEN_SNACKBAR = "openSnackbar",
   CLICKED_LIKE_BUTTON = "clickedLikeButton",
   CHANGE_LIKED = "changeLiked",
+  BOTTOM_DRAWER_OPEN = "bottomDrawerOpen",
 }

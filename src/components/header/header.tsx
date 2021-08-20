@@ -10,6 +10,7 @@ import {
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import HistoryIcon from "@material-ui/icons/History";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
+import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import { useDispatch } from "react-redux";
 import useStyles from "./styles";
 import "./header.css";
@@ -27,6 +28,9 @@ export default function ButtonAppBar() {
   };
   const sendSuggestion = () => {
     dispatch({ type: "openSuggestion", payload: true });
+  };
+  const openJokesDrawer = () => {
+    dispatch({ type: "bottomDrawerOpen", payload: true });
   };
 
   return (
@@ -82,6 +86,22 @@ export default function ButtonAppBar() {
               onClick={sendSuggestion}
             >
               <MailOutlineIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip
+            title="Jokester!"
+            arrow
+            leaveTouchDelay={2000}
+            enterTouchDelay={50}
+          >
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="menu"
+              onClick={openJokesDrawer}
+            >
+              <InsertEmoticonIcon />
             </IconButton>
           </Tooltip>
         </Toolbar>

@@ -1,0 +1,49 @@
+import React, { FC } from "react";
+import JokesPaper from "../jokes-paper";
+import CancelPresentationIcon from "@material-ui/icons/CancelPresentation";
+import { IconButton, Drawer } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import clsx from "clsx";
+import { useTypedSelector } from "../../../hooks/useTypeSelector";
+import useStyles from "./styles";
+import "./jokes-main.css";
+
+const JokesMain: FC = () => {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const drawerOpen = useTypedSelector(
+    (state) => state.serviceReducers.bottomDrawer
+  );
+  const drawerClose = () => {
+    dispatch({ type: "bottomDrawerOpen", payload: false });
+  };
+
+  const drawer = (
+    <div
+      className={clsx(classes.list, {
+        [classes.fullList]: "bottom",
+      })}
+    >
+      <IconButton onClick={drawerClose} className={classes.iconDrawer}>
+        <CancelPresentationIcon />
+      </IconButton>
+      <JokesPaper />
+    </div>
+  );
+
+  return (
+    <nav>
+      <Drawer
+        anchor={"bottom"}
+        open={drawerOpen}
+        onClose={drawerClose}
+        ModalProps={{
+          keepMounted: true,
+        }}
+      >
+        {drawer}
+      </Drawer>
+    </nav>
+  );
+};
+export default JokesMain;

@@ -73,3 +73,9 @@ export const changeLiked = (liked: string[]) => {
     payload: { liked },
   };
 };
+export const bottomDrawerOpen = (bottomDrawer: boolean) => {
+  return {
+    type: ActionTypes.BOTTOM_DRAWER_OPEN,
+    payload: { bottomDrawer },
+  };
+};
