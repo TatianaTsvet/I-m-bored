@@ -40,3 +40,16 @@ export interface IFilterProps {
   title: string;
   icon: React.ReactNode;
 }
+export interface IJokesData {
+  id: string;
+  joke: string;
+}
+export interface IJokesItemsProps {
+  id: string;
+  joke: string;
+}
+export interface IJokesShareModal {
+  joke: string;
+  open: boolean;
+  openShareModal: (modal: boolean) => void;
+}

@@ -1,111 +1,45 @@
-import React, { FC } from "react";
-import {
-  Grid,
-  Card,
-  CardHeader,
-  Avatar,
-  IconButton,
-  CardMedia,
-  Typography,
-  CardContent,
-  CardActions,
-  Collapse,
-} from "@material-ui/core";
-import { useTypedSelector } from "../../../hooks/useTypeSelector";
-import { useDispatch } from "react-redux";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+import React, { FC, useState } from "react";
+import { useQuery } from "react-query";
+import JokesItems from "../jokes-items";
+import { fetchJokes } from "../../../service/asyncRequests";
+import { IJokesData } from "../../../interfaces/interfaces";
+import { Grid, IconButton, Button } from "@material-ui/core";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+
 import useStyles from "./styles";
 import "./jokes-paper.css";
-import clsx from "clsx";
 
-export default function JokesPaper() {
+const JokesPaper: FC = () => {
+  const [page, setPage] = useState<number>(1);
+  const { data, status } = useQuery(["jokes", page], fetchJokes);
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  const jokes =
+    status === "success"
+      ? data.results.map((item: IJokesData) => (
+          <JokesItems key={item.id} id={item.id} joke={item.joke} />
+        ))
+      : null;
+  const nextPage = () => {
+    const nextPage = page + 1;
+    setPage(nextPage);
+    console.log(page);
   };
-
   return (
-    <Card className={classes.root}>
-      <CardHeader
-        avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            R
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
-      />
-      <CardMedia
-        className={classes.media}
-        image="/static/images/cards/paella.jpg"
-        title="Paella dish"
-      />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+    <>
+      {jokes}
+      <Grid container justifyContent="center" className={classes.pageButtons}>
+        <IconButton>
+          <ArrowBackIosIcon />
         </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
+        <p>page</p>
+        <IconButton onClick={nextPage}>
+          <ArrowForwardIosIcon />
         </IconButton>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Method:</Typography>
-          <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and
-            set aside for 10 minutes.
-          </Typography>
-          <Typography paragraph>
-            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet
-            over medium-high heat. Add chicken, shrimp and chorizo, and cook,
-            stirring occasionally until lightly browned, 6 to 8 minutes.
-            Transfer shrimp to a large plate and set aside, leaving chicken and
-            chorizo in the pan. Add pimentón, bay leaves, garlic, tomatoes,
-            onion, salt and pepper, and cook, stirring often until thickened and
-            fragrant, about 10 minutes. Add saffron broth and remaining 4 1/2
-            cups chicken broth; bring to a boil.
-          </Typography>
-          <Typography paragraph>
-            Add rice and stir very gently to distribute. Top with artichokes and
-            peppers, and cook without stirring, until most of the liquid is
-            absorbed, 15 to 18 minutes. Reduce heat to medium-low, add reserved
-            shrimp and mussels, tucking them down into the rice, and cook again
-            without stirring, until mussels have opened and rice is just tender,
-            5 to 7 minutes more. (Discard any mussels that don’t open.)
-          </Typography>
-          <Typography>
-            Set aside off of the heat to let rest for 10 minutes, and then
-            serve.
-          </Typography>
-        </CardContent>
-      </Collapse>
-    </Card>
+      </Grid>
+    </>
   );
-}
+};
+
+export default JokesPaper;

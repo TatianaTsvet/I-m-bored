@@ -45,3 +45,17 @@ export const sendActivityWithSuggestion = (suggestion: any) => {
       .then(() => dispatch({ type: ActionTypes.OPEN_SNACKBAR, payload: true }));
   };
 };
+
+export const fetchJokes = async (page: number) => {
+  const res = await fetch(
+    `https://icanhazdadjoke.com/search?page=${page}&limit=8`,
+    {
+      cache: "no-cache",
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+    }
+  );
+  return res.json();
+};

@@ -1,7 +1,14 @@
 import React, { FC } from "react";
 import JokesPaper from "../jokes-paper";
 import CancelPresentationIcon from "@material-ui/icons/CancelPresentation";
-import { IconButton, Drawer } from "@material-ui/core";
+import {
+  Grid,
+  IconButton,
+  Drawer,
+  AppBar,
+  Toolbar,
+  Typography,
+} from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import clsx from "clsx";
 import { useTypedSelector } from "../../../hooks/useTypeSelector";
@@ -24,10 +31,29 @@ const JokesMain: FC = () => {
         [classes.fullList]: "bottom",
       })}
     >
-      <IconButton onClick={drawerClose} className={classes.iconDrawer}>
-        <CancelPresentationIcon />
-      </IconButton>
-      <JokesPaper />
+      <div className={classes.grow}>
+        <AppBar position="static" className={classes.jokesBar}>
+          <Toolbar>
+            <Typography variant="h5" noWrap>
+              Jokester
+            </Typography>
+            <IconButton onClick={drawerClose} className={classes.iconDrawer}>
+              <CancelPresentationIcon />
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+      </div>
+      <Grid
+        className={classes.container}
+        xs={12}
+        container
+        item
+        direction="row"
+        justifyContent="space-between"
+        alignItems="stretch"
+      >
+        <JokesPaper />
+      </Grid>
     </div>
   );
 
