@@ -137,7 +137,6 @@ const ModalWithActivity: FC = () => {
         direction="row"
         justifyContent="center"
         alignItems="center"
-        className={classes.modal}
       >
         {body}
       </Grid>

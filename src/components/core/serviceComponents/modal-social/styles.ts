@@ -1,4 +1,5 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { mainColor } from "../../../../styles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -13,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
       
     },
     shareTitle: {     
-      color: '#ff9800'
+      color: mainColor
     },
     shareJoke: {
       margin: '1em 0 1em',

@@ -1,5 +1,5 @@
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
-
+import { mainColor } from "../../styles";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
      
     },
     appBar: {
-      background: "#ff9800",
+      background: mainColor,
       
     },
     menuButton: {

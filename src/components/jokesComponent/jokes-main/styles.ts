@@ -1,3 +1,4 @@
+import { mainColor, secondaryColor } from "../../../styles";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 
 
@@ -10,19 +11,22 @@ const useStyles = makeStyles((theme: Theme) =>
        width: 'auto',    
     },
     iconDrawer: {
-     color: "#fff",
+     color: secondaryColor,
       position: "absolute",
       right: "1em",      
     },
     grow: {
-      flexGrow: 1,
+      // flexGrow: 1,
+      
+
     },
     jokesBar: {
-      backgroundColor: "#ff9800",
+      backgroundColor: mainColor,
     },
     container: {
-      backgroundColor:  '#ff9800',
+      backgroundColor:  mainColor,
      padding: '0.2em',
+     width: '100%'
     }
   }),
 );

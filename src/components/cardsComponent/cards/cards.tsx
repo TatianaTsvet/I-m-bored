@@ -7,11 +7,9 @@ import Spinner from "../../core/serviceComponents/spinner";
 import SnackbarResult from "../../core/serviceComponents/snackbar-result";
 import { useTypedSelector } from "../../../hooks/useTypeSelector";
 import { useDispatch } from "react-redux";
-import useStyles from "./styles";
 import "./cards.css";
 
 const Cards: FC = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const { loading, openSnackbar, suggestResponse } = useTypedSelector(
     (state) => state.serviceReducers
@@ -20,7 +18,7 @@ const Cards: FC = () => {
     dispatch({ type: "openSnackbar", payload: false });
   };
   return (
-    <Grid container className={classes.container}>
+    <Grid container>
       <Grid>
         <CardsList />
       </Grid>

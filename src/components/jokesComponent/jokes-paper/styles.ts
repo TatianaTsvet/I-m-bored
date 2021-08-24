@@ -1,4 +1,5 @@
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
+import { secondaryColor } from "../../../styles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -9,10 +10,13 @@ const useStyles = makeStyles((theme: Theme) =>
       overflow: 'hidden',
       backgroundColor: theme.palette.background.paper,
     },
-    pageButtons: {
-      color: '#fff',
+    pageButton: {
+      color: secondaryColor,
+    },
+    pageNumber: {
+      color: secondaryColor,
+      marginTop: '0.3em',
     }
-    
   }), 
 );
 

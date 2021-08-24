@@ -1,20 +1,21 @@
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import { mainColor } from "../../../styles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     drawer: {
      background: "#37474f",
-      color: "#ff9800",
+      color: mainColor,
       padding: "1em",
     },
     drawerText: {
       textTransform: "uppercase",
     },
     icon: {
-      color: "#ff9800",
+      color:mainColor,
     },
     iconDrawer: {
-      color: "#ff9800",
+      color: mainColor,
       position: "absolute",
       right: "1em",
       

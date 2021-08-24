@@ -46,9 +46,13 @@ export const sendActivityWithSuggestion = (suggestion: any) => {
   };
 };
 
-export const fetchJokes = async (page: number) => {
+export const fetchJokes = async (
+  key: string,
+  page: number,
+  matches: number
+) => {
   const res = await fetch(
-    `https://icanhazdadjoke.com/search?page=${page}&limit=8`,
+    `https://icanhazdadjoke.com/search?page=${page}&limit=${matches}`,
     {
       cache: "no-cache",
       method: "GET",

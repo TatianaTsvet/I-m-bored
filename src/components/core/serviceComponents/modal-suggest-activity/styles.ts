@@ -1,4 +1,5 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { secondaryColor } from "../../../../styles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -12,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
       top: "20%",
     },
     select: {
-      background: "#fff",
+      background: secondaryColor,
     },
     menuItem: {
       textTransform: "capitalize",

@@ -1,15 +1,12 @@
 import React, { FC } from "react";
 import {
-  FacebookShareCount,
   VKShareButton,
   VKIcon,
   OKIcon,
   OKShareButton,
   TelegramShareButton,
-  FacebookShareButton,
   FacebookIcon,
   FacebookMessengerShareButton,
-  FacebookMessengerIcon,
   TwitterShareButton,
   TwitterIcon,
   TelegramIcon,

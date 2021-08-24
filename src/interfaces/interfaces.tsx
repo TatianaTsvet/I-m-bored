@@ -44,6 +44,9 @@ export interface IJokesData {
   id: string;
   joke: string;
 }
+export interface ISearchProps {
+  checked: boolean;
+}
 export interface IJokesItemsProps {
   id: string;
   joke: string;

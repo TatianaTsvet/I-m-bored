@@ -1,4 +1,5 @@
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
+import { mainColor } from "../../../../styles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -14,9 +15,9 @@ const useStyles = makeStyles((theme: Theme) =>
       top: "25%",
     },
     icon: {
-      color: "#ff9800",
+      color: mainColor,
     },
-    modal: {},
+   
   })
 );
 export default useStyles;

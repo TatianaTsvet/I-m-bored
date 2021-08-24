@@ -1,5 +1,5 @@
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
-
+import { mainColor } from "../../../styles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -12,13 +12,13 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingTop: '56.25%', // 16:9
     },
     avatar: {
-      backgroundColor:  '#ff9800',
+      backgroundColor:  mainColor,
     },
    icon: {
-    color:  '#ff9800',
+    color:  mainColor,
    },
    title: {
-    color:  '#ff9800',
+    color:  mainColor,
    },
    
   }), 

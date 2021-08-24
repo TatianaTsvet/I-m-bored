@@ -1,32 +1,33 @@
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import { mainColor } from "../../../styles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     drawer: {
       background: "#37474f",
       height: "100%",
-      color: "#ff9800",
+      color: mainColor,
       
     },
     drawerText: {
       textTransform: "uppercase",
     },
     icon: {
-      color: "#ff9800",
+      color: mainColor,
     },
     input: {
-      color: "#ff9800",
+      color: mainColor,
 
       "&::before": {
-        borderColor: "#ff9800",
+        borderColor:mainColor,
       },
       "&::after": {
-        borderColor: "#ff9800",
+        borderColor: mainColor,
       },
     },
 
     participantsTextField: {
-      color: "#ff9800",
+      color: mainColor,
       "&::before": {
         borderBottom: "2px solid #ff9800",
       },
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     checkbox: {
-      color: "#ff9800",
+      color: mainColor,
       "&::checked": {
         color: "#b0bec5",
       },

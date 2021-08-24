@@ -1,30 +1,28 @@
 import { makeStyles, Theme, createStyles} from "@material-ui/core/styles";
+import { ISearchProps } from "../../../interfaces/interfaces";
+import { mainColor } from "../../../styles";
 
-interface Props {
-  checked: boolean;
-}
-
-const useStyles = makeStyles<Theme, Props>((theme) =>
+const useStyles = makeStyles<Theme, ISearchProps>((theme) =>
   createStyles({
     icon: {
-      color: "#ff9800",
+      color: mainColor,
     },
     inputFields: {
       marginTop: '1em',
     },
     input: {
-      color: "#ff9800",
+      color: mainColor,
 
       "&::before": {
-        borderColor: "#ff9800",
+        borderColor: mainColor,
       },
       "&::after": {
-        borderColor: "#ff9800",
+        borderColor: mainColor,
       },
     },
 
     participantsTextField: {
-      color: "#ff9800",
+      color: mainColor,
       "&::before": {
         borderBottom: "2px solid #ff9800",
       },
@@ -33,7 +31,7 @@ const useStyles = makeStyles<Theme, Props>((theme) =>
       },
     },
     checkbox: {
-      color: "#ff9800",
+      color: mainColor,
       "&::checked": {
         color: "#b0bec5",
       },

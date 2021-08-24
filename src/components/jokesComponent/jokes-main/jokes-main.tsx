@@ -8,6 +8,7 @@ import {
   AppBar,
   Toolbar,
   Typography,
+  Container,
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import clsx from "clsx";
@@ -59,16 +60,18 @@ const JokesMain: FC = () => {
 
   return (
     <nav>
-      <Drawer
-        anchor={"bottom"}
-        open={drawerOpen}
-        onClose={drawerClose}
-        ModalProps={{
-          keepMounted: true,
-        }}
-      >
-        {drawer}
-      </Drawer>
+      <Container>
+        <Drawer
+          anchor={"bottom"}
+          open={drawerOpen}
+          onClose={drawerClose}
+          ModalProps={{
+            keepMounted: true,
+          }}
+        >
+          {drawer}
+        </Drawer>
+      </Container>
     </nav>
   );
 };
