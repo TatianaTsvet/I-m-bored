@@ -5,7 +5,7 @@ export interface ServiceState {
   drawer: boolean;
   drawerType: string;
   suggestionModal: boolean;
-  suggestResponse: string;
+  suggestResponse: string | any;
   openSnackbar: boolean;
   bottomDrawer: boolean;
 }

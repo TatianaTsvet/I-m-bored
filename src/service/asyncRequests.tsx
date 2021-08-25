@@ -2,7 +2,7 @@ import { Dispatch } from "redux";
 import { ActionTypes } from "../store/actions/actionType";
 import { MainActions } from "../types/mainTypes";
 import { ServiceActions } from "../types/serviceTypes";
-
+import { ISendSuggestion } from "../interfaces/interfaces";
 export const fetchNewActivity = (type: string) => {
   // let data = new URLSearchParams();
   let data = "";
@@ -27,7 +27,7 @@ export const fetchNewActivity = (type: string) => {
   };
 };
 
-export const sendActivityWithSuggestion = (suggestion: any) => {
+export const sendActivityWithSuggestion = (suggestion: ISendSuggestion) => {
   return (dispatch: Dispatch<ServiceActions>) => {
     fetch(`https://www.boredapi.com/api/suggestion`, {
       cache: "no-cache",

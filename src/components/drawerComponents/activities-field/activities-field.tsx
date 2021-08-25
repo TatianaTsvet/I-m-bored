@@ -1,5 +1,11 @@
 import React, { FC } from "react";
-import { Grid, Typography, IconButton, Checkbox } from "@material-ui/core";
+import {
+  Grid,
+  Typography,
+  IconButton,
+  Checkbox,
+  Tooltip,
+} from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import "./activities-field.css";
@@ -16,7 +22,7 @@ const ActivitiesField: FC<IFavoriteActivitiesProps> = ({
   const classes = useStyles();
   const dispatch = useDispatch();
   const favoriteActivities = useTypedSelector(
-    (state) => state.mainReducers.activity
+    (state) => state.mainReducers.favorites
   );
 
   const deleteActivity = (key: number) => {
@@ -29,7 +35,9 @@ const ActivitiesField: FC<IFavoriteActivitiesProps> = ({
       </Typography>
     );
   }
-
+  const reallyDeleteActivity = (key: number) => {
+    dispatch({ type: "reallyDeleteActivity", payload: key });
+  };
   const addToLiked = (
     event: React.ChangeEvent<HTMLInputElement>,
     checked: boolean
@@ -66,28 +74,42 @@ const ActivitiesField: FC<IFavoriteActivitiesProps> = ({
             justifyContent="space-between"
             alignItems="flex-start"
           >
-            <Grid item xs={10}>
+            <Grid item xs={8} md={9}>
               <Typography variant="body1" className={classes.activityName}>
                 {item.activity}
               </Typography>
             </Grid>
-            <Grid item xs={2}>
+            <Grid item>
               {drawerType === "favorites" ? (
-                <IconButton
-                  className={classes.icon}
-                  onClick={() => deleteActivity(item.key)}
-                >
-                  <DeleteIcon />
-                </IconButton>
+                <Tooltip title="Add to history">
+                  <IconButton
+                    className={classes.icon}
+                    onClick={() => deleteActivity(item.key)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </Tooltip>
               ) : (
-                <Checkbox
-                  checked={item.liked ? true : false}
-                  icon={<FavoriteIcon />}
-                  onChange={addToLiked}
-                  checkedIcon={<FavoriteIcon />}
-                  name="checkedH"
-                  value={item.key}
-                />
+                <Grid>
+                  <Tooltip title="Return to favorites">
+                    <Checkbox
+                      checked={item.liked ? true : false}
+                      icon={<FavoriteIcon />}
+                      onChange={addToLiked}
+                      checkedIcon={<FavoriteIcon />}
+                      name="checkedH"
+                      value={item.key}
+                    />
+                  </Tooltip>
+                  <Tooltip title="Delete at all">
+                    <IconButton
+                      className={classes.icon}
+                      onClick={() => reallyDeleteActivity(item.key)}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
               )}
             </Grid>
           </Grid>

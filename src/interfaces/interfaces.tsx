@@ -4,8 +4,11 @@ export interface IActivity {
   participants: number;
   key: number;
 }
+export interface IResponse {
+  message?: string;
+}
 export interface ISnackbarProps {
-  suggestResponse: any;
+  suggestResponse: IResponse;
   snackbar: boolean;
   snackbarClose: () => void;
 }
@@ -55,4 +58,9 @@ export interface IJokesShareModal {
   joke: string;
   open: boolean;
   openShareModal: (modal: boolean) => void;
+}
+export interface ISendSuggestion {
+  activity: string;
+  type: string;
+  participants: number;
 }

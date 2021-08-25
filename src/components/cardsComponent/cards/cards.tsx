@@ -17,6 +17,7 @@ const Cards: FC = () => {
   const snackbarClose = () => {
     dispatch({ type: "openSnackbar", payload: false });
   };
+
   return (
     <Grid container>
       <Grid>

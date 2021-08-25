@@ -4,7 +4,6 @@ import {
   ImageListItem,
   ImageListItemBar,
   IconButton,
-  ListSubheader,
   useMediaQuery,
 } from "@material-ui/core";
 import itemData from "../../core/itemData";
@@ -33,9 +32,11 @@ const CardsList: FC = () => {
       alignItems="center"
     >
       <ImageList rowHeight={180}>
-        <ImageListItem key="Subheader" cols={2} style={{ height: "auto" }}>
-          <ListSubheader component="div">Recreation Types</ListSubheader>
-        </ImageListItem>
+        <ImageListItem
+          key="Subheader"
+          cols={2}
+          style={{ height: "auto" }}
+        ></ImageListItem>
         {itemData.map((item) => (
           <ImageListItem key={item.img} cols={matches ? 2 : 1}>
             <img alt={item.title} src={`images/${item.src}`} />

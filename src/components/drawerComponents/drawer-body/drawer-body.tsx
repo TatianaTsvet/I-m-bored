@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Typography } from "@material-ui/core";
 import ActivitiesField from "../activities-field";
 import SearchField from "../search-field";
@@ -11,26 +11,18 @@ export default function DrawerBody() {
   const classes = useStyles();
   const { drawerType } = useTypedSelector((state) => state.serviceReducers);
   const favoriteActivity = useTypedSelector(
-    (state) => state.mainReducers.activity
+    (state) => state.mainReducers.favorites
   );
   const historyActivity = useTypedSelector(
     (state) => state.mainReducers.history
   );
   const allActivities =
     drawerType === "favorites" ? favoriteActivity : historyActivity;
-  // const drawerOpen = useTypedSelector((state) => state.serviceReducers.drawer);
+  const drawerOpen = useTypedSelector((state) => state.serviceReducers.drawer);
 
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [count, setCount] = useState<number>(1);
   const [checkedFilters, setCheckedFilters] = useState<string[]>([]);
-
-  // useEffect(() => {
-  //   if (!drawerOpen) {
-  //     setSearchQuery("");
-  //     setCount(1);
-  //     setCheckedFilters([]);
-  //   }
-  // }, [drawerOpen]);
 
   const activities = useMemo(() => {
     return allActivities.filter(
