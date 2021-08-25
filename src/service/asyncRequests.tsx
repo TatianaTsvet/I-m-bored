@@ -47,7 +47,7 @@ export const sendActivityWithSuggestion = (suggestion: any) => {
 };
 
 export const fetchJokes = async (
-  key: string,
+  // key: string,
   page: number,
   matches: number
 ) => {
