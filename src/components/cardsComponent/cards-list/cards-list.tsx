@@ -26,37 +26,48 @@ const CardsList: FC = () => {
   const matches = useMediaQuery("(max-width:600px)");
 
   return (
-    <Grid
-      container
-      direction="column"
-      justifyContent="flex-start"
-      alignItems="center"
-    >
-      <ImageList rowHeight={180}>
-        <ImageListItem key="Subheader" cols={2} style={{ height: "auto" }}>
-          <ListSubheader component="div">Recreation Types</ListSubheader>
-        </ImageListItem>
-        {itemData.map((item) => (
-          <ImageListItem key={item.img} cols={matches ? 2 : 1}>
-            <img alt={item.title} src={`images/${item.src}`} />
-            <ImageListItemBar
-              title={item.title.toUpperCase()}
-              subtitle={item.subtitle}
-              actionIcon={
-                <IconButton
-                  aria-label={`info about ${item.title}`}
-                  color="inherit"
-                  className={classes.icon}
-                  onClick={() => modalOpen(item.title)}
-                >
-                  {item.icon}
-                </IconButton>
-              }
-            />
-          </ImageListItem>
-        ))}
-      </ImageList>
-    </Grid>
+    <main className="grid grid-cols-2 gap-1 mt-1">
+      {itemData.map((item) => (
+        <div key={item.title}>
+          <img
+            className="h-48 w-full object-cover"
+            alt={item.title}
+            src={`images/${item.src}`}
+          />
+        </div>
+      ))}
+    </main>
+    // <Grid
+    //   container
+    //   direction="column"
+    //   justifyContent="flex-start"
+    //   alignItems="center"
+    // >
+    //   <ImageList rowHeight={180}>
+    //     <ImageListItem key="Subheader" cols={2} style={{ height: "auto" }}>
+    //       <ListSubheader component="div">Recreation Types</ListSubheader>
+    //     </ImageListItem>
+    //     {itemData.map((item) => (
+    //       <ImageListItem key={item.img} cols={matches ? 2 : 1}>
+    //         <img alt={item.title} src={`images/${item.src}`} />
+    //         <ImageListItemBar
+    //           title={item.title.toUpperCase()}
+    //           subtitle={item.subtitle}
+    //           actionIcon={
+    //             <IconButton
+    //               aria-label={`info about ${item.title}`}
+    //               color="inherit"
+    //               className={classes.icon}
+    //               onClick={() => modalOpen(item.title)}
+    //             >
+    //               {item.icon}
+    //             </IconButton>
+    //           }
+    //         />
+    //       </ImageListItem>
+    //     ))}
+    //   </ImageList>
+    // </Grid>
   );
 };
 

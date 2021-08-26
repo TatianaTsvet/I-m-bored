@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import { Grid } from "@material-ui/core";
 import ModalWithActivity from "../../core/serviceComponents/modal-with-activity/modal-with-activity";
 import ModalSuggestActivity from "../../core/serviceComponents/modal-suggest-activity";
 import CardsList from "../cards-list/cards-list";
@@ -7,11 +6,10 @@ import Spinner from "../../core/serviceComponents/spinner";
 import SnackbarResult from "../../core/serviceComponents/snackbar-result";
 import { useTypedSelector } from "../../../hooks/useTypeSelector";
 import { useDispatch } from "react-redux";
-import useStyles from "./styles";
+
 import "./cards.css";
 
 const Cards: FC = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const { loading, openSnackbar, suggestResponse } = useTypedSelector(
     (state) => state.serviceReducers
@@ -20,10 +18,10 @@ const Cards: FC = () => {
     dispatch({ type: "openSnackbar", payload: false });
   };
   return (
-    <Grid container className={classes.container}>
-      <Grid>
+    <div>
+      <div>
         <CardsList />
-      </Grid>
+      </div>
       <ModalSuggestActivity />
       {loading ? <Spinner loading={loading} /> : <ModalWithActivity />}
 
@@ -32,7 +30,7 @@ const Cards: FC = () => {
         suggestResponse={suggestResponse}
         snackbarClose={snackbarClose}
       />
-    </Grid>
+    </div>
   );
 };
 export default Cards;
