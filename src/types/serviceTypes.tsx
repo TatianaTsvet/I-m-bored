@@ -5,8 +5,9 @@ export interface ServiceState {
   drawer: boolean;
   drawerType: string;
   suggestionModal: boolean;
-  suggestResponse: string;
+  suggestResponse: string | any;
   openSnackbar: boolean;
+  bottomDrawer: boolean;
 }
 
 interface OpenDrawer {
@@ -37,6 +38,10 @@ interface SuggestResponse {
   type: ActionTypes.SUGGEST_RESPONSE;
   payload: string;
 }
+interface BottomDrawerOpen {
+  type: ActionTypes.BOTTOM_DRAWER_OPEN;
+  payload: boolean;
+}
 
 export type ServiceActions =
   | OpenDrawer
@@ -45,4 +50,5 @@ export type ServiceActions =
   | DrawerType
   | OpenSuggestion
   | OpenSnackbar
-  | SuggestResponse;
+  | SuggestResponse
+  | BottomDrawerOpen;

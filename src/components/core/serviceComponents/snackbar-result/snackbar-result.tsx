@@ -10,7 +10,7 @@ const SnackbarResult = ({
   snackbarClose,
   suggestResponse,
 }: ISnackbarProps): React.ReactElement => {
-  const classes = useStyles();
+  const classes = useStyles(); 
 
   return (
     <Snackbar

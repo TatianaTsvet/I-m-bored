@@ -4,8 +4,11 @@ export interface IActivity {
   participants: number;
   key: number;
 }
+export interface IResponse {
+  message?: string;
+}
 export interface ISnackbarProps {
-  suggestResponse: any;
+  suggestResponse: IResponse;
   snackbar: boolean;
   snackbarClose: () => void;
 }
@@ -39,4 +42,25 @@ export interface IFilterProps {
   switchType: (title: IFilterProps["title"], checked: boolean) => void;
   title: string;
   icon: React.ReactNode;
+}
+export interface IJokesData {
+  id: string;
+  joke: string;
+}
+export interface ISearchProps {
+  checked: boolean;
+}
+export interface IJokesItemsProps {
+  id: string;
+  joke: string;
+}
+export interface IJokesShareModal {
+  joke: string;
+  open: boolean;
+  openShareModal: (modal: boolean) => void;
+}
+export interface ISendSuggestion {
+  activity: string;
+  type: string;
+  participants: number;
 }

@@ -1,22 +1,28 @@
 import { ActionTypes } from "../actions/actionType";
-import { MainState, MainActions } from "../../types/mainTypes";
+import { MainState, MainActions, Activity } from "../../types/mainTypes";
 
 const defaultState: MainState = {
-  activity: JSON.parse(localStorage.getItem("activityList") ?? "[]"),
-  history: JSON.parse(localStorage.getItem("history") ?? "[]"),
+  favorites: JSON.parse(localStorage.getItem("favoritesList") ?? "[]"),
+  history: JSON.parse(localStorage.getItem("historyList") ?? "[]"),
   randomActivity: [],
 };
 
 const mainReducers = (state = defaultState, action: MainActions): MainState => {
+  const filterActivity = (stateActivity: Activity[], activityKey: number) =>
+    stateActivity.filter((item) => item.key !== activityKey);
+  const findActivity = (stateActivity: Activity[], activityKey: number) =>
+    stateActivity.find((item) => item.key === activityKey);
+
+  let newState = state;
+
   switch (action.type) {
     case ActionTypes.ADD_TO_ACTIVITY_LIST:
       action.payload.liked = true;
-      const sameActivity = !!state.activity.find(
-        (item) => item.key === action.payload.key
-      );
-      const newActivity = sameActivity
-        ? state.activity
-        : [...state.activity, action.payload];
+      const sameActivity = !!findActivity(state.favorites, action.payload.key);
+
+      const newFavorites = sameActivity
+        ? state.favorites
+        : [...state.favorites, action.payload];
       const newHistory = state.history.map((item) => {
         if (item.key === action.payload.key) {
           return { ...item, liked: true };
@@ -24,56 +30,67 @@ const mainReducers = (state = defaultState, action: MainActions): MainState => {
           return item;
         }
       });
-      localStorage.setItem("activityList", JSON.stringify(newActivity));
-      localStorage.setItem("history", JSON.stringify(newHistory));
 
-      return {
+      newState = {
         ...state,
         history: newHistory,
-        activity: newActivity,
+        favorites: newFavorites,
       };
+      break;
     case ActionTypes.GET_ACTIVITY:
       const randomActivity = { ...action.payload, liked: false };
-      const sameHistoryActivity = !!state.history.find(
-        (item) => item.key === action.payload.key
+      const sameHistoryActivity = !!findActivity(
+        state.history,
+        action.payload.key
       );
+
       const historyList = sameHistoryActivity
         ? state.history
         : [...state.history, randomActivity];
-      localStorage.setItem("history", JSON.stringify(historyList));
-      return {
+
+      newState = {
         ...state,
         randomActivity: [randomActivity],
         history: historyList,
       };
+      break;
     case ActionTypes.DELETE_FAVORITE_ACTIVITY:
-      const nonDeletedActivities = state.activity.filter(
-        (item) => item.key !== action.payload
+      const nonDeletedFavorites = filterActivity(
+        state.favorites,
+        action.payload
       );
-      const newHistoryArr = state.history.map((item) => {
+
+      const nonDeletedHistory = state.history.map((item) => {
         if (item.key === action.payload) {
           return { ...item, liked: false };
         } else {
           return item;
         }
       });
-      localStorage.setItem(
-        "activityList",
-        JSON.stringify(nonDeletedActivities)
-      );
-      localStorage.setItem("history", JSON.stringify(newHistoryArr));
 
-      return {
+      newState = {
         ...state,
-        activity: nonDeletedActivities,
-        history: newHistoryArr,
+        favorites: nonDeletedFavorites,
+        history: nonDeletedHistory,
       };
+      break;
+    case ActionTypes.REALLY_DELETE_ACTIVITY:
+      const favoriteActivities = filterActivity(
+        state.favorites,
+        action.payload
+      );
+      const historyActivities = filterActivity(state.history, action.payload);
 
+      newState = {
+        ...state,
+        favorites: favoriteActivities,
+        history: historyActivities,
+      };
+      break;
     case ActionTypes.CHANGE_LIKED:
-      const newActivityLiked = state.history
+      const newFavoritesLiked = state.history
         .filter((item) => item.key === action.payload)
         .map((obj) => (obj.liked === false ? { ...obj, liked: true } : obj));
-
       const historyArr = state.history.map((item) => {
         if (item.key === action.payload) {
           return { ...item, liked: true };
@@ -81,18 +98,19 @@ const mainReducers = (state = defaultState, action: MainActions): MainState => {
           return item;
         }
       });
-
-      const newActivityState = [...state.activity, ...newActivityLiked];
-
-      return {
+      const newFavoritesState = [...state.favorites, ...newFavoritesLiked];
+      newState = {
         ...state,
         history: historyArr,
-        activity: newActivityState,
+        favorites: newFavoritesState,
       };
-
+      break;
     default:
-      return state;
+      newState = state;
   }
+  localStorage.setItem("favoritesList", JSON.stringify(state.favorites));
+  localStorage.setItem("historyList", JSON.stringify(state.history));
+  return newState;
 };
 
 export default mainReducers;
