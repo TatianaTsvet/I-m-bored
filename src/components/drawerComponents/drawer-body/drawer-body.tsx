@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import { Typography } from "@material-ui/core";
 import ActivitiesField from "../activities-field";
 import SearchField from "../search-field";
@@ -18,7 +18,6 @@ export default function DrawerBody() {
   );
   const allActivities =
     drawerType === "favorites" ? favoriteActivity : historyActivity;
-  const drawerOpen = useTypedSelector((state) => state.serviceReducers.drawer);
 
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [count, setCount] = useState<number>(1);
