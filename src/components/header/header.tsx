@@ -16,7 +16,7 @@ export default function ButtonAppBar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full flex bg-yellow-500 h-16 shadow-md  ">
+    <header className="sticky top-0 z-40 w-full flex bg-yellow-500 h-16 shadow-md  ">
       <div className="w-3/4 p-2 my-auto  ml-5 text-2xl	">
         <h5 className="font-medium">I&apos;m Bored...</h5>
       </div>

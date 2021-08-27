@@ -26,7 +26,7 @@ const SearchField: FC<ISearchFieldProps> = (props) => {
     (event: React.ChangeEvent<HTMLInputElement>) => {
       onSearch(event.target.value);
     },
-    [onSearch] 
+    [onSearch]
   );
 
   const handleCountInput = useCallback(
@@ -41,9 +41,8 @@ const SearchField: FC<ISearchFieldProps> = (props) => {
   );
 
   const icons = (
-    <Grid container className={classes.iconField}>
-      <p>Filters:</p>
-      {/* <Grid container justifyContent="center" xs={10} sm={11}> */}
+    <div>
+      <p className="text-lg pb-2 pl-1">Filters:</p>
       {itemData.map(({ title, icon }) => (
         <Filter
           key={title}
@@ -52,8 +51,7 @@ const SearchField: FC<ISearchFieldProps> = (props) => {
           switchType={onCheckFilter}
         />
       ))}
-      {/* </Grid> */}
-    </Grid>
+    </div>
   );
 
   return (

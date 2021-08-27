@@ -6,7 +6,6 @@ import ActivitiesDrawer from "../drawerComponents/activities-drawer";
 import "./app.css";
 
 const App: FC = () => {
- 
   return (
     <div className="container mx-auto p-1">
       <Header />
