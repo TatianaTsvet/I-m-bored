@@ -58,7 +58,7 @@ export default function DrawerBody() {
 
   return (
     <div className="text-yellow-500 p-1">
-      <p className="capitalize text-2xl pb-2 pl-1">{drawerType}</p>
+      <p className="capitalize text-2xl pb-2">{drawerType}</p>
 
       <SearchField
         count={count}

@@ -1,35 +1,38 @@
-import React, { FC, useCallback } from "react";
+import React, { FC, useCallback, useState } from "react";
 import { IFilterProps } from "../../../interfaces/interfaces";
-import "./filter.css";
 
 const Filter: FC<IFilterProps> = (props) => {
   const { switchType, icon, title } = props;
-
-  const handleFilterClick = useCallback(() => {
-    switchType(title, true);
-  }, [switchType, title]);
-
-  // const handleFilterClick = useCallback(
-  //   (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
-  //     switchType(title, checked);
-  //   },
-  //   [switchType, title]
-  // );
+  const [checkedLabel, setCheckedLabel] = useState(" inherit");
+  const handleFilterClick = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      switchType(title, e.target.checked);
+      e.target.checked === true
+        ? setCheckedLabel(" text-gray-500")
+        : setCheckedLabel(" inherit");
+    },
+    [switchType, title]
+  );
 
   return (
-    <button onClick={handleFilterClick} name={title} value={title}>
-      {icon}
-    </button>
-    // <input
-    //   className=" "
-    //   type="checkbox"
-    //   icon={icon}
-    //   onChange={handleFilterClick}
-    //   checkedIcon={icon}
-    //   name="checkedH"
-    //   value={title}
-    //   color="primary"
-    // />
+    <>
+      <input
+        className=" form-checkbox text-gray-400 absolute opacity-0 "
+        type="checkbox"
+        id={title}
+        onChange={handleFilterClick}
+        value={title}
+      />
+      <label
+        className={
+          "inline-flex cursor-pointer p-2 md:h-12 md:w-12 xl:h-14 xl:w-14" +
+          checkedLabel
+        }
+        htmlFor={title}
+      >
+        {icon}
+      </label>
+    </>
   );
 };
 

@@ -24,7 +24,7 @@ const Cards: FC = () => {
       </div>
       <ModalSuggestActivity />
       {loading ? <Spinner loading={loading} /> : <ModalWithActivity />}
-
+      {/* <Spinner loading={true} /> */}
       <SnackbarResult
         snackbar={openSnackbar}
         suggestResponse={suggestResponse}
