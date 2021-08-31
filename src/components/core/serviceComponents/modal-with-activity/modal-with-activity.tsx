@@ -1,17 +1,12 @@
 import React, { FC } from "react";
-import { Modal, Grid, IconButton, Tooltip } from "@material-ui/core";
 import { useDispatch } from "react-redux";
-import PersonIcon from "@material-ui/icons/Person";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import CloseIcon from "@material-ui/icons/Close";
-import useStyles from "./styles";
-import "./modal-with-activity.css";
 import { useTypedSelector } from "../../../../hooks/useTypeSelector";
 import { IActivity } from "../../../../interfaces/interfaces";
+import { heartIcon, userIconSolid, closeIcon } from "../../icons";
+import "./modal-with-activity.css";
 
 const ModalWithActivity: FC = () => {
   const dispatch = useDispatch();
-  const classes = useStyles();
 
   const modalClose = () => {
     dispatch({ type: "openModal", payload: false });
@@ -25,123 +20,68 @@ const ModalWithActivity: FC = () => {
   const randomActivity = useTypedSelector(
     (state) => state.mainReducers.randomActivity
   );
-
-  const participants = [<PersonIcon key="personIcon" />];
+  if (!modalOpen) return null;
+  const participants = [
+    <span className="inline-block " key="personIcon">
+      {userIconSolid}
+    </span>,
+  ];
   randomActivity.map((item) => {
     for (let i = 1; i < item.participants; i++) {
-      participants.push(<PersonIcon key={`personIcon${i}`} />);
+      participants.push(
+        <span className="inline-block" key={`personIcon${i}`}>
+          {userIconSolid}
+        </span>
+      );
     }
     return participants;
   });
 
   const body = randomActivity.map((item) => {
     return (
-      <Grid
+      <div
         key={item.key}
-        item
-        xs={8}
-        sm={9}
-        md={6}
-        container
-        direction="row"
-        justifyContent="space-around"
-        alignItems="flex-start"
-        className={classes.paper}
+        className="border-0 z-50 rounded-lg shadow-lg relative flex flex-row p-3 bg-white "
       >
-        <Grid
-          container
-          direction="column"
-          justifyContent="space-around"
-          alignItems="flex-start"
-        >
-          <h2 id="simple-modal-title">{item.activity}</h2>
-          <p id="simple-modal-description">
-            Participants
-            <span className={classes.icon}>{participants}</span>
+        <div>
+          <p className="text-lg md:text-xl m-2">{item.activity}</p>
+          <p className=" md:text-xl m-2">
+            Participants:
+            <span className="inline-block text-yellow-600 m-2">
+              {participants}
+            </span>
           </p>
-          <Tooltip title="Add to favorite" aria-label="add">
-            <IconButton
-              color="inherit"
-              className={classes.icon}
-              onClick={() => addToFavorite(item)}
-            >
-              <FavoriteIcon />
-            </IconButton>
-          </Tooltip>
-        </Grid>
-        <Grid>
-          <IconButton
-            color="inherit"
-            className={classes.icon}
+          <button
+            className="text-yellow-600 m-2 rounded-full h-11 w-11 flex justify-center items-center content-center hover:bg-yellow-100 hover:text-yellow-500"
+            onClick={() => addToFavorite(item)}
+          >
+            {heartIcon}
+          </button>
+        </div>
+        <div>
+          <button
+            className="text-yellow-600 hover:text-yellow-500"
             onClick={modalClose}
           >
-            <CloseIcon />
-          </IconButton>
-        </Grid>
-      </Grid>
+            {closeIcon}
+          </button>
+        </div>
+      </div>
     );
   });
-  // <Grid
-  //   item
-  //   xs={8}
-  //   sm={9}
-  //   md={6}
-  //   container
-  //   direction="row"
-  //   justifyContent="space-around"
-  //   alignItems="flex-start"
-  //   className={classes.paper}
-  // >
-  //   <Grid
-  //     container
-  //     direction="column"
-  //     justifyContent="space-around"
-  //     alignItems="flex-start"
-  //   >
-  //     <h2 id="simple-modal-title">{randomActivity.activity}</h2>
-  //     <p id="simple-modal-description">
-  //       Participants
-  //       <span className={classes.icon}>{participants}</span>
-  //     </p>
-  //     <Tooltip title="Add to favorite" aria-label="add">
-  //       <IconButton
-  //         color="inherit"
-  //         className={classes.icon}
-  //         onClick={() => addToFavorite(randomActivity)}
-  //       >
-  //         <FavoriteIcon />
-  //       </IconButton>
-  //     </Tooltip>
-  //   </Grid>
-  //   <Grid>
-  //     <IconButton
-  //       color="inherit"
-  //       className={classes.icon}
-  //       onClick={modalClose}
-  //     >
-  //       <CloseIcon />
-  //     </IconButton>
-  //   </Grid>
-  // </Grid>
 
   return (
-    <Modal
-      open={modalOpen}
-      onClose={modalClose}
-      aria-labelledby="simple-modal-title"
-      aria-describedby="simple-modal-description"
+    <div
+      onClick={modalClose}
+      className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none "
     >
-      <Grid
-        container
-        item
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-        className={classes.modal}
-      >
-        {body}
-      </Grid>
-    </Modal>
+      <div className="relative w-auto my-6 mx-auto max-w-3xl">
+        <div className="border-0 rounded-lg shadow-lg relative flex flex-col bg-white justify-center items-center m-2 content-center ">
+          {body}
+        </div>
+      </div>
+      <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+    </div>
   );
 };
 

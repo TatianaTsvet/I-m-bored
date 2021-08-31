@@ -1,7 +1,4 @@
-import React from "react";
-import { Snackbar } from "@material-ui/core";
-import MuiAlert from "@material-ui/lab/Alert";
-import useStyles from "./styles";
+import React, { useEffect } from "react";
 import "./snackbar-result.css";
 import { ISnackbarProps } from "../../../../interfaces/interfaces";
 
@@ -9,25 +6,21 @@ const SnackbarResult = ({
   snackbar,
   snackbarClose,
   suggestResponse,
-}: ISnackbarProps): React.ReactElement => {
-  const classes = useStyles();
+}: ISnackbarProps) => {
+  useEffect(() => {
+    if (snackbar) {
+      const timeout = setTimeout(() => snackbarClose(), 2000);
+      return () => {
+        clearTimeout(timeout);
+      };
+    }
+  }, [snackbar, snackbarClose]);
 
+  if (!snackbar) return null;
   return (
-    <Snackbar
-      className={classes.snackbar}
-      anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "right",
-      }}
-      open={snackbar}
-      autoHideDuration={2000}
-      onClose={snackbarClose}
-      action={
-        <MuiAlert variant="filled" severity="success">
-          {suggestResponse.message}
-        </MuiAlert>
-      }
-    />
+    <div className="bg-green-500 fixed right-2 bottom-1 font-medium p-2 md:p-5">
+      {suggestResponse.message}
+    </div>
   );
 };
 

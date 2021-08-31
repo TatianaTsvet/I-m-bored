@@ -1,19 +1,7 @@
 import React, { useState, FC, useEffect } from "react";
-import {
-  TextField,
-  MenuItem,
-  InputLabel,
-  Select,
-  Grid,
-  Typography,
-  Modal,
-  Button,
-  FormControl,
-} from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../../../hooks/useTypeSelector";
 import { sendActivityWithSuggestion } from "../../../../service/asyncRequests";
-import useStyles from "./styles";
 import "./modal-suggest-activity.css";
 
 const availableTypes = [
@@ -28,7 +16,6 @@ const availableTypes = [
   "busy work",
 ];
 const ModalSuggestActivity: FC = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const [activity, setActivity] = useState("");
   const [type, setType] = useState("");
@@ -44,7 +31,7 @@ const ModalSuggestActivity: FC = () => {
       setActivity("");
     }
   }, [openModal]);
-
+  if (!openModal) return null;
   const modalClose = () => {
     dispatch({ type: "openSuggestion", payload: false });
   };
@@ -58,7 +45,6 @@ const ModalSuggestActivity: FC = () => {
     const participantsNumber = Number(event.target.value);
     setParticipants(participantsNumber);
   };
-
   const sendSuggestion = () => {
     const data = { activity, type, participants };
     dispatch(sendActivityWithSuggestion(data));
@@ -66,97 +52,95 @@ const ModalSuggestActivity: FC = () => {
     setParticipants(1);
   };
 
+  const disabled =
+    activity === "" || type === "" || participants <= 0 ? true : false;
+
   const types = availableTypes.map((item) => {
     return (
-      <MenuItem value={item.replace(" ", "")} key={item}>
+      <option value={item.replace(" ", "")} key={item}>
         {item.toUpperCase()}
-      </MenuItem>
+      </option>
     );
   });
   const body = (
-    <Grid item xs={10} sm={9} md={6} className={classes.paper}>
-      <FormControl>
-        <Grid
-          container
-          direction="column"
-          justifyContent="center"
-          alignItems="stretch"
-        >
-          <Typography>
-            Suggest a new activity to the Bored API team and see your activity
-            in future displays!
-          </Typography>
-          <InputLabel htmlFor="standard-basic"></InputLabel>
-          <TextField required id="standard-basic" onChange={changeInput} />
-
-          <TextField
-            className={classes.textField}
-            id="standard-number"
-            type="number"
-            value={participants}
-            variant="outlined"
-            onChange={changeParticipants}
-            label="participants"
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-
-          <Select
-            required
-            className={classes.selectForm}
-            onChange={changeSelect}
-            labelId="demo-simple-select-outlined-label"
-            id="demo-simple-select-outlined"
-            defaultValue=""
-          >
-            {types}
-          </Select>
-          <Grid
-            container
-            direction="row"
-            justifyContent="flex-end"
-            alignItems="center"
-          >
-            <Button variant="contained" color="primary" onClick={modalClose}>
-              Close
-            </Button>
-            <Button
-              className={classes.suggestionButton}
-              variant="contained"
-              color="secondary"
-              onClick={sendSuggestion}
-              disabled={
-                activity === "" || type === "" || participants <= 0
-                  ? true
-                  : false
-              }
+    <div className="border-0 z-50 rounded-lg shadow-lg relative flex flex-row p-5 bg-white ">
+      <form action="">
+        <p className="font-bold text-lg md:text-2xl text-justify">
+          Suggest a new activity to the Bored API team and see your activity in
+          future displays!
+        </p>
+        <input
+          type="text"
+          className="w-full mt-5 border-yellow-500 border-b-2 focus:outline-none"
+          onChange={changeInput}
+          placeholder="Write New Activity"
+        />
+        <div className="flex flex-row mt-5 justify-between">
+          <div>
+            <label className="pr-2" htmlFor="sendCategory">
+              Categories:
+            </label>
+            <select
+              onChange={changeSelect}
+              id="sendCategory"
+              className="md:w-52  border-b-2 border-yellow-500 focus:outline-none"
+              defaultValue="Select category"
             >
-              Send suggestion
-            </Button>
-          </Grid>
-        </Grid>
-      </FormControl>
-    </Grid>
+              <option disabled>Select category</option>
+              {types}
+            </select>
+          </div>
+          <div>
+            <label className="pr-2" htmlFor="sendParticipants">
+              Participants:
+            </label>
+            <input
+              className=" border-b-2 w-10 focus:outline-none border-yellow-500"
+              id="sendParticipants"
+              type="number"
+              min="1"
+              onChange={changeParticipants}
+              value={participants}
+            />
+          </div>
+        </div>
+        <div className="flex flex-row justify-end mt-3">
+          <button
+            className="bg-yellow-500 rounded-full font-bold uppercase text-sm px-6 py-3  hover:bg-yellow-600 hover:text-white outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            type="button"
+            onClick={modalClose}
+          >
+            Close
+          </button>
+          <button
+            className={
+              " font-bold uppercase text-sm px-6 py-3 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear " +
+              (disabled
+                ? " bg-gray-500 cursor-not-allowed opacity-50 text-white rounded-full"
+                : " bg-yellow-500  hover:bg-yellow-600 hover:text-white transition-all duration-150")
+            }
+            type="button"
+            onClick={sendSuggestion}
+          >
+            Send suggestion
+          </button>
+        </div>
+      </form>
+    </div>
   );
 
   return (
-    <Modal
-      open={openModal}
-      onClose={modalClose}
-      aria-labelledby="simple-modal-title"
-      aria-describedby="simple-modal-description"
-    >
-      <Grid
-        container
-        item
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-      >
-        {body}
-      </Grid>
-    </Modal>
+    <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none ">
+      <div className="relative w-auto my-6 mx-auto max-w-3xl">
+        <div className="border-0 rounded-lg shadow-lg relative flex flex-col bg-white justify-center items-center m-2 content-center ">
+          {body}
+        </div>
+      </div>
+      <div
+        className="opacity-25 fixed inset-0 z-40  bg-black"
+        onClick={modalClose}
+      ></div>
+    </div>
   );
 };
 
