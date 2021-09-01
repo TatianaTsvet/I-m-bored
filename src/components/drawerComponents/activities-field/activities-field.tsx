@@ -57,7 +57,7 @@ const ActivitiesField: FC<IFavoriteActivitiesProps> = ({
               {drawerType === "favorites" ? (
                 <button
                   title="add to history"
-                  className="hover:text-yellow-600"
+                  className="hoverTextYellow"
                   onClick={() => deleteActivity(item.key)}
                 >
                   {trashIcon}

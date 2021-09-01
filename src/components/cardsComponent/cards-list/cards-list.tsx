@@ -24,12 +24,12 @@ const CardsList: FC = () => {
             src={`images/${item.src}`}
           />
           <div className="absolute inset-x-0 bottom-0 h-16  flex items-center justify-between bg-gray-800 bg-opacity-60 px-2">
-            <div className=" text-white ">
+            <div className="textWhite">
               <h4>{item.title.toUpperCase()}</h4>
               <h6>{item.subtitle}</h6>
             </div>
             <button
-              className="justify-self-end flex flex-wrap content-center p-3 rounded-full text-yellow-500 bg-yellow-100 hover:bg-yellow-200 hover:text-yellow-900 "
+              className="justify-self-end flex flex-wrap content-center p-3 rounded-full textYellow bg-yellow-100 hover:bg-yellow-200 hover:text-yellow-900 "
               onClick={() => modalOpen(item.title)}
             >
               {item.icon}

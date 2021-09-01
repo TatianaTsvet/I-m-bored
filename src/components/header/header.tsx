@@ -16,27 +16,27 @@ export default function ButtonAppBar() {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full flex bg-yellow-500 h-16 shadow-md  ">
+    <header className="sticky top-0 z-40 w-full flex bgYellow h-16 shadow-md  ">
       <div className="w-3/4 p-2 my-auto  ml-5 text-2xl	">
         <h5 className="font-medium">I&apos;m Bored...</h5>
       </div>
       <div className="w-1/4 flex justify-end ">
         <button
           title="favorites"
-          className="p-2 hover:text-white has-tooltip"
+          className="p-2 hoverTextWhite has-tooltip"
           onClick={openFavoriteDrawer}
         >
           {heartIconOutline}
         </button>
         <button
-          className="p-2 hover:text-white"
+          className="p-2 hoverTextWhite"
           title="history"
           onClick={openHistoryDrawer}
         >
           {clockIcon}
         </button>
         <button
-          className="p-2 hover:text-white"
+          className="p-2 hoverTextWhite"
           onClick={sendSuggestion}
           title="send new activity"
         >

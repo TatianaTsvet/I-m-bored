@@ -63,7 +63,7 @@ const ModalSuggestActivity: FC = () => {
     );
   });
   const body = (
-    <div className="border-0 z-50 rounded-lg shadow-lg relative flex flex-row p-5 bg-white ">
+    <div className="border-0 z-50 rounded-lg shadow-lg relative flex flex-row p-5 bgWhite ">
       <form action="">
         <p className="font-bold text-lg md:text-2xl text-justify">
           Suggest a new activity to the Bored API team and see your activity in
@@ -71,7 +71,7 @@ const ModalSuggestActivity: FC = () => {
         </p>
         <input
           type="text"
-          className="w-full mt-5 border-yellow-500 border-b-2 focus:outline-none"
+          className="w-full mt-5 borderYellow border-b-2 focus:outline-none"
           onChange={changeInput}
           placeholder="Write New Activity"
         />
@@ -83,7 +83,7 @@ const ModalSuggestActivity: FC = () => {
             <select
               onChange={changeSelect}
               id="sendCategory"
-              className="md:w-52  border-b-2 border-yellow-500 focus:outline-none"
+              className="md:w-52  border-b-2 borderYellow focus:outline-none"
               defaultValue="Select category"
             >
               <option disabled>Select category</option>
@@ -95,7 +95,7 @@ const ModalSuggestActivity: FC = () => {
               Participants:
             </label>
             <input
-              className=" border-b-2 w-10 focus:outline-none border-yellow-500"
+              className=" border-b-2 w-10 focus:outline-none borderYellow"
               id="sendParticipants"
               type="number"
               min="1"
@@ -106,7 +106,7 @@ const ModalSuggestActivity: FC = () => {
         </div>
         <div className="flex flex-row justify-end mt-3">
           <button
-            className="bg-yellow-500 rounded-full font-bold uppercase text-sm px-6 py-3  hover:bg-yellow-600 hover:text-white outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            className="bgYellow rounded-full font-bold uppercase text-sm px-6 py-3  hoverBg hoverTextWhite outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
             type="button"
             onClick={modalClose}
           >
@@ -116,11 +116,11 @@ const ModalSuggestActivity: FC = () => {
             className={
               " font-bold uppercase text-sm px-6 py-3 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear " +
               (disabled
-                ? " bg-gray-500 cursor-not-allowed opacity-50 text-white rounded-full"
-                : " bg-yellow-500  hover:bg-yellow-600 hover:text-white transition-all duration-150")
+                ? " bg-gray-500 cursor-not-allowed opacity-50 textWhite rounded-full"
+                : " bgYellow ease-in-out hoverBg hoverTextWhite transition-all duration-150")
             }
             type="button"
-            onClick={sendSuggestion}
+            onClick={() => sendSuggestion}
           >
             Send suggestion
           </button>
@@ -132,7 +132,7 @@ const ModalSuggestActivity: FC = () => {
   return (
     <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none ">
       <div className="relative w-auto my-6 mx-auto max-w-3xl">
-        <div className="border-0 rounded-lg shadow-lg relative flex flex-col bg-white justify-center items-center m-2 content-center ">
+        <div className="border-0 rounded-lg shadow-lg relative flex flex-col bgWhite justify-center items-center m-2 content-center ">
           {body}
         </div>
       </div>

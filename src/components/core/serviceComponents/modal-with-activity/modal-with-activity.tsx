@@ -41,28 +41,23 @@ const ModalWithActivity: FC = () => {
     return (
       <div
         key={item.key}
-        className="border-0 z-50 rounded-lg shadow-lg relative flex flex-row p-3 bg-white "
+        className="border-0 z-50 rounded-lg shadow-lg relative flex flex-row p-3 bgWhite "
       >
         <div>
           <p className="text-lg md:text-xl m-2">{item.activity}</p>
           <p className=" md:text-xl m-2">
             Participants:
-            <span className="inline-block text-yellow-600 m-2">
-              {participants}
-            </span>
+            <span className="inline-block textYellow m-2">{participants}</span>
           </p>
           <button
-            className="text-yellow-600 m-2 rounded-full h-11 w-11 flex justify-center items-center content-center hover:bg-yellow-100 hover:text-yellow-500"
+            className="textYellow m-2 rounded-full h-11 w-11 flex justify-center items-center content-center hover:bg-yellow-100 hoverTextYellow"
             onClick={() => addToFavorite(item)}
           >
             {heartIcon}
           </button>
         </div>
         <div>
-          <button
-            className="text-yellow-600 hover:text-yellow-500"
-            onClick={modalClose}
-          >
+          <button className="textYellow hoverTextYellow" onClick={modalClose}>
             {closeIcon}
           </button>
         </div>
@@ -73,10 +68,10 @@ const ModalWithActivity: FC = () => {
   return (
     <div
       onClick={modalClose}
-      className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none "
+      className="justify-center  items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none "
     >
       <div className="relative w-auto my-6 mx-auto max-w-3xl">
-        <div className="border-0 rounded-lg shadow-lg relative flex flex-col bg-white justify-center items-center m-2 content-center ">
+        <div className="border-0 rounded-lg shadow-lg relative flex flex-col bgWhite justify-center items-center m-2 content-center ">
           {body}
         </div>
       </div>

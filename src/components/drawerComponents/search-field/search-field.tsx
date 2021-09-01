@@ -69,13 +69,13 @@ const SearchField: FC<ISearchFieldProps> = (props) => {
       </div>
 
       {icons}
-      <div className="relative flex justify-between border-b-2 mt-1 border-yellow-500  text-yellow-500  p-2">
+      <div className="relative flex justify-between border-b-2 mt-1 borderYellow  textYellow  p-2">
         <div>
           <span className="absolute inset-y-0 left-0 flex items-center">
             {searchIcon}
           </span>
           <input
-            className="bg-gray-900 border-yellow-500 placeholder-yellow-500 pl-6 focus:outline-none"
+            className="bg-gray-900 borderYellow placeholder-yellow-500 pl-6 focus:outline-none"
             placeholder="search"
             type="text"
             onChange={handleSearchInput}

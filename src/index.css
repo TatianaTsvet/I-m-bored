@@ -1,3 +1,30 @@
 @tailwind base;
+
 @tailwind components;
+
 @tailwind utilities;
+
+.textYellow {
+  @apply text-yellow-500;
+}
+.bgYellow {
+  @apply bg-yellow-500;
+}
+.borderYellow {
+  @apply border-yellow-500;
+}
+.hoverBg {
+  @apply hover:bg-yellow-600;
+}
+.hoverTextYellow {
+  @apply hover:text-yellow-600;
+}
+.textWhite {
+  @apply text-white;
+}
+.bgWhite {
+  @apply bg-white;
+}
+.hoverTextWhite {
+  @apply hover:text-white;
+}

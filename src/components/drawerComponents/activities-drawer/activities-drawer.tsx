@@ -14,10 +14,7 @@ const ActivitiesDrawer: FC = () => {
 
   const drawer = (
     <div className="ml-2 mt-1 ">
-      <div
-        onClick={drawerClose}
-        className="absolute right-2 top-2 text-yellow-500"
-      >
+      <div onClick={drawerClose} className="absolute right-2 top-2 textYellow">
         {closeIcon}
       </div>
       <DrawerBody />
