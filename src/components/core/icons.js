@@ -1,5 +1,3 @@
-// import React from "react";
-
 export const heartIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -17,7 +15,7 @@ export const heartIcon = (
 export const heartIconOutline = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-7 w-7"
+    className="h-6 w-6 md:h-7 md:w-7"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -111,7 +109,7 @@ export const userIconSolid = (
 export const clockIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-7 w-7"
+    className="h-6 w-6 md:h-7 md:w-7"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -127,7 +125,7 @@ export const clockIcon = (
 export const mailIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-7 w-7 mr-5 "
+    className="h-6 w-6 md:h-7 md:w-7"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -138,5 +136,31 @@ export const mailIcon = (
       strokeWidth={2}
       d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
     />
+  </svg>
+);
+export const smileIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-6 w-6 md:h-7 md:w-7"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+    />
+  </svg>
+);
+export const shareIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-5 w-5"
+    viewBox="0 0 20 20"
+    fill="currentColor"
+  >
+    <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
   </svg>
 );

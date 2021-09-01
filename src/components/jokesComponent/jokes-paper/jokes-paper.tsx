@@ -29,7 +29,7 @@ const JokesPaper: FC = () => {
   return (
     <>
       {jokes}
-      <Grid container justifyContent="center">
+      {/* <Grid container justifyContent="center">
         <Pagination
           className="pageNumber"
           size={matches === 4 ? "small" : "large"}
@@ -37,7 +37,7 @@ const JokesPaper: FC = () => {
           color="secondary"
           onChange={(event, page) => setPage(page)}
         />
-      </Grid>
+      </Grid> */}
     </>
   );
 };
