@@ -1,4 +1,5 @@
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
+import { mainColor } from "../../../styles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -9,7 +10,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     
     icon: {
-      color: "#ff9800",
+      color: mainColor,
       background: "#ffe0b2",
       marginRight: '0.1em'
     },

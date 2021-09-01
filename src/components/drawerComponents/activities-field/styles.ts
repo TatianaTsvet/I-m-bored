@@ -1,9 +1,10 @@
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import { mainColor } from "../../../styles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     icon: {
-      color: "#ff9800",
+      color: mainColor,
     },
     favoriteActivities: {
       marginTop: "0.2em",     

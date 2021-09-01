@@ -1,10 +1,10 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { mainColor } from "../../../styles";
 
 const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    
+  createStyles({    
     checkbox: {
-      color: "#ff9800",
+      color: mainColor,
       "&::checked": {
         color: "#b0bec5",
       },
