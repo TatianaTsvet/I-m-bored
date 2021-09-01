@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-
 import itemData from "../../core/itemData";
 import { fetchNewActivity } from "../../../service/asyncRequests";
 import { useDispatch } from "react-redux";

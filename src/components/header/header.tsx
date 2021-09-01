@@ -14,8 +14,12 @@ export default function ButtonAppBar() {
   const sendSuggestion = () => {
     dispatch({ type: "openSuggestion", payload: true });
   };
+  const openJokesDrawer = () => {
+    dispatch({ type: "bottomDrawerOpen", payload: true });
+  };
 
   return (
+
     <header className="sticky top-0 z-40 w-full flex bgYellow h-16 shadow-md  ">
       <div className="w-3/4 p-2 my-auto  ml-5 text-2xl	">
         <h5 className="font-medium">I&apos;m Bored...</h5>
@@ -42,7 +46,24 @@ export default function ButtonAppBar() {
         >
           {mailIcon}
         </button>
+        {/* <Tooltip
+            title="Jokester!"
+            arrow
+            leaveTouchDelay={2000}
+            enterTouchDelay={50}
+          >
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="menu"
+              onClick={openJokesDrawer}
+            >
+              <InsertEmoticonIcon />
+            </IconButton>
+          </Tooltip> */}
       </div>
     </header>
+
   );
 }

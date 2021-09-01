@@ -5,6 +5,7 @@ const defaultState = {
   modal: false,
   loading: false,
   drawer: false,
+  bottomDrawer: false,
   drawerType: "favorites",
   suggestionModal: false,
   suggestResponse: "",
@@ -51,6 +52,12 @@ const serviceReducers = (
         ...state,
         suggestResponse: action.payload,
       };
+    case ActionTypes.BOTTOM_DRAWER_OPEN:
+      return {
+        ...state,
+        bottomDrawer: action.payload,
+      };
+
     default:
       return state;
   }

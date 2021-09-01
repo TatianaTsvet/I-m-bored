@@ -9,7 +9,7 @@ export interface Activity {
 }
 
 export interface MainState {
-  activity: Activity[];
+  favorites: Activity[];
   history: Activity[];
   randomActivity: Activity[];
 }
@@ -34,10 +34,15 @@ interface ChangedLiked {
   type: ActionTypes.CHANGE_LIKED;
   payload: number;
 }
+interface ReallyDeleteActivity {
+  type: ActionTypes.REALLY_DELETE_ACTIVITY;
+  payload: number;
+}
 
 export type MainActions =
   | AddToActivityList
   | DeleteFavoriteActivity
   | GetActivity
   | ClickedLikeButton
-  | ChangedLiked;
+  | ChangedLiked
+  | ReallyDeleteActivity;

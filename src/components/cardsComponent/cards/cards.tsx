@@ -6,7 +6,6 @@ import Spinner from "../../core/serviceComponents/spinner";
 import SnackbarResult from "../../core/serviceComponents/snackbar-result";
 import { useTypedSelector } from "../../../hooks/useTypeSelector";
 import { useDispatch } from "react-redux";
-
 import "./cards.css";
 
 const Cards: FC = () => {
@@ -17,6 +16,7 @@ const Cards: FC = () => {
   const snackbarClose = () => {
     dispatch({ type: "openSnackbar", payload: false });
   };
+
   return (
     <div>
       <div>

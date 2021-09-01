@@ -11,7 +11,7 @@ const ActivitiesField: FC<IFavoriteActivitiesProps> = ({
 }) => {
   const dispatch = useDispatch();
   const favoriteActivities = useTypedSelector(
-    (state) => state.mainReducers.activity
+    (state) => state.mainReducers.favorites
   );
 
   const deleteActivity = (key: number) => {
