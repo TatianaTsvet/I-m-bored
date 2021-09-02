@@ -18,7 +18,7 @@ const CardsList: FC = () => {
       {itemData.map((item) => (
         <div key={item.title} className="relative">
           <img
-            className="h-52 w-full object-cover"
+            className="h-40 md:h-52 w-full object-cover"
             alt={item.title}
             src={`images/${item.src}`}
           />
