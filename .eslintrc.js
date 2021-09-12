@@ -7,6 +7,7 @@ module.exports = {
     "react-app",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:react/jsx-runtime",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -18,6 +19,7 @@ module.exports = {
   },
   plugins: ["babel", "react", "prettier", "@typescript-eslint"],
   rules: {
+    "react/no-unescaped-entities": 0,
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "import/no-named-as-default": 0,
     "react/jsx-uses-vars": 1,

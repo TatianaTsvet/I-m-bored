@@ -1,63 +1,42 @@
 import React, { FC } from "react";
-import {
-  ImageList,
-  ImageListItem,
-  ImageListItemBar,
-  IconButton,
-  useMediaQuery,
-} from "@material-ui/core";
 import itemData from "../../core/itemData";
-import { Grid } from "@material-ui/core";
 import { fetchNewActivity } from "../../../service/asyncRequests";
 import { useDispatch } from "react-redux";
-import useStyles from "./styles";
 import "./cards-list.css";
 
 const CardsList: FC = () => {
   const dispatch = useDispatch();
-  const classes = useStyles();
   const modalOpen = (type: string) => {
     const newType = type.replace(" ", "");
     dispatch(fetchNewActivity(newType));
     dispatch({ type: "switchLoading", payload: true });
     dispatch({ type: "openModal", payload: true });
   };
-  const matches = useMediaQuery("(max-width:600px)");
 
   return (
-    <Grid
-      container
-      direction="column"
-      justifyContent="flex-start"
-      alignItems="center"
-    >
-      <ImageList rowHeight={180}>
-        <ImageListItem
-          key="Subheader"
-          cols={2}
-          style={{ height: "auto" }}
-        ></ImageListItem>
-        {itemData.map((item) => (
-          <ImageListItem key={item.img} cols={matches ? 2 : 1}>
-            <img alt={item.title} src={`images/${item.src}`} />
-            <ImageListItemBar
-              title={item.title.toUpperCase()}
-              subtitle={item.subtitle}
-              actionIcon={
-                <IconButton
-                  aria-label={`info about ${item.title}`}
-                  color="inherit"
-                  className={classes.icon}
-                  onClick={() => modalOpen(item.title)}
-                >
-                  {item.icon}
-                </IconButton>
-              }
-            />
-          </ImageListItem>
-        ))}
-      </ImageList>
-    </Grid>
+    <main className="grid grid-cols-1 md:grid-cols-2 gap-1 mt-1">
+      {itemData.map((item) => (
+        <div key={item.title} className="relative">
+          <img
+            className="h-40 md:h-52 w-full object-cover"
+            alt={item.title}
+            src={`images/${item.src}`}
+          />
+          <div className="absolute inset-x-0 bottom-0 h-16  flex items-center justify-between bg-gray-800 bg-opacity-60 px-2">
+            <div className="textWhite">
+              <h4>{item.title.toUpperCase()}</h4>
+              <h6>{item.subtitle}</h6>
+            </div>
+            <button
+              className="justify-self-end flex flex-wrap content-center p-3 rounded-full textYellow bg-yellow-100 hover:bg-yellow-200 hover:text-yellow-900 "
+              onClick={() => modalOpen(item.title)}
+            >
+              {item.icon}
+            </button>
+          </div>
+        </div>
+      ))}
+    </main>
   );
 };
 

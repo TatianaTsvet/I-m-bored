@@ -1,22 +1,12 @@
 import React from "react";
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  Grid,
-  Tooltip,
-} from "@material-ui/core";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import HistoryIcon from "@material-ui/icons/History";
-import MailOutlineIcon from "@material-ui/icons/MailOutline";
-import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import { useDispatch } from "react-redux";
-import useStyles from "./styles";
-import "./header.css";
-
+import {
+  clockIcon,
+  heartIconOutline,
+  mailIcon,
+  smileIcon,
+} from "../core/icons";
 export default function ButtonAppBar() {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const openFavoriteDrawer = () => {
     dispatch({ type: "openDrawer", payload: true });
@@ -34,78 +24,40 @@ export default function ButtonAppBar() {
   };
 
   return (
-    <Grid className={classes.root} container>
-      <AppBar position="static" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            I am bored...
-          </Typography>
-          <Tooltip
-            title="Favorite"
-            arrow
-            leaveTouchDelay={2000}
-            enterTouchDelay={50}
-          >
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="menu"
-              onClick={openFavoriteDrawer}
-            >
-              <FavoriteBorderIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip
-            title="History"
-            arrow
-            leaveTouchDelay={2000}
-            enterTouchDelay={50}
-          >
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="menu"
-              onClick={openHistoryDrawer}
-            >
-              <HistoryIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip
-            title="Suggest new activity"
-            arrow
-            leaveTouchDelay={2000}
-            enterTouchDelay={50}
-          >
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="menu"
-              onClick={sendSuggestion}
-            >
-              <MailOutlineIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip
-            title="Jokester!"
-            arrow
-            leaveTouchDelay={2000}
-            enterTouchDelay={50}
-          >
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="menu"
-              onClick={openJokesDrawer}
-            >
-              <InsertEmoticonIcon />
-            </IconButton>
-          </Tooltip>
-        </Toolbar>
-      </AppBar>
-    </Grid>
+    <header className="sticky top-0 z-40 w-full flex bgYellow md:h-16 shadow-md  ">
+      <div className="w-3/4 p-2 my-auto  ml-5 text-lg md:text-2xl	">
+        <h5 className="font-medium">I&apos;m Bored...</h5>
+      </div>
+      <div className="w-1/4 flex justify-end ">
+        <button
+          title="Favorites"
+          className="p-2 hoverTextWhite has-tooltip"
+          onClick={openFavoriteDrawer}
+        >
+          {heartIconOutline}
+        </button>
+        <button
+          className="p-2 hoverTextWhite"
+          title="History"
+          onClick={openHistoryDrawer}
+        >
+          {clockIcon}
+        </button>
+        <button
+          className="p-2  hoverTextWhite"
+          onClick={sendSuggestion}
+          title="Send new activity"
+        >
+          {mailIcon}
+        </button>
+        <button
+          className="p-2  mr-5  hoverTextWhite"
+          onClick={openJokesDrawer}
+          title="Jokester"
+        >
+          {smileIcon}
+        </button>
+      </div>
+    </header>
   );
 }

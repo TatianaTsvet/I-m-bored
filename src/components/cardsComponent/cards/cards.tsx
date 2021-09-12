@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import { Grid } from "@material-ui/core";
 import ModalWithActivity from "../../core/serviceComponents/modal-with-activity/modal-with-activity";
 import ModalSuggestActivity from "../../core/serviceComponents/modal-suggest-activity";
 import CardsList from "../cards-list/cards-list";
@@ -19,10 +18,10 @@ const Cards: FC = () => {
   };
 
   return (
-    <Grid container>
-      <Grid>
+    <div>
+      <div>
         <CardsList />
-      </Grid>
+      </div>
       <ModalSuggestActivity />
       {loading ? <Spinner loading={loading} /> : <ModalWithActivity />}
 
@@ -31,7 +30,7 @@ const Cards: FC = () => {
         suggestResponse={suggestResponse}
         snackbarClose={snackbarClose}
       />
-    </Grid>
+    </div>
   );
 };
 export default Cards;

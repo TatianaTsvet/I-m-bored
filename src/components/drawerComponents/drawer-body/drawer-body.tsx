@@ -1,14 +1,11 @@
 import React, { useState, useMemo } from "react";
-import { Typography } from "@material-ui/core";
 import ActivitiesField from "../activities-field";
 import SearchField from "../search-field";
 import { useTypedSelector } from "../../../hooks/useTypeSelector";
-import useStyles from "./styles";
 import "./drawer-body.css";
 import { useCallback } from "react";
 
 export default function DrawerBody() {
-  const classes = useStyles();
   const { drawerType } = useTypedSelector((state) => state.serviceReducers);
   const favoriteActivity = useTypedSelector(
     (state) => state.mainReducers.favorites
@@ -51,10 +48,8 @@ export default function DrawerBody() {
   }, []);
 
   return (
-    <div className="drawer-body">
-      <Typography variant="h6" gutterBottom className={classes.drawerText}>
-        {drawerType}
-      </Typography>
+    <div className="text-yellow-500 p-1">
+      <p className="capitalize text-2xl pb-2">{drawerType}</p>
 
       <SearchField
         count={count}

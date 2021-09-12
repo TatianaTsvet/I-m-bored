@@ -1,23 +1,11 @@
 import React, { FC } from "react";
 import JokesPaper from "../jokes-paper";
-import CancelPresentationIcon from "@material-ui/icons/CancelPresentation";
-import {
-  Grid,
-  IconButton,
-  Drawer,
-  AppBar,
-  Toolbar,
-  Typography,
-  Container,
-} from "@material-ui/core";
+import { closeIcon } from "../../core/icons";
 import { useDispatch } from "react-redux";
-import clsx from "clsx";
 import { useTypedSelector } from "../../../hooks/useTypeSelector";
-import useStyles from "./styles";
 import "./jokes-main.css";
 
 const JokesMain: FC = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const drawerOpen = useTypedSelector(
     (state) => state.serviceReducers.bottomDrawer
@@ -27,51 +15,31 @@ const JokesMain: FC = () => {
   };
 
   const drawer = (
-    <div
-      className={clsx(classes.list, {
-        [classes.fullList]: "bottom",
-      })}
-    >
-      <div className={classes.grow}>
-        <AppBar position="static" className={classes.jokesBar}>
-          <Toolbar>
-            <Typography variant="h5" noWrap>
-              Jokester
-            </Typography>
-            <IconButton onClick={drawerClose} className={classes.iconDrawer}>
-              <CancelPresentationIcon />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
+    <div className="m-2 ">
+      <p className="font-medium tracking-wider text-lg ml-2 pb-2 md:text-xl text-black">
+        Jokester
+      </p>
+      <div onClick={drawerClose} className="absolute right-2 top-2 textYellow">
+        {closeIcon}
       </div>
-      <Grid
-        className={classes.container}
-        xs={12}
-        container
-        item
-        direction="row"
-        justifyContent="space-between"
-        alignItems="stretch"
-      >
-        <JokesPaper />
-      </Grid>
+      <JokesPaper />
     </div>
   );
 
   return (
-    <nav>
-      <Container>
-        <Drawer
-          anchor={"bottom"}
-          open={drawerOpen}
-          onClose={drawerClose}
-          ModalProps={{
-            keepMounted: true,
-          }}
-        >
-          {drawer}
-        </Drawer>
-      </Container>
+    <nav
+      className={
+        "fixed overflow-auto z-50  bg-gray-900 bg-opacity-25 inset-0 transform" +
+        (drawerOpen
+          ? " transition-opacity opacity-100 duration-500 translate-x-0  "
+          : " transition-all  opacity-0 translate-y-full  ")
+      }
+    >
+      <section className="absolute bg-white min-w-full ">{drawer}</section>
+      <section
+        className=" w-screen h-full cursor-pointer "
+        onClick={drawerClose}
+      ></section>
     </nav>
   );
 };
