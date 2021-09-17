@@ -1,7 +1,8 @@
 {
   "name": "bored",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "homepage": "https://tatianatsvet.github.io/I-m-bored/",
   "dependencies": {
     "@craco/craco": "^6.2.0",
     "@heroicons/react": "^1.0.4",
