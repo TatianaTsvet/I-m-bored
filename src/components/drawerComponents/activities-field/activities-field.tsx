@@ -24,7 +24,9 @@ const ActivitiesField: FC<IFavoriteActivitiesProps> = ({
       </p>
     );
   }
-
+  const reallyDeleteActivity = (key: number) => {
+    dispatch({ type: "reallyDeleteActivity", payload: key });
+  };
   const addToLiked = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.checked) {
       dispatch({
@@ -63,7 +65,7 @@ const ActivitiesField: FC<IFavoriteActivitiesProps> = ({
                   {trashIcon}
                 </button>
               ) : (
-                <>
+                <div className="flex">
                   <input
                     className=" form-checkbox absolute opacity-0 "
                     type="checkbox"
@@ -72,13 +74,31 @@ const ActivitiesField: FC<IFavoriteActivitiesProps> = ({
                     value={item.key}
                   />
                   <label
-                    className={item.liked ? "text-red-600" : "text-gray-400"}
+                    className={
+                      item.liked
+                        ? "text-red-600 cursor-pointer"
+                        : "text-gray-400 cursor-pointer"
+                    }
                     title="return to favorites"
                     htmlFor={item.activity}
                   >
                     {heartIcon}
                   </label>
-                </>
+                  <input
+                    className="form-checkbox absolute opacity-0"
+                    type="checkbox"
+                    id={item.activity + "key"}
+                    onChange={() => reallyDeleteActivity(item.key)}
+                    value={item.key}
+                  />
+                  <label
+                    className="text-gray-400 ml-2 cursor-pointer"
+                    title="delete at all"
+                    htmlFor={item.activity + "key"}
+                  >
+                    {trashIcon}
+                  </label>
+                </div>
               )}
             </div>
           </div>

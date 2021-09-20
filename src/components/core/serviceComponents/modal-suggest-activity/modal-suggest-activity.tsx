@@ -2,6 +2,7 @@ import React, { useState, FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../../../hooks/useTypeSelector";
 import { sendActivityWithSuggestion } from "../../../../service/asyncRequests";
+import ActivitiesDrawer from "../../../drawerComponents/activities-drawer";
 import "./modal-suggest-activity.css";
 
 const availableTypes = [
@@ -120,7 +121,7 @@ const ModalSuggestActivity: FC = () => {
                 : " bgYellow ease-in-out hoverBg hoverTextWhite transition-all duration-150")
             }
             type="button"
-            onClick={() => sendSuggestion}
+            onClick={sendSuggestion}
           >
             Send suggestion
           </button>
