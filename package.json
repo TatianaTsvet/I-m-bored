@@ -34,7 +34,7 @@
     "eslint-check": "eslint --print-config src/App.js | eslint-config-prettier-check",
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix",
-    "predeploy": "npm run built",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
