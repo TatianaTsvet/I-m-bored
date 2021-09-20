@@ -1,10 +1,11 @@
 {
   "name": "bored",
+  "homepage": "https://tatianatsvet.github.io/I-m-bored/",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@craco/craco": "^6.2.0",
-    "@heroicons/react": "^1.0.4",   
+    "@heroicons/react": "^1.0.4",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -32,7 +33,9 @@
     "eject": "react-scripts eject",
     "eslint-check": "eslint --print-config src/App.js | eslint-config-prettier-check",
     "lint": "eslint ./src",
-    "lint:fix": "eslint ./src --fix"
+    "lint:fix": "eslint ./src --fix",
+    "predeploy": "npm run built",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -61,6 +64,7 @@
     "eslint-plugin-babel": "^5.3.1",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",
+    "gh-pages": "^3.2.3",
     "postcss": "^7.0.36",
     "prettier": "2.3.2",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.9"
